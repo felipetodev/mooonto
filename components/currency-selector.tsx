@@ -11,12 +11,12 @@ import {
 } from '@/components/ui/select'
 import useCookies from '@/hooks/use-cookies'
 import { useRouter } from 'next/navigation'
-import { CURRENCY_SELECTOR } from '@/lib/constants'
+import { CURRENCY_COOKIE_KEY, CURRENCY_SELECTOR } from '@/lib/constants'
 
 const DEFAULT_CURRENCY = 'CLP'
 
 function CurrencySelector () {
-  const [currency, setCurrency] = useCookies('currency', DEFAULT_CURRENCY)
+  const [currency, setCurrency] = useCookies(CURRENCY_COOKIE_KEY, DEFAULT_CURRENCY)
   const router = useRouter()
 
   return (

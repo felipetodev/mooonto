@@ -147,3 +147,5 @@ export const FORM_FIELDS_TWO_TWO = [
 export const CUSTOM_FORM_ERROR = {
   message: 'Ingresa un monto mayor a 0'
 } as const
+
+export const CURRENCY_COOKIE_KEY = 'currency'
