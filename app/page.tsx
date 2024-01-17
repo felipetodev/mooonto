@@ -1,12 +1,20 @@
-import { Button } from '@/components/ui/button'
+import StepOneForm from '@/components/forms/step-one-form'
+import StepTwoForm from '@/components/forms/step-two-form'
+import MainHero from '@/components/main-hero'
+import { cookies } from 'next/headers'
+import { CURRENCY_SELECTOR } from '@/lib/constants'
 
-export default function Home () {
+export default async function Home () {
+  const hasCustomCurrency = cookies().get('currency')?.value
+  const currency = hasCustomCurrency ? JSON.parse(hasCustomCurrency) : 'CLP'
+
+  const intlConfig = CURRENCY_SELECTOR.find((c) => c.currency === currency)!
+
   return (
-    <main className='h-screen flex flex-col justify-center items-center gap-10 bg-gray-500'>
-      <img className='fill-black' src="mooonto.svg" alt="mooonto-logo" />
-      <Button>
-        Submit
-      </Button>
-    </main>
+    <>
+      <MainHero />
+      <StepOneForm intlConfig={intlConfig} />
+      <StepTwoForm intlConfig={intlConfig} />
+    </>
   )
 }
