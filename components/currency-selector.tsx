@@ -9,11 +9,24 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import useCookies from '@/hooks/use-cookies'
+import { useRouter } from 'next/navigation'
 import { CURRENCY_SELECTOR } from '@/lib/constants'
 
+const DEFAULT_CURRENCY = 'CLP'
+
 function CurrencySelector () {
+  const [currency, setCurrency] = useCookies('currency', DEFAULT_CURRENCY)
+  const router = useRouter()
+
   return (
-    <Select defaultValue='CLP' onValueChange={e => console.log(CURRENCY_SELECTOR.find(el => el.currency === e))}>
+    <Select
+      defaultValue={currency}
+      onValueChange={e => {
+        setCurrency(e)
+        router.refresh()
+      }}
+    >
       <SelectTrigger className="rounded-3xl">
         <SelectValue placeholder="$ CLP" />
       </SelectTrigger>
@@ -24,7 +37,7 @@ function CurrencySelector () {
             <SelectItem key={c.name} value={c.currency}>
               <div className='flex space-x-2'>
                 <img
-                  src={`https://hatscripts.github.io/circle-flags/flags/${c.locale}.svg`}
+                  src={`https://hatscripts.github.io/circle-flags/flags/${c.locale.split('-')[1].toLowerCase()}.svg`}
                   width="20"
                   alt={c.name}
                 />
