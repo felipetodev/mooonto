@@ -148,4 +148,8 @@ export const CUSTOM_FORM_ERROR = {
   message: 'Ingresa un monto mayor a 0'
 } as const
 
-export const CURRENCY_COOKIE_KEY = 'currency'
+export const isProduction = process.env.NODE_ENV === 'production'
+
+export const CURRENCY_COOKIE_KEY = isProduction
+  ? 'currency'
+  : 'currency_dev' as const
