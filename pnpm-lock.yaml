@@ -34,6 +34,7 @@ specifiers:
   tailwind-merge: ^2.2.0
   tailwindcss: ^3.3.0
   tailwindcss-animate: ^1.0.7
+  tailwindcss-animated: ^1.0.1
   typescript: ^5.3.3
   zod: 3.22.4
 
@@ -74,6 +75,7 @@ devDependencies:
   eslint-plugin-react: 7.33.2_eslint@8.56.0
   postcss: 8.4.33
   tailwindcss: 3.4.1
+  tailwindcss-animated: 1.0.1_tailwindcss@3.4.1
   typescript: 5.3.3
 
 packages:
@@ -3233,6 +3235,14 @@ packages:
     dependencies:
       tailwindcss: 3.4.1
     dev: false
+
+  /tailwindcss-animated/1.0.1_tailwindcss@3.4.1:
+    resolution: {integrity: sha512-u5wusj89ZwP8I+s8WZlaAd7aZTWBN/XEG6QgMKpkIKmAf3xP1A6WYf7oYIKmGaB10UAQaSqWopi/i1ozzZEs8Q==}
+    peerDependencies:
+      tailwindcss: '>=3.1.0'
+    dependencies:
+      tailwindcss: 3.4.1
+    dev: true
 
   /tailwindcss/3.4.1:
     resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
