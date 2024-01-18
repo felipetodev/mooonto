@@ -18,6 +18,9 @@ const config = {
         '2xl': '1400px'
       }
     },
+    screens: {
+      '4xl': '1920px'
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
