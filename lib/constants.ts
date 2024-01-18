@@ -26,10 +26,16 @@ export const CURRENCY_SELECTOR: IntlConfig[] = [
     symbol: '$'
   },
   {
-    name: 'Peru',
-    currency: 'PEN',
-    locale: 'es-PE',
-    symbol: 'S/'
+    name: 'España',
+    currency: 'EUR',
+    locale: 'es-ES',
+    symbol: '€'
+  },
+  {
+    name: 'USA',
+    currency: 'USD',
+    locale: 'en-US',
+    symbol: '$'
   },
   {
     name: 'Uruguay',
@@ -38,10 +44,16 @@ export const CURRENCY_SELECTOR: IntlConfig[] = [
     symbol: '$'
   },
   {
-    name: 'Bolivia',
-    currency: 'BOB',
-    locale: 'es-BO',
-    symbol: '$'
+    name: 'Brazil',
+    currency: 'BRL',
+    locale: 'pt-BR',
+    symbol: 'R$'
+  },
+  {
+    name: 'Peru',
+    currency: 'PEN',
+    locale: 'es-PE',
+    symbol: 'S/'
   },
   {
     name: 'Paraguay',
@@ -50,12 +62,12 @@ export const CURRENCY_SELECTOR: IntlConfig[] = [
     symbol: '₲'
   },
   {
-    name: 'Brazil',
-    currency: 'BRL',
-    locale: 'pt-BR',
-    symbol: 'R$'
+    name: 'Bolivia',
+    currency: 'BOB',
+    locale: 'es-BO',
+    symbol: '$'
   }
-]
+] as const
 
 export const FORM_FIELDS_TWO = [
   {
