@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { fontSans, delaGothicOne } from '@/lib/fonts'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 import NavBar from '@/components/navbar'
 import { cn } from '@/lib/utils'
 import './globals.css'
@@ -27,6 +28,7 @@ export default function RootLayout ({
           <main className='flex flex-col flex-1 min-h-[calc(100vh-64px)] text-[#F7F4F0]'>
             {children}
           </main>
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
     </html>
