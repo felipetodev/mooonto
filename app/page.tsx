@@ -1,7 +1,8 @@
-import StepOneForm from '@/components/forms/step-one-form'
-import StepTwoForm from '@/components/forms/step-two-form'
-import MainHero from '@/components/main-hero'
 import { cookies } from 'next/headers'
+import MainHero from '@/components/main-hero'
+import MainForm from '@/components/forms/form'
+import AdsLayout from '@/components/ads-layout'
+import Footer from '@/components/footer'
 import { CURRENCY_COOKIE_KEY, CURRENCY_SELECTOR } from '@/lib/constants'
 
 export default async function Home () {
@@ -13,8 +14,10 @@ export default async function Home () {
   return (
     <>
       <MainHero />
-      <StepOneForm intlConfig={intlConfig} />
-      <StepTwoForm intlConfig={intlConfig} />
+      <AdsLayout>
+        <MainForm intlConfig={intlConfig} />
+      </AdsLayout>
+      <Footer />
     </>
   )
 }
