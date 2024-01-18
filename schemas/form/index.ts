@@ -1,7 +1,7 @@
 import * as z from 'zod'
 import { CUSTOM_FORM_ERROR as customFormError } from '@/lib/constants'
 
-export const stepOneSchema = z.object({
+const stepOneSchema = z.object({
   selfEmployed: z.number().positive(customFormError),
   consultancy: z.number().positive(customFormError),
   lifecyclyEquipment: z.number().positive(customFormError),
@@ -16,9 +16,7 @@ export const stepOneSchema = z.object({
   water: z.number().positive(customFormError)
 })
 
-export type StepOneValues = z.infer<typeof stepOneSchema>
-
-export const stepTwoSchema = z.object({
+const stepTwoSchema = z.object({
   livingExpenses: z.number().positive(customFormError),
   commonExpenses: z.number().positive(customFormError),
   food: z.number().positive(customFormError),
@@ -41,7 +39,12 @@ export const stepTwoSchema = z.object({
   childrensExpenses: z.number().positive(customFormError).optional(),
   livingExpensesTwoTwo: z.number().positive(customFormError).optional(),
   carInsurance: z.number().positive(customFormError).optional(),
-  taxes: z.number().positive(customFormError).optional()
+  taxes: z.number().positive(customFormError).optional(),
+  incomeTaxRetention: z.number().positive('Ingresa un monto mayor a 0%').optional(),
+  valueContribution: z.number().positive('Ingresa un monto mayor a 0%').optional(),
+  unExpectedExpenses: z.number().positive('Ingresa un monto mayor a 0%').optional()
 })
 
-export type StepTwoValues = z.infer<typeof stepTwoSchema>
+export const formSchema = stepOneSchema.merge(stepTwoSchema)
+
+export type FormValues = z.infer<typeof formSchema>
