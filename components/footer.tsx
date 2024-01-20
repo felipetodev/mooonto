@@ -4,10 +4,10 @@ import { InstagramIcon } from '@/components/ui/icons'
 
 function Footer () {
   return (
-    <div className="bg-[#002446] w-full px-10 md:px-16 pb-8 pt-24">
+    <footer className="bg-[#002446] w-full px-10 md:px-16 pb-8 pt-24">
       <div className='max-w-screen-4xl mx-auto h-full'>
         <div className='flex justify-between'>
-          <Link href='/'>
+          <Link href='/' className='h-max'>
             <Logo className='text-[#FF3B16]' />
           </Link>
           <div className='grid grid-cols-2'>
@@ -62,7 +62,7 @@ function Footer () {
           </span>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
