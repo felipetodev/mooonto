@@ -2,8 +2,8 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import StepOneForm from './step-one-form'
-import StepTwoForm from './step-two-form'
+import { StepOneForm } from './step-one-form'
+import { StepTwoForm } from './step-two-form'
 import { Form } from '../ui/form'
 import { toast } from 'sonner'
 import { type FormValues, formSchema } from '@/schemas/form'
@@ -77,8 +77,6 @@ function MainForm ({ intlConfig }: { intlConfig: IntlConfig }) {
     },
     mode: 'onChange'
   })
-
-  // console.log(form.getValues())
 
   function onSubmit (formData: FormValues) {
     const cleanedData: Partial<FormValues> = structuredClone(formData)

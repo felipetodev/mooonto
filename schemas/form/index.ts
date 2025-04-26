@@ -1,8 +1,7 @@
 import * as z from 'zod'
 import { CUSTOM_FORM_ERROR as customFormError } from '@/lib/constants'
 
-// Create a base schema with all fields, but make conditional ones optional
-const formSchema = z.object({
+export const formSchema = z.object({
   // Step One - Base fields
   selfEmployed: z.number().positive(customFormError),
   consultancy: z.number().positive(customFormError),
@@ -82,5 +81,4 @@ const formSchema = z.object({
     }
   )
 
-export { formSchema }
 export type FormValues = z.infer<typeof formSchema>
