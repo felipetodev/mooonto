@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Heading from './heading'
 import {
   FormControl,
@@ -9,16 +10,69 @@ import {
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Input } from '@/components/ui/input'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import CurrencyInput from 'react-currency-input-field'
 import { FORM_FIELDS_TWO, FORM_FIELDS_TWO_TWO } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { type IntlConfig } from '@/lib/types'
 
+interface ChildFieldValues {
+  quantityChildrens?: number
+  childrensExpenses?: number
+  livingExpensesTwoTwo?: number
+  carInsurance?: number
+  taxes?: number
+  incomeTaxRetention?: number
+  valueContribution?: number
+  unExpectedExpenses?: number
+}
+
 function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
   const form = useFormContext()
 
-  const disabledFields = form.getValues('childrens') === 'no'
+  const hasChildrens = useWatch({
+    control: form.control,
+    name: 'childrens'
+  })
+  const disabledFields = !hasChildrens
+
+  const prevValues = useRef<ChildFieldValues>({})
+
+  const handleChildrensChange = (value: boolean) => {
+    if (!value) {
+      prevValues.current = {
+        quantityChildrens: form.getValues('quantityChildrens'),
+        childrensExpenses: form.getValues('childrensExpenses'),
+        livingExpensesTwoTwo: form.getValues('livingExpensesTwoTwo'),
+        carInsurance: form.getValues('carInsurance'),
+        taxes: form.getValues('taxes'),
+        incomeTaxRetention: form.getValues('incomeTaxRetention'),
+        valueContribution: form.getValues('valueContribution'),
+        unExpectedExpenses: form.getValues('unExpectedExpenses')
+      }
+
+      form.setValue('quantityChildrens', undefined)
+      form.setValue('childrensExpenses', undefined)
+      form.setValue('livingExpensesTwoTwo', undefined)
+      form.setValue('carInsurance', undefined)
+      form.setValue('taxes', undefined)
+      form.setValue('incomeTaxRetention', undefined)
+      form.setValue('valueContribution', undefined)
+      form.setValue('unExpectedExpenses', undefined)
+    } else {
+      form.setValue('quantityChildrens', prevValues.current.quantityChildrens)
+      form.setValue('childrensExpenses', prevValues.current.childrensExpenses)
+      form.setValue('livingExpensesTwoTwo', prevValues.current.livingExpensesTwoTwo)
+      form.setValue('carInsurance', prevValues.current.carInsurance)
+      form.setValue('taxes', prevValues.current.taxes)
+      form.setValue('incomeTaxRetention', prevValues.current.incomeTaxRetention)
+      form.setValue('valueContribution', prevValues.current.valueContribution)
+      form.setValue('unExpectedExpenses', prevValues.current.unExpectedExpenses)
+    }
+
+    return value
+  }
+
   const opacityStyles = (className: string) => cn(
     className,
     'transition-opacity ease-in-out',
@@ -74,13 +128,16 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                 <div className='flex flex-col w-full'>
                   <FormControl>
                     <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      onValueChange={(e) => {
+                        const value = Boolean(Number(e))
+                        field.onChange(handleChildrensChange(value))
+                      }}
+                      defaultValue={field.value ? '1' : '0'}
                       className="flex items-center"
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="yes" />
+                          <RadioGroupItem value="1" />
                         </FormControl>
                         <FormLabel className="font-normal">
                           Si
@@ -88,7 +145,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="no" />
+                          <RadioGroupItem value="0" />
                         </FormControl>
                         <FormLabel className="font-normal">
                           No
@@ -142,7 +199,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                 <div className='flex flex-col w-full'>
                   <FormControl>
                     <CurrencyInput
-                      // ref={field.ref}
                       className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                       intlConfig={intlConfig}
                       onValueChange={(value) => {

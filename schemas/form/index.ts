@@ -1,22 +1,25 @@
 import * as z from 'zod'
 import { CUSTOM_FORM_ERROR as customFormError } from '@/lib/constants'
 
-const stepOneSchema = z.object({
+// Create a base schema with all fields, but make conditional ones optional
+const formSchema = z.object({
+  // Step One - Base fields
   selfEmployed: z.number().positive(customFormError),
   consultancy: z.number().positive(customFormError),
   lifecyclyEquipment: z.number().positive(customFormError),
   subscriptions: z.number().positive(customFormError),
-  cowork: z.string().min(1, { message: 'Debes seleccionar una opción' }),
+  cowork: z.boolean().default(false),
+  gasoline: z.number().positive(customFormError),
+  coffee: z.number().positive(customFormError),
+  water: z.number().positive(customFormError),
+
+  // Step One - Office fields (conditional on cowork)
   officeRent: z.number().positive(customFormError).optional(),
   officeInsurance: z.number().positive(customFormError).optional(),
   officeBills: z.number().positive(customFormError).optional(),
   officeInternet: z.number().positive(customFormError).optional(),
-  gasoline: z.number().positive(customFormError),
-  coffee: z.number().positive(customFormError),
-  water: z.number().positive(customFormError)
-})
 
-const stepTwoSchema = z.object({
+  // Step Two - Base fields
   livingExpenses: z.number().positive(customFormError),
   commonExpenses: z.number().positive(customFormError),
   food: z.number().positive(customFormError),
@@ -30,12 +33,10 @@ const stepTwoSchema = z.object({
   healthPlan: z.number().positive(customFormError),
   retirementFund: z.number().positive(customFormError),
   otherExpenses: z.number().positive(customFormError),
-  childrens: z.string().min(1, 'Debes seleccionar una opción'),
-  quantityChildrens: z
-    .string()
-    .min(1, 'Ingresa una cantidad')
-    .refine((value) => Number(value) > 0, customFormError)
-    .optional(),
+  childrens: z.boolean().default(false),
+
+  // Step Two - Children fields (conditional on childrens)
+  quantityChildrens: z.string().optional(),
   childrensExpenses: z.number().positive(customFormError).optional(),
   livingExpensesTwoTwo: z.number().positive(customFormError).optional(),
   carInsurance: z.number().positive(customFormError).optional(),
@@ -44,7 +45,40 @@ const stepTwoSchema = z.object({
   valueContribution: z.number().positive('Ingresa un monto mayor a 0%').optional(),
   unExpectedExpenses: z.number().positive('Ingresa un monto mayor a 0%').optional()
 })
+  .refine(
+    (data) => {
+      if (data.cowork) {
+        return data.officeRent !== undefined &&
+          data.officeInsurance !== undefined &&
+          data.officeBills !== undefined &&
+          data.officeInternet !== undefined
+      }
+      return true
+    },
+    {
+      message: 'Deberás ingresar todos los campos relacionados a oficina/cowork',
+      path: ['cowork']
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.childrens) {
+        return data.quantityChildrens !== undefined &&
+          data.childrensExpenses !== undefined &&
+          data.livingExpensesTwoTwo !== undefined &&
+          data.carInsurance !== undefined &&
+          data.taxes !== undefined &&
+          data.incomeTaxRetention !== undefined &&
+          data.valueContribution !== undefined &&
+          data.unExpectedExpenses !== undefined
+      }
+      return true
+    },
+    {
+      message: 'Deberás ingresar todos los campos relacionados a hijos',
+      path: ['childrens']
+    }
+  )
 
-export const formSchema = stepOneSchema.merge(stepTwoSchema)
-
+export { formSchema }
 export type FormValues = z.infer<typeof formSchema>

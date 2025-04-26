@@ -1,6 +1,7 @@
+import { useRef } from 'react'
 import Heading from './heading'
 import CurrencyInput from 'react-currency-input-field'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import {
   FormControl,
   FormDescription,
@@ -13,10 +14,46 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 import { type IntlConfig } from '@/lib/types'
 
+interface CoworkFieldValues {
+  officeRent?: number
+  officeInsurance?: number
+  officeBills?: number
+  officeInternet?: number
+}
+
 function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
   const form = useFormContext()
 
-  const disabledField = form.getValues('cowork') === 'no'
+  const cowork = useWatch({
+    control: form.control,
+    name: 'cowork'
+  })
+  const disabledField = !cowork
+
+  const prevValues = useRef<CoworkFieldValues>({})
+
+  const handleCoworkChange = (value: boolean) => {
+    if (!value) {
+      prevValues.current = {
+        officeRent: form.getValues('officeRent'),
+        officeInsurance: form.getValues('officeInsurance'),
+        officeBills: form.getValues('officeBills'),
+        officeInternet: form.getValues('officeInternet')
+      }
+
+      form.setValue('officeRent', undefined)
+      form.setValue('officeInsurance', undefined)
+      form.setValue('officeBills', undefined)
+      form.setValue('officeInternet', undefined)
+    } else {
+      form.setValue('officeRent', prevValues.current.officeRent)
+      form.setValue('officeInsurance', prevValues.current.officeInsurance)
+      form.setValue('officeBills', prevValues.current.officeBills)
+      form.setValue('officeInternet', prevValues.current.officeInternet)
+    }
+    return value
+  }
+
   const opacityStyles = (className: string) => cn(
     className,
     'transition-opacity ease-in-out',
@@ -169,13 +206,16 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                 <div className='flex flex-col w-full'>
                   <FormControl>
                     <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      onValueChange={e => {
+                        const value = Boolean(Number(e))
+                        field.onChange(handleCoworkChange(value))
+                      }}
+                      defaultValue={field.value ? '1' : '0'}
                       className="flex items-center"
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="yes" />
+                          <RadioGroupItem value="1" />
                         </FormControl>
                         <FormLabel className="font-normal">
                           Si
@@ -183,7 +223,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="no" />
+                          <RadioGroupItem value="0" />
                         </FormControl>
                         <FormLabel className="font-normal">
                           No
