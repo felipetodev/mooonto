@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import Heading from './heading'
 import CurrencyInput from 'react-currency-input-field'
 import { useFormContext, useWatch } from 'react-hook-form'
@@ -28,7 +28,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
     control: form.control,
     name: 'cowork'
   })
-  const disabledField = !cowork
+  const disabledField = useMemo(() => !cowork, [cowork])
 
   const prevValues = useRef<CoworkFieldValues>({})
 
@@ -239,7 +239,6 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
         />
         <div className='space-y-8'>
           <FormField
-            disabled={disabledField}
             control={form.control}
             name="officeRent"
             render={({ field }) => (
@@ -258,7 +257,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                         placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={field.disabled}
+                        disabled={disabledField}
                       />
                     </FormControl>
                     <FormDescription className={opacityStyles('text-inherit')}>
@@ -271,7 +270,6 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
             )}
           />
           <FormField
-            disabled={disabledField}
             control={form.control}
             name="officeInsurance"
             render={({ field }) => (
@@ -293,7 +291,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                             }}
                             prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                             placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                            disabled={field.disabled}
+                            disabled={disabledField}
                           />
                         </FormControl>
                       </div>
@@ -304,7 +302,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         value={(form.getValues('officeInsurance') ?? 0) * 12 || 0}
                         prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                         placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={field.disabled}
+                        disabled={disabledField}
                       />
                     </div>
                     <FormDescription className={opacityStyles('text-inherit')}>
@@ -317,7 +315,6 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
             )}
           />
           <FormField
-            disabled={disabledField}
             control={form.control}
             name="officeBills"
             render={({ field }) => (
@@ -336,7 +333,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                         placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={field.disabled}
+                        disabled={disabledField}
                       />
                     </FormControl>
                     <FormDescription className={opacityStyles('text-inherit')}>
@@ -349,7 +346,6 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
             )}
           />
           <FormField
-            disabled={disabledField}
             control={form.control}
             name="officeInternet"
             render={({ field }) => (
@@ -368,7 +364,7 @@ function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                         placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={field.disabled}
+                        disabled={disabledField}
                       />
                     </FormControl>
                     <FormDescription className={opacityStyles('text-inherit')}>

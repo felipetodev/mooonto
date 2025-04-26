@@ -36,7 +36,9 @@ const formSchema = z.object({
   childrens: z.boolean().default(false),
 
   // Step Two - Children fields (conditional on childrens)
-  quantityChildrens: z.string().optional(),
+  quantityChildrens: z.number().positive(customFormError)
+    .max(10, 'Ingresa un número entre 1 y 10')
+    .optional(),
   childrensExpenses: z.number().positive(customFormError).optional(),
   livingExpensesTwoTwo: z.number().positive(customFormError).optional(),
   carInsurance: z.number().positive(customFormError).optional(),

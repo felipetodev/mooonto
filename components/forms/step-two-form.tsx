@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import Heading from './heading'
 import {
   FormControl,
@@ -34,7 +34,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
     control: form.control,
     name: 'childrens'
   })
-  const disabledFields = !hasChildrens
+  const disabledFields = useMemo(() => !hasChildrens, [hasChildrens])
 
   const prevValues = useRef<ChildFieldValues>({})
 
@@ -160,7 +160,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
           )}
         />
         <FormField
-          disabled={disabledFields}
           control={form.control}
           name="quantityChildrens"
           render={({ field }) => (
@@ -172,10 +171,15 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                 <div className='flex flex-col w-full'>
                   <FormControl>
                     <Input
-                      className='max-w-60 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                      className='max-w-60 [&::-webkit-inner-spin-button]:ml-2'
                       type='number'
                       placeholder="0"
                       {...field}
+                      value={field.value || ''}
+                      onChange={e => {
+                        field.onChange(Number(e.target.value || 0))
+                      }}
+                      disabled={disabledFields}
                     />
                   </FormControl>
                   <FormMessage />
@@ -185,7 +189,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
           )}
         />
         <FormField
-          disabled={disabledFields}
           control={form.control}
           name="childrensExpenses"
           render={({ field }) => (
@@ -206,7 +209,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       }}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                       placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                      disabled={field.disabled}
+                      disabled={disabledFields}
                     />
                   </FormControl>
                   <FormDescription className={opacityStyles('text-inherit')}>
@@ -220,7 +223,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
         />
         {FORM_FIELDS_TWO_TWO.map((f) => (
           <FormField
-            disabled={disabledFields}
             key={f.name}
             control={form.control}
             name={f.name as any}
@@ -234,7 +236,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         <FormLabel className={opacityStyles('min-w-max')}>Costo Anual</FormLabel>
                         <FormControl>
                           <CurrencyInput
-                            disabled={field.disabled}
+                            disabled={disabledFields}
                             className='ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                             intlConfig={intlConfig}
                             onValueChange={(value) => {
@@ -247,7 +249,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       </div>
                       <CurrencyInput
                         readOnly
-                        disabled={field.disabled}
+                        disabled={disabledFields}
                         className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         value={form.getValues(f.name as any) * 12 || 0}
@@ -266,7 +268,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
           />
         ))}
         <FormField
-          disabled={disabledFields}
           control={form.control}
           name="incomeTaxRetention"
           render={({ field }) => (
@@ -284,7 +285,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix='%'
                         placeholder='%'
-                        disabled={field.disabled}
+                        disabled={disabledFields}
                         allowDecimals={false}
                         maxLength={2}
                       />
@@ -296,7 +297,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       value={form.getValues('incomeTaxRetention') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                       placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                      disabled={field.disabled}
+                      disabled={disabledFields}
                     />
                   </div>
                   <FormDescription className={opacityStyles('text-inherit')}>
@@ -309,7 +310,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
           )}
         />
         <FormField
-          disabled={disabledFields}
           control={form.control}
           name="valueContribution"
           render={({ field }) => (
@@ -327,7 +327,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix='%'
                         placeholder='%'
-                        disabled={field.disabled}
+                        disabled={disabledFields}
                         allowDecimals={false}
                         maxLength={2}
                       />
@@ -339,7 +339,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       value={form.getValues('valueContribution') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                       placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                      disabled={field.disabled}
+                      disabled={disabledFields}
                     />
                   </div>
                   <FormDescription className={opacityStyles('text-inherit')}>
@@ -352,7 +352,6 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
           )}
         />
         <FormField
-          disabled={disabledFields}
           control={form.control}
           name="unExpectedExpenses"
           render={({ field }) => (
@@ -370,7 +369,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         }}
                         prefix='%'
                         placeholder='%'
-                        disabled={field.disabled}
+                        disabled={disabledFields}
                         allowDecimals={false}
                         maxLength={2}
                       />
@@ -382,7 +381,7 @@ function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       value={form.getValues('unExpectedExpenses') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
                       placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                      disabled={field.disabled}
+                      disabled={disabledFields}
                     />
                   </div>
                   <FormDescription className={opacityStyles('text-inherit')}>
