@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Logo } from '@/components/logo'
 import { InstagramIcon } from '@/components/ui/icons'
 
-function Footer () {
+export function Footer () {
   return (
     <footer className="bg-[#002446] w-full px-10 md:px-16 pb-8 pt-24">
       <div className='max-w-screen-4xl mx-auto h-full'>
@@ -65,5 +65,3 @@ function Footer () {
     </footer>
   )
 }
-
-export default Footer

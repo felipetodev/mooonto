@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers'
-import MainHero from '@/components/main-hero'
-import MainForm from '@/components/forms/form'
-import AdsLayout from '@/components/ads-layout'
-import Footer from '@/components/footer'
+import { MainHero } from '@/components/main-hero'
+import { MainForm } from '@/components/forms/form'
+import { AdsLayout } from '@/components/ads-layout'
+import { Footer } from '@/components/footer'
 import { CURRENCY_COOKIE_KEY, CURRENCY_SELECTOR } from '@/lib/constants'
 
 export default async function Home () {

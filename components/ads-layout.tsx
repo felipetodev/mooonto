@@ -19,7 +19,7 @@ function AdComponent ({
   )
 }
 
-function AdsLayout ({ children }: { children: React.ReactNode }) {
+export function AdsLayout ({ children }: { children: React.ReactNode }) {
   return (
     <section id='calcula' className="bg-[#f7f4f0] px-10 md:px-16">
       <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row w-full">
@@ -36,5 +36,3 @@ function AdsLayout ({ children }: { children: React.ReactNode }) {
     </section>
   )
 }
-
-export default AdsLayout

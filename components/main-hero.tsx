@@ -1,7 +1,7 @@
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-function MainHero () {
+export function MainHero () {
   return (
     <section className="h-[700px] bg-[#002446] w-full px-10 md:px-16">
       <div className='max-w-screen-4xl mx-auto h-full'>
@@ -31,5 +31,3 @@ function MainHero () {
     </section>
   )
 }
-
-export default MainHero
