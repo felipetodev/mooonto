@@ -1,5 +1,5 @@
 import NavBar from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import { delaGothicOne, fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -26,13 +26,13 @@ export default function RootLayout({
 					delaGothicOne.variable,
 				)}
 			>
-				<ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+				<Providers>
 					<NavBar />
 					<main className="flex min-h-[calc(100vh-64px)] flex-1 flex-col text-[#F7F4F0]">
 						{children}
 					</main>
 					<Toaster position="top-center" richColors />
-				</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	);
