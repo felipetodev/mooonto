@@ -1,84 +1,107 @@
 import * as z from 'zod'
 import { CUSTOM_FORM_ERROR as customFormError } from '@/lib/constants'
 
-export const formSchema = z.object({
-  // Step One - Base fields
-  selfEmployed: z.number().positive(customFormError),
-  consultancy: z.number().positive(customFormError),
-  lifecyclyEquipment: z.number().positive(customFormError),
-  subscriptions: z.number().positive(customFormError),
+const createPositiveField = () => z.number().positive(customFormError)
+const createConditionalField = () => z.number().optional()
+const validateConditionalField = (
+  ctx: z.RefinementCtx,
+  value: number | undefined,
+  path: string[]
+) => {
+  if (!value || value <= 0) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: customFormError.message,
+      path
+    })
+  }
+}
+
+const stepOneBaseFields = {
+  selfEmployed: createPositiveField(),
+  consultancy: createPositiveField(),
+  lifecyclyEquipment: createPositiveField(),
+  subscriptions: createPositiveField(),
   cowork: z.boolean().default(false),
-  gasoline: z.number().positive(customFormError),
-  coffee: z.number().positive(customFormError),
-  water: z.number().positive(customFormError),
+  gasoline: createPositiveField(),
+  coffee: createPositiveField(),
+  water: createPositiveField()
+}
 
-  // Step One - Office fields (conditional on cowork)
-  officeRent: z.number().positive(customFormError).optional(),
-  officeInsurance: z.number().positive(customFormError).optional(),
-  officeBills: z.number().positive(customFormError).optional(),
-  officeInternet: z.number().positive(customFormError).optional(),
+const stepOneOfficeFields = {
+  officeRent: createConditionalField(),
+  officeInsurance: createConditionalField(),
+  officeBills: createConditionalField(),
+  officeInternet: createConditionalField()
+}
 
-  // Step Two - Base fields
-  livingExpenses: z.number().positive(customFormError),
-  commonExpenses: z.number().positive(customFormError),
-  food: z.number().positive(customFormError),
-  gym: z.number().positive(customFormError),
-  entertainment: z.number().positive(customFormError),
-  clothes: z.number().positive(customFormError),
-  carFee: z.number().positive(customFormError),
-  livingExpensesTwo: z.number().positive(customFormError),
-  internet: z.number().positive(customFormError),
-  personalPhone: z.number().positive(customFormError),
-  healthPlan: z.number().positive(customFormError),
-  retirementFund: z.number().positive(customFormError),
-  otherExpenses: z.number().positive(customFormError),
-  childrens: z.boolean().default(false),
+const stepTwoBaseFields = {
+  livingExpenses: createPositiveField(),
+  commonExpenses: createPositiveField(),
+  food: createPositiveField(),
+  gym: createPositiveField(),
+  entertainment: createPositiveField(),
+  clothes: createPositiveField(),
+  carFee: createPositiveField(),
+  livingExpensesTwo: createPositiveField(),
+  internet: createPositiveField(),
+  personalPhone: createPositiveField(),
+  healthPlan: createPositiveField(),
+  retirementFund: createPositiveField(),
+  otherExpenses: createPositiveField(),
+  childrens: z.boolean().default(false)
+}
 
-  // Step Two - Children fields (conditional on childrens)
-  quantityChildrens: z.number().positive(customFormError)
-    .max(10, 'Ingresa un número entre 1 y 10')
-    .optional(),
-  childrensExpenses: z.number().positive(customFormError).optional(),
-  livingExpensesTwoTwo: z.number().positive(customFormError).optional(),
-  carInsurance: z.number().positive(customFormError).optional(),
-  taxes: z.number().positive(customFormError).optional(),
-  incomeTaxRetention: z.number().positive('Ingresa un monto mayor a 0%').optional(),
-  valueContribution: z.number().positive('Ingresa un monto mayor a 0%').optional(),
-  unExpectedExpenses: z.number().positive('Ingresa un monto mayor a 0%').optional()
+const stepTwoChildrenFields = {
+  quantityChildrens: createConditionalField(),
+  childrensExpenses: createConditionalField(),
+  livingExpensesTwoTwo: createConditionalField(),
+  carInsurance: createConditionalField(),
+  taxes: createConditionalField(),
+  incomeTaxRetention: createConditionalField(),
+  valueContribution: createConditionalField(),
+  unExpectedExpenses: createConditionalField()
+}
+
+export const formSchema = z.object({
+  ...stepOneBaseFields,
+  ...stepOneOfficeFields,
+  ...stepTwoBaseFields,
+  ...stepTwoChildrenFields
 })
-  .refine(
-    (data) => {
-      if (data.cowork) {
-        return data.officeRent !== undefined &&
-          data.officeInsurance !== undefined &&
-          data.officeBills !== undefined &&
-          data.officeInternet !== undefined
-      }
-      return true
-    },
-    {
-      message: 'Deberás ingresar todos los campos relacionados a oficina/cowork',
-      path: ['cowork']
+  .superRefine((data, ctx) => {
+    // Validate office fields only when cowork is true
+    if (data.cowork) {
+      const officeFieldsToValidate = [
+        { value: data.officeRent, path: 'officeRent' },
+        { value: data.officeInsurance, path: 'officeInsurance' },
+        { value: data.officeBills, path: 'officeBills' },
+        { value: data.officeInternet, path: 'officeInternet' }
+      ]
+
+      officeFieldsToValidate.forEach(field => {
+        validateConditionalField(ctx, field.value, [field.path])
+      })
     }
-  )
-  .refine(
-    (data) => {
-      if (data.childrens) {
-        return data.quantityChildrens !== undefined &&
-          data.childrensExpenses !== undefined &&
-          data.livingExpensesTwoTwo !== undefined &&
-          data.carInsurance !== undefined &&
-          data.taxes !== undefined &&
-          data.incomeTaxRetention !== undefined &&
-          data.valueContribution !== undefined &&
-          data.unExpectedExpenses !== undefined
-      }
-      return true
-    },
-    {
-      message: 'Deberás ingresar todos los campos relacionados a hijos',
-      path: ['childrens']
+  })
+  .superRefine((data, ctx) => {
+    // Validate children fields only when childrens is true
+    if (data.childrens) {
+      const childrenFieldsToValidate = [
+        { value: data.quantityChildrens, path: 'quantityChildrens' },
+        { value: data.childrensExpenses, path: 'childrensExpenses' },
+        { value: data.livingExpensesTwoTwo, path: 'livingExpensesTwoTwo' },
+        { value: data.carInsurance, path: 'carInsurance' },
+        { value: data.taxes, path: 'taxes' },
+        { value: data.incomeTaxRetention, path: 'incomeTaxRetention' },
+        { value: data.valueContribution, path: 'valueContribution' },
+        { value: data.unExpectedExpenses, path: 'unExpectedExpenses' }
+      ]
+
+      childrenFieldsToValidate.forEach(field => {
+        validateConditionalField(ctx, field.value, [field.path])
+      })
     }
-  )
+  })
 
 export type FormValues = z.infer<typeof formSchema>
