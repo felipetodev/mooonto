@@ -99,7 +99,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                     <FormControl>
                       <CurrencyInput
                         ref={field.ref}
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         onValueChange={(value) => {
                           field.onChange(Number(value ?? 0))
@@ -202,7 +202,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                 <div className='flex flex-col w-full'>
                   <FormControl>
                     <CurrencyInput
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                       intlConfig={intlConfig}
                       onValueChange={(value) => {
                         field.onChange(Number(value ?? 0))
@@ -237,7 +237,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                         <FormControl>
                           <CurrencyInput
                             disabled={disabledFields}
-                            className='ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                            className='ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                             intlConfig={intlConfig}
                             onValueChange={(value) => {
                               field.onChange(Number(value ?? 0))
@@ -250,7 +250,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                       <CurrencyInput
                         readOnly
                         disabled={disabledFields}
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         value={form.getValues(f.name as any) * 12 || 0}
                         prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
@@ -278,7 +278,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                   <div className='grid grid-cols-2 gap-x-4'>
                     <FormControl>
                       <CurrencyInput
-                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         onValueChange={(value) => {
                           field.onChange(Number(value ?? 0))
@@ -292,7 +292,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                     </FormControl>
                     <CurrencyInput
                       readOnly
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                       intlConfig={intlConfig}
                       value={form.getValues('incomeTaxRetention') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
@@ -320,7 +320,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                   <div className='grid grid-cols-2 gap-x-4'>
                     <FormControl>
                       <CurrencyInput
-                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         onValueChange={(value) => {
                           field.onChange(Number(value ?? 0))
@@ -334,7 +334,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                     </FormControl>
                     <CurrencyInput
                       readOnly
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                       intlConfig={intlConfig}
                       value={form.getValues('valueContribution') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
@@ -362,7 +362,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                   <div className='grid grid-cols-2 gap-x-4'>
                     <FormControl>
                       <CurrencyInput
-                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                        className='max-w-60 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                         intlConfig={intlConfig}
                         onValueChange={(value) => {
                           field.onChange(Number(value ?? 0))
@@ -376,7 +376,7 @@ export function StepTwoForm ({ intlConfig }: { intlConfig: IntlConfig }) {
                     </FormControl>
                     <CurrencyInput
                       readOnly
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
+                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
                       intlConfig={intlConfig}
                       value={form.getValues('unExpectedExpenses') * 12 || 0}
                       prefix={`${intlConfig.currency} ${intlConfig.symbol}`}

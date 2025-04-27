@@ -22,7 +22,7 @@ function AdComponent ({
 export function AdsLayout ({ children }: { children: React.ReactNode }) {
   return (
     <section id='calcula' className="bg-[#f7f4f0] px-10 md:px-16">
-      <div className="max-w-screen-4xl mx-auto flex flex-col md:flex-row w-full">
+      <div className="max-w-(--breakpoint-4xl) mx-auto flex flex-col md:flex-row w-full">
         <AdComponent className="ml-auto">
           AD
         </AdComponent>

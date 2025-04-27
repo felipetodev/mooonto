@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 export function MainHero () {
   return (
     <section className="h-[700px] bg-[#002446] w-full px-10 md:px-16">
-      <div className='max-w-screen-4xl mx-auto h-full'>
+      <div className='max-w-(--breakpoint-4xl) mx-auto h-full'>
         <div className="flex flex-col gap-y-10 justify-center h-full max-w-3xl">
-          <h1 className="flex flex-col text-[80px] font-bold leading-tight font-delaGothic">
+          <h1 className="flex flex-col text-[80px] font-bold leading-tight font-dela-gothic">
             <span>Dale valor a tu</span>{' '}
             <span>trabajo creativo</span>{' '}
             <span>

@@ -6,7 +6,7 @@ import HelpPopover from '@/components/help-popover'
 function NavBar () {
   return (
     <nav className='bg-[#FF3B16] px-10 md:px-16'>
-      <div className='flex items-center justify-between max-w-screen-4xl mx-auto h-16'>
+      <div className='flex items-center justify-between max-w-(--breakpoint-4xl) mx-auto h-16'>
         <Link href='/'>
           <Logo className='text-[#F7F4F0]' />
         </ Link>
