@@ -6,11 +6,11 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { IntlConfig } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useMemo, useRef } from "react";
-import CurrencyInput from "react-currency-input-field";
 import { useFormContext, useWatch } from "react-hook-form";
 import Heading from "./heading";
 
@@ -75,9 +75,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Autónomos</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
@@ -104,9 +103,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Asesoría / Gestoría</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
@@ -138,9 +136,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<div className="flex items-center">
 											<FormLabel className="min-w-max">Costo Anual</FormLabel>
 											<FormControl>
-												<CurrencyInput
+												<NumberInput
 													ref={field.ref}
-													className="ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 													intlConfig={intlConfig}
 													onValueChange={(value) => {
 														field.onChange(Number(value ?? 0));
@@ -150,9 +147,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												/>
 											</FormControl>
 										</div>
-										<CurrencyInput
+										<NumberInput
 											readOnly
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											value={form.getValues("lifecycleEquipment") * 12 || 0}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
@@ -177,9 +173,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Suscripciones</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
@@ -246,8 +241,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
-											<CurrencyInput
-												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											<NumberInput
 												intlConfig={intlConfig}
 												onValueChange={(value) => {
 													field.onChange(Number(value ?? 0));
@@ -282,8 +276,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													Costo Anual
 												</FormLabel>
 												<FormControl>
-													<CurrencyInput
-														className="ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+													<NumberInput
 														intlConfig={intlConfig}
 														onValueChange={(value) => {
 															field.onChange(Number(value ?? 0));
@@ -294,9 +287,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													/>
 												</FormControl>
 											</div>
-											<CurrencyInput
+											<NumberInput
 												readOnly
-												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 												intlConfig={intlConfig}
 												value={
 													(form.getValues("officeInsurance") ?? 0) * 12 || 0
@@ -326,8 +318,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
-											<CurrencyInput
-												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											<NumberInput
 												intlConfig={intlConfig}
 												onValueChange={(value) => {
 													field.onChange(Number(value ?? 0));
@@ -357,8 +348,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
-											<CurrencyInput
-												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											<NumberInput
 												intlConfig={intlConfig}
 												onValueChange={(value) => {
 													field.onChange(Number(value ?? 0));
@@ -387,9 +377,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Gasolina / diesel</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
@@ -416,9 +405,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Café</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
@@ -445,9 +433,8 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<FormLabel className="w-[330px]">Agua</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
-										<CurrencyInput
+										<NumberInput
 											ref={field.ref}
-											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 											intlConfig={intlConfig}
 											onValueChange={(value) => {
 												field.onChange(Number(value ?? 0));
