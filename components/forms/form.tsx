@@ -107,44 +107,72 @@ export function MainForm ({ intlConfig }: { intlConfig: IntlConfig }) {
   console.log('FORM ERRORS :::: ', form.formState.errors)
 
   const stepsSum = useMemo(() => {
-    const stepOneSum = form.getValues().selfEmployed +
-      form.getValues().consultancy +
-      form.getValues().lifecyclyEquipment * 12 +
-      form.getValues().subscriptions +
-      (form.getValues().cowork ? (form.getValues().officeRent ?? 0) : 0) +
-      (form.getValues().cowork ? (form.getValues().officeInsurance ?? 0) * 12 : 0) +
-      (form.getValues().cowork ? (form.getValues().officeBills ?? 0) : 0) +
-      (form.getValues().cowork ? (form.getValues().officeInternet ?? 0) : 0) +
-      form.getValues().gasoline +
-      form.getValues().coffee +
-      form.getValues().water
+    const values = form.getValues()
 
-    const stepTwoSum = form.getValues().livingExpenses +
-      form.getValues().commonExpenses +
-      form.getValues().food +
-      form.getValues().gym +
-      form.getValues().entertainment +
-      form.getValues().clothes +
-      form.getValues().carFee +
-      (form.getValues().livingExpensesTwo ?? 0) +
-      (form.getValues().internet ?? 0) +
-      (form.getValues().personalPhone ?? 0) +
-      (form.getValues().healthPlan ?? 0) +
-      (form.getValues().retirementFund ?? 0) +
-      (form.getValues().otherExpenses ?? 0) +
-      (form.getValues().childrens
-        ? (form.getValues().quantityChildrens ?? 0) * (form.getValues().childrensExpenses ?? 0)
-        : 0) +
-      (form.getValues().childrens ? (form.getValues().livingExpensesTwoTwo ?? 0) * 12 : 0) +
-      (form.getValues().childrens ? (form.getValues().carInsurance ?? 0) * 12 : 0) +
-      (form.getValues().childrens ? (form.getValues().taxes ?? 0) * 12 : 0) +
-      (form.getValues().childrens ? (form.getValues().incomeTaxRetention ?? 0) : 0) + // %
-      (form.getValues().childrens ? (form.getValues().valueContribution ?? 0) : 0) + // %
-      (form.getValues().childrens ? (form.getValues().unExpectedExpenses ?? 0) : 0) // %
+    const calculateOfficeExpenses = () => {
+      if (!values.cowork) return 0
 
-    return stepOneSum + stepTwoSum
-  }
-  , [watchedValues])
+      return (values.officeRent ?? 0) +
+        (values.officeInsurance ?? 0) * 12 +
+        (values.officeBills ?? 0) +
+        (values.officeInternet ?? 0)
+    }
+
+    const calculateChildrenExpenses = () => {
+      if (!values.childrens) return 0
+
+      const childrenBasicExpenses = (values.quantityChildrens ?? 0) * (values.childrensExpenses ?? 0)
+      const childrenPeriodicExpenses = (values.livingExpensesTwoTwo ?? 0) * 12 +
+        (values.carInsurance ?? 0) * 12 +
+        (values.taxes ?? 0) * 12
+      const childrenPercentageExpenses = (values.incomeTaxRetention ?? 0) +
+        (values.valueContribution ?? 0) +
+        (values.unExpectedExpenses ?? 0) // fix: calculate % expenses
+
+      return childrenBasicExpenses + childrenPeriodicExpenses + childrenPercentageExpenses
+    }
+
+    // Step One Expenses
+    const businessExpenses = values.selfEmployed +
+      values.consultancy +
+      values.lifecyclyEquipment * 12 +
+      values.subscriptions
+
+    const officeExpenses = calculateOfficeExpenses()
+
+    const dailyBusinessExpenses = values.gasoline +
+      values.coffee +
+      values.water
+
+    // Step Two Expenses
+    const basicLivingExpenses = values.livingExpenses +
+      values.commonExpenses +
+      values.food
+
+    const lifestyleExpenses = values.gym +
+      values.entertainment +
+      values.clothes
+
+    const recurringExpenses = values.carFee +
+      (values.livingExpensesTwo ?? 0) +
+      (values.internet ?? 0) +
+      (values.personalPhone ?? 0)
+
+    const financialSecurity = (values.healthPlan ?? 0) +
+      (values.retirementFund ?? 0) +
+      (values.otherExpenses ?? 0)
+
+    const childrenExpenses = calculateChildrenExpenses()
+
+    return businessExpenses +
+      officeExpenses +
+      dailyBusinessExpenses +
+      basicLivingExpenses +
+      lifestyleExpenses +
+      recurringExpenses +
+      financialSecurity +
+      childrenExpenses
+  }, [watchedValues])
 
   return (
     <div className="relative flex flex-col text-[#002446]">
