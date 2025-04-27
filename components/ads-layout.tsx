@@ -1,38 +1,42 @@
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
-function AdComponent ({
-  className,
-  children
+function AdComponent({
+	className,
+	children,
 }: {
-  className?: string
-  children: React.ReactNode
+	className?: string;
+	children: React.ReactNode;
 }) {
-  return (
-    <>
-      <div className={cn('hidden sticky mt-10 mb-20 top-0 rounded w-40 h-[600px] bg-neutral-200 md:grid place-items-center text-3xl font-bold', className)}>
-        {children}
-      </div>
-      <div className={cn('mt-10 mb-20 rounded w-full h-32 bg-neutral-200 grid md:hidden place-items-center text-3xl font-bold', className)}>
-        {children}
-      </div>
-    </>
-  )
+	return (
+		<>
+			<div
+				className={cn(
+					"sticky top-0 mt-10 mb-20 hidden h-[600px] w-40 place-items-center rounded bg-neutral-200 font-bold text-3xl md:grid",
+					className,
+				)}
+			>
+				{children}
+			</div>
+			<div
+				className={cn(
+					"mt-10 mb-20 grid h-32 w-full place-items-center rounded bg-neutral-200 font-bold text-3xl md:hidden",
+					className,
+				)}
+			>
+				{children}
+			</div>
+		</>
+	);
 }
 
-export function AdsLayout ({ children }: { children: React.ReactNode }) {
-  return (
-    <section id='calcula' className="bg-[#f7f4f0] px-10 md:px-16">
-      <div className="max-w-(--breakpoint-4xl) mx-auto flex flex-col md:flex-row w-full">
-        <AdComponent className="ml-auto">
-          AD
-        </AdComponent>
-        <main className="md:px-14 w-full pt-10 pb-20">
-          {children}
-        </main>
-        <AdComponent className="mr-auto">
-          AD
-        </AdComponent>
-      </div>
-    </section>
-  )
+export function AdsLayout({ children }: { children: React.ReactNode }) {
+	return (
+		<section id="calcula" className="bg-[#f7f4f0] px-10 md:px-16">
+			<div className="mx-auto flex w-full max-w-(--breakpoint-4xl) flex-col md:flex-row">
+				<AdComponent className="ml-auto">AD</AdComponent>
+				<main className="w-full pt-10 pb-20 md:px-14">{children}</main>
+				<AdComponent className="mr-auto">AD</AdComponent>
+			</div>
+		</section>
+	);
 }

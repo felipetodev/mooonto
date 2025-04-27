@@ -1,472 +1,473 @@
-import { useRef, useMemo } from 'react'
-import Heading from './heading'
-import CurrencyInput from 'react-currency-input-field'
-import { useFormContext, useWatch } from 'react-hook-form'
 import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { cn } from '@/lib/utils'
-import { type IntlConfig } from '@/lib/types'
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import type { IntlConfig } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { useMemo, useRef } from "react";
+import CurrencyInput from "react-currency-input-field";
+import { useFormContext, useWatch } from "react-hook-form";
+import Heading from "./heading";
 
 interface CoworkFieldValues {
-  officeRent?: number
-  officeInsurance?: number
-  officeBills?: number
-  officeInternet?: number
+	officeRent?: number;
+	officeInsurance?: number;
+	officeBills?: number;
+	officeInternet?: number;
 }
 
-export function StepOneForm ({ intlConfig }: { intlConfig: IntlConfig }) {
-  const form = useFormContext()
+export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
+	const form = useFormContext();
 
-  const cowork = useWatch({
-    control: form.control,
-    name: 'cowork'
-  })
-  const disabledField = useMemo(() => !cowork, [cowork])
+	const cowork = useWatch({
+		control: form.control,
+		name: "cowork",
+	});
+	const disabledField = useMemo(() => !cowork, [cowork]);
 
-  const prevValues = useRef<CoworkFieldValues>({})
+	const prevValues = useRef<CoworkFieldValues>({});
 
-  const handleCoworkChange = (value: boolean) => {
-    if (!value) {
-      prevValues.current = {
-        officeRent: form.getValues('officeRent'),
-        officeInsurance: form.getValues('officeInsurance'),
-        officeBills: form.getValues('officeBills'),
-        officeInternet: form.getValues('officeInternet')
-      }
+	const handleCoworkChange = (value: boolean) => {
+		if (!value) {
+			prevValues.current = {
+				officeRent: form.getValues("officeRent"),
+				officeInsurance: form.getValues("officeInsurance"),
+				officeBills: form.getValues("officeBills"),
+				officeInternet: form.getValues("officeInternet"),
+			};
 
-      form.setValue('officeRent', undefined)
-      form.setValue('officeInsurance', undefined)
-      form.setValue('officeBills', undefined)
-      form.setValue('officeInternet', undefined)
-    } else {
-      form.setValue('officeRent', prevValues.current.officeRent)
-      form.setValue('officeInsurance', prevValues.current.officeInsurance)
-      form.setValue('officeBills', prevValues.current.officeBills)
-      form.setValue('officeInternet', prevValues.current.officeInternet)
-    }
-    return value
-  }
+			form.setValue("officeRent", undefined);
+			form.setValue("officeInsurance", undefined);
+			form.setValue("officeBills", undefined);
+			form.setValue("officeInternet", undefined);
+		} else {
+			form.setValue("officeRent", prevValues.current.officeRent);
+			form.setValue("officeInsurance", prevValues.current.officeInsurance);
+			form.setValue("officeBills", prevValues.current.officeBills);
+			form.setValue("officeInternet", prevValues.current.officeInternet);
+		}
+		return value;
+	};
 
-  const opacityStyles = (className: string) => cn(
-    className,
-    'transition-opacity ease-in-out',
-    { 'opacity-50': disabledField }
-  )
+	const opacityStyles = (className: string) =>
+		cn(className, "transition-opacity ease-in-out", {
+			"opacity-50": disabledField,
+		});
 
-  return (
-    <div className="flex flex-col">
-      <Heading step={1} totalSteps={2}>
-        Gastos mensuales mínimos para poder{' '}
-        <span className="font-bold">trabajar</span>
-      </Heading>
-      <div className="space-y-8 mt-10">
-        <FormField
-          control={form.control}
-          name="selfEmployed"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Autónomos</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={intlConfig.symbol}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Costo de impuestos por ser autónomo
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="consultancy"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Asesoría / Gestoría</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Costos de contabilidad y servicios externos
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="lifecyclyEquipment"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Vida útil de tus equipos</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <div className='grid grid-cols-2 gap-x-4'>
-                    <div className='flex items-center'>
-                      <FormLabel className='min-w-max'>Costo Anual</FormLabel>
-                      <FormControl>
-                        <CurrencyInput
-                          ref={field.ref}
-                          className='ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                          intlConfig={intlConfig}
-                          onValueChange={(value) => {
-                            field.onChange(Number(value ?? 0))
-                          }}
-                          prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                          placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        />
-                      </FormControl>
-                    </div>
-                    <CurrencyInput
-                      readOnly
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      value={form.getValues('lifecyclyEquipment') * 12 || 0}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </div>
-                  <FormDescription className='text-inherit'>
-                    Costo de impuestos por ser autónomo
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="subscriptions"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Suscripciones</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Vercel, GitHub, Adobe, Shutterstock, Figma, etc.
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="cowork"
-          render={({ field }) => (
-            <FormItem className="space-y-3">
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Oficina / Cowork</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={e => {
-                        const value = Boolean(Number(e))
-                        field.onChange(handleCoworkChange(value))
-                      }}
-                      defaultValue={field.value ? '1' : '0'}
-                      className="flex items-center"
-                    >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="1" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Si
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="0" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          No
-                        </FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <div className='space-y-8'>
-          <FormField
-            control={form.control}
-            name="officeRent"
-            render={({ field }) => (
-              <FormItem>
-                <div className='flex items-center'>
-                  <FormLabel className='w-[330px]'>
-                    <span className='ml-8'>Alquiler de oficina / Cowork</span>
-                  </FormLabel>
-                  <div className='flex flex-col w-full'>
-                    <FormControl>
-                      <CurrencyInput
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                        intlConfig={intlConfig}
-                        onValueChange={(value) => {
-                          field.onChange(Number(value ?? 0))
-                        }}
-                        prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                        placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={disabledField}
-                      />
-                    </FormControl>
-                    <FormDescription className={opacityStyles('text-inherit')}>
-                      Lorem Ipsum dolor sit amet.
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="officeInsurance"
-            render={({ field }) => (
-              <FormItem>
-                <div className='flex items-center'>
-                  <FormLabel className='w-[330px]'>
-                    <span className='ml-8'>Seguro oficina</span>
-                  </FormLabel>
-                  <div className='flex flex-col w-full'>
-                    <div className='grid grid-cols-2 gap-x-4'>
-                      <div className='flex items-center'>
-                        <FormLabel className={opacityStyles('min-w-max')}>Costo Anual</FormLabel>
-                        <FormControl>
-                          <CurrencyInput
-                            className='ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                            intlConfig={intlConfig}
-                            onValueChange={(value) => {
-                              field.onChange(Number(value ?? 0))
-                            }}
-                            prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                            placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                            disabled={disabledField}
-                          />
-                        </FormControl>
-                      </div>
-                      <CurrencyInput
-                        readOnly
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                        intlConfig={intlConfig}
-                        value={(form.getValues('officeInsurance') ?? 0) * 12 || 0}
-                        prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                        placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={disabledField}
-                      />
-                    </div>
-                    <FormDescription className={opacityStyles('text-inherit')}>
-                      Lorem Ipsum dolor sit amet.
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="officeBills"
-            render={({ field }) => (
-              <FormItem>
-                <div className='flex items-center'>
-                  <FormLabel className='w-[330px]'>
-                    <span className='ml-8'>Agua / luz / gas oficina</span>
-                  </FormLabel>
-                  <div className='flex flex-col w-full'>
-                    <FormControl>
-                      <CurrencyInput
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                        intlConfig={intlConfig}
-                        onValueChange={(value) => {
-                          field.onChange(Number(value ?? 0))
-                        }}
-                        prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                        placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={disabledField}
-                      />
-                    </FormControl>
-                    <FormDescription className={opacityStyles('text-inherit')}>
-                      Lorem Ipsum dolor sit amet.
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="officeInternet"
-            render={({ field }) => (
-              <FormItem>
-                <div className='flex items-center'>
-                  <FormLabel className='w-[330px]'>
-                    <span className='ml-8'>Internet / teléfono oficina</span>
-                  </FormLabel>
-                  <div className='flex flex-col w-full'>
-                    <FormControl>
-                      <CurrencyInput
-                        className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                        intlConfig={intlConfig}
-                        onValueChange={(value) => {
-                          field.onChange(Number(value ?? 0))
-                        }}
-                        prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                        placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                        disabled={disabledField}
-                      />
-                    </FormControl>
-                    <FormDescription className={opacityStyles('text-inherit')}>
-                      Lorem Ipsum dolor sit amet.
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
-          />
-        </div>
-        <FormField
-          control={form.control}
-          name="gasoline"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Gasolina / diesel</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Lorem Ipsum dolor sit amet.
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="coffee"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Café</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Lorem Ipsum dolor sit amet.
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="water"
-          render={({ field }) => (
-            <FormItem>
-              <div className='flex items-center'>
-                <FormLabel className='w-[330px]'>Agua</FormLabel>
-                <div className='flex flex-col w-full'>
-                  <FormControl>
-                    <CurrencyInput
-                      ref={field.ref}
-                      className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-end'
-                      intlConfig={intlConfig}
-                      onValueChange={(value) => {
-                        field.onChange(Number(value ?? 0))
-                      }}
-                      prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-                      placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-                    />
-                  </FormControl>
-                  <FormDescription className='text-inherit'>
-                    Lorem Ipsum dolor sit amet.
-                  </FormDescription>
-                  <FormMessage />
-                </div>
-              </div>
-            </FormItem>
-          )}
-        />
-      </div>
-    </div>
-  )
+	return (
+		<div className="flex flex-col">
+			<Heading step={1} totalSteps={2}>
+				Gastos mensuales mínimos para poder{" "}
+				<span className="font-bold">trabajar</span>
+			</Heading>
+			<div className="mt-10 space-y-8">
+				<FormField
+					control={form.control}
+					name="selfEmployed"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Autónomos</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={intlConfig.symbol}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Costo de impuestos por ser autónomo
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="consultancy"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Asesoría / Gestoría</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Costos de contabilidad y servicios externos
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="lifecycleEquipment"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">
+									Vida útil de tus equipos
+								</FormLabel>
+								<div className="flex w-full flex-col">
+									<div className="grid grid-cols-2 gap-x-4">
+										<div className="flex items-center">
+											<FormLabel className="min-w-max">Costo Anual</FormLabel>
+											<FormControl>
+												<CurrencyInput
+													ref={field.ref}
+													className="ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+													intlConfig={intlConfig}
+													onValueChange={(value) => {
+														field.onChange(Number(value ?? 0));
+													}}
+													prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+													placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												/>
+											</FormControl>
+										</div>
+										<CurrencyInput
+											readOnly
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											value={form.getValues("lifecycleEquipment") * 12 || 0}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</div>
+									<FormDescription className="text-inherit">
+										Costo de impuestos por ser autónomo
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="subscriptions"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Suscripciones</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Vercel, GitHub, Adobe, Shutterstock, Figma, etc.
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="cowork"
+					render={({ field }) => (
+						<FormItem className="space-y-3">
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Oficina / Cowork</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<RadioGroup
+											onValueChange={(e) => {
+												const value = Boolean(Number(e));
+												field.onChange(handleCoworkChange(value));
+											}}
+											defaultValue={field.value ? "1" : "0"}
+											className="flex items-center"
+										>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="1" />
+												</FormControl>
+												<FormLabel className="font-normal">Si</FormLabel>
+											</FormItem>
+											<FormItem className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<RadioGroupItem value="0" />
+												</FormControl>
+												<FormLabel className="font-normal">No</FormLabel>
+											</FormItem>
+										</RadioGroup>
+									</FormControl>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<div className="space-y-8">
+					<FormField
+						control={form.control}
+						name="officeRent"
+						render={({ field }) => (
+							<FormItem>
+								<div className="flex items-center">
+									<FormLabel className="w-[330px]">
+										<span className="ml-8">Alquiler de oficina / Cowork</span>
+									</FormLabel>
+									<div className="flex w-full flex-col">
+										<FormControl>
+											<CurrencyInput
+												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+												intlConfig={intlConfig}
+												onValueChange={(value) => {
+													field.onChange(Number(value ?? 0));
+												}}
+												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												disabled={disabledField}
+											/>
+										</FormControl>
+										<FormDescription className={opacityStyles("text-inherit")}>
+											Lorem Ipsum dolor sit amet.
+										</FormDescription>
+										<FormMessage />
+									</div>
+								</div>
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="officeInsurance"
+						render={({ field }) => (
+							<FormItem>
+								<div className="flex items-center">
+									<FormLabel className="w-[330px]">
+										<span className="ml-8">Seguro oficina</span>
+									</FormLabel>
+									<div className="flex w-full flex-col">
+										<div className="grid grid-cols-2 gap-x-4">
+											<div className="flex items-center">
+												<FormLabel className={opacityStyles("min-w-max")}>
+													Costo Anual
+												</FormLabel>
+												<FormControl>
+													<CurrencyInput
+														className="ml-4 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+														intlConfig={intlConfig}
+														onValueChange={(value) => {
+															field.onChange(Number(value ?? 0));
+														}}
+														prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+														placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+														disabled={disabledField}
+													/>
+												</FormControl>
+											</div>
+											<CurrencyInput
+												readOnly
+												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+												intlConfig={intlConfig}
+												value={
+													(form.getValues("officeInsurance") ?? 0) * 12 || 0
+												}
+												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												disabled={disabledField}
+											/>
+										</div>
+										<FormDescription className={opacityStyles("text-inherit")}>
+											Lorem Ipsum dolor sit amet.
+										</FormDescription>
+										<FormMessage />
+									</div>
+								</div>
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="officeBills"
+						render={({ field }) => (
+							<FormItem>
+								<div className="flex items-center">
+									<FormLabel className="w-[330px]">
+										<span className="ml-8">Agua / luz / gas oficina</span>
+									</FormLabel>
+									<div className="flex w-full flex-col">
+										<FormControl>
+											<CurrencyInput
+												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+												intlConfig={intlConfig}
+												onValueChange={(value) => {
+													field.onChange(Number(value ?? 0));
+												}}
+												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												disabled={disabledField}
+											/>
+										</FormControl>
+										<FormDescription className={opacityStyles("text-inherit")}>
+											Lorem Ipsum dolor sit amet.
+										</FormDescription>
+										<FormMessage />
+									</div>
+								</div>
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="officeInternet"
+						render={({ field }) => (
+							<FormItem>
+								<div className="flex items-center">
+									<FormLabel className="w-[330px]">
+										<span className="ml-8">Internet / teléfono oficina</span>
+									</FormLabel>
+									<div className="flex w-full flex-col">
+										<FormControl>
+											<CurrencyInput
+												className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+												intlConfig={intlConfig}
+												onValueChange={(value) => {
+													field.onChange(Number(value ?? 0));
+												}}
+												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												disabled={disabledField}
+											/>
+										</FormControl>
+										<FormDescription className={opacityStyles("text-inherit")}>
+											Lorem Ipsum dolor sit amet.
+										</FormDescription>
+										<FormMessage />
+									</div>
+								</div>
+							</FormItem>
+						)}
+					/>
+				</div>
+				<FormField
+					control={form.control}
+					name="gasoline"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Gasolina / diesel</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Lorem Ipsum dolor sit amet.
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="coffee"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Café</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Lorem Ipsum dolor sit amet.
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="water"
+					render={({ field }) => (
+						<FormItem>
+							<div className="flex items-center">
+								<FormLabel className="w-[330px]">Agua</FormLabel>
+								<div className="flex w-full flex-col">
+									<FormControl>
+										<CurrencyInput
+											ref={field.ref}
+											className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-end text-sm ring-offset-background file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+											intlConfig={intlConfig}
+											onValueChange={(value) => {
+												field.onChange(Number(value ?? 0));
+											}}
+											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
+											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										/>
+									</FormControl>
+									<FormDescription className="text-inherit">
+										Lorem Ipsum dolor sit amet.
+									</FormDescription>
+									<FormMessage />
+								</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+			</div>
+		</div>
+	);
 }
 
-export default StepOneForm
+export default StepOneForm;
