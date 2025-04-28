@@ -97,7 +97,10 @@ function FormLabel({
 		<Label
 			data-slot="form-label"
 			data-error={!!error}
-			className={cn("data-[error=true]:text-destructive", className)}
+			className={cn(
+				"transition aria-disabled:opacity-50 data-[error=true]:text-destructive",
+				className,
+			)}
 			htmlFor={formItemId}
 			{...props}
 		/>
@@ -130,7 +133,10 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 		<p
 			data-slot="form-description"
 			id={formDescriptionId}
-			className={cn("text-muted-foreground text-sm", className)}
+			className={cn(
+				"text-inherit text-sm transition aria-disabled:opacity-50",
+				className,
+			)}
 			{...props}
 		/>
 	);

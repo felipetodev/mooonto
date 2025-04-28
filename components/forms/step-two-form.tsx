@@ -11,7 +11,6 @@ import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FORM_FIELDS_TWO, FORM_FIELDS_TWO_TWO } from "@/lib/constants";
 import type { IntlConfig } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import Heading from "./heading";
@@ -28,10 +27,10 @@ interface ChildFieldValues {
 }
 
 export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
-	const form = useFormContext();
+	const { control, getValues, setValue } = useFormContext();
 
 	const hasChildrens = useWatch({
-		control: form.control,
+		control: control,
 		name: "childrens",
 	});
 	const disabledFields = useMemo(() => !hasChildrens, [hasChildrens]);
@@ -41,51 +40,37 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const handleChildrensChange = (value: boolean) => {
 		if (!value) {
 			prevValues.current = {
-				quantityChildrens: form.getValues("quantityChildrens"),
-				childrensExpenses: form.getValues("childrensExpenses"),
-				livingExpensesTwoTwo: form.getValues("livingExpensesTwoTwo"),
-				carInsurance: form.getValues("carInsurance"),
-				taxes: form.getValues("taxes"),
-				incomeTaxRetention: form.getValues("incomeTaxRetention"),
-				valueContribution: form.getValues("valueContribution"),
-				unExpectedExpenses: form.getValues("unExpectedExpenses"),
+				quantityChildrens: getValues("quantityChildrens"),
+				childrensExpenses: getValues("childrensExpenses"),
+				livingExpensesTwoTwo: getValues("livingExpensesTwoTwo"),
+				carInsurance: getValues("carInsurance"),
+				taxes: getValues("taxes"),
+				incomeTaxRetention: getValues("incomeTaxRetention"),
+				valueContribution: getValues("valueContribution"),
+				unExpectedExpenses: getValues("unExpectedExpenses"),
 			};
 
-			form.setValue("quantityChildrens", undefined);
-			form.setValue("childrensExpenses", undefined);
-			form.setValue("livingExpensesTwoTwo", undefined);
-			form.setValue("carInsurance", undefined);
-			form.setValue("taxes", undefined);
-			form.setValue("incomeTaxRetention", undefined);
-			form.setValue("valueContribution", undefined);
-			form.setValue("unExpectedExpenses", undefined);
+			setValue("quantityChildrens", undefined);
+			setValue("childrensExpenses", undefined);
+			setValue("livingExpensesTwoTwo", undefined);
+			setValue("carInsurance", undefined);
+			setValue("taxes", undefined);
+			setValue("incomeTaxRetention", undefined);
+			setValue("valueContribution", undefined);
+			setValue("unExpectedExpenses", undefined);
 		} else {
-			form.setValue("quantityChildrens", prevValues.current.quantityChildrens);
-			form.setValue("childrensExpenses", prevValues.current.childrensExpenses);
-			form.setValue(
-				"livingExpensesTwoTwo",
-				prevValues.current.livingExpensesTwoTwo,
-			);
-			form.setValue("carInsurance", prevValues.current.carInsurance);
-			form.setValue("taxes", prevValues.current.taxes);
-			form.setValue(
-				"incomeTaxRetention",
-				prevValues.current.incomeTaxRetention,
-			);
-			form.setValue("valueContribution", prevValues.current.valueContribution);
-			form.setValue(
-				"unExpectedExpenses",
-				prevValues.current.unExpectedExpenses,
-			);
+			setValue("quantityChildrens", prevValues.current.quantityChildrens);
+			setValue("childrensExpenses", prevValues.current.childrensExpenses);
+			setValue("livingExpensesTwoTwo", prevValues.current.livingExpensesTwoTwo);
+			setValue("carInsurance", prevValues.current.carInsurance);
+			setValue("taxes", prevValues.current.taxes);
+			setValue("incomeTaxRetention", prevValues.current.incomeTaxRetention);
+			setValue("valueContribution", prevValues.current.valueContribution);
+			setValue("unExpectedExpenses", prevValues.current.unExpectedExpenses);
 		}
 
 		return value;
 	};
-
-	const opacityStyles = (className: string) =>
-		cn(className, "transition-opacity ease-in-out", {
-			"opacity-50": disabledFields,
-		});
 
 	return (
 		<div className="flex flex-col">
@@ -97,7 +82,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 				{FORM_FIELDS_TWO.map((f) => (
 					<FormField
 						key={f.name}
-						control={form.control}
+						control={control}
 						name={f.name}
 						render={({ field }) => (
 							<FormItem>
@@ -126,7 +111,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					/>
 				))}
 				<FormField
-					control={form.control}
+					control={control}
 					name="childrens"
 					render={({ field }) => (
 						<FormItem className="space-y-3">
@@ -165,7 +150,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="quantityChildrens"
 					render={({ field }) => (
 						<FormItem>
@@ -194,7 +179,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="childrensExpenses"
 					render={({ field }) => (
 						<FormItem>
@@ -216,7 +201,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											disabled={disabledFields}
 										/>
 									</FormControl>
-									<FormDescription className={opacityStyles("text-inherit")}>
+									<FormDescription aria-disabled={disabledFields}>
 										Lorem Ipsum dolor sit amet.
 									</FormDescription>
 									<FormMessage />
@@ -228,7 +213,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 				{FORM_FIELDS_TWO_TWO.map((f) => (
 					<FormField
 						key={f.name}
-						control={form.control}
+						control={control}
 						name={f.name}
 						render={({ field }) => (
 							<FormItem>
@@ -237,7 +222,10 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
 											<div className="flex items-center">
-												<FormLabel className={opacityStyles("min-w-max")}>
+												<FormLabel
+													aria-disabled={disabledFields}
+													className="mr-1 min-w-max"
+												>
 													Costo Anual
 												</FormLabel>
 												<FormControl>
@@ -256,12 +244,12 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												readOnly
 												disabled={disabledFields}
 												intlConfig={intlConfig}
-												value={form.getValues(f.name) * 12 || 0}
+												value={getValues(f.name) * 12 || 0}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 											/>
 										</div>
-										<FormDescription className={opacityStyles("text-inherit")}>
+										<FormDescription aria-disabled={disabledFields}>
 											{f.description}
 										</FormDescription>
 										<FormMessage />
@@ -272,7 +260,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					/>
 				))}
 				<FormField
-					control={form.control}
+					control={control}
 					name="incomeTaxRetention"
 					render={({ field }) => (
 						<FormItem>
@@ -297,13 +285,13 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											readOnly
 											intlConfig={intlConfig}
-											value={form.getValues("incomeTaxRetention") * 12 || 0}
+											value={getValues("incomeTaxRetention") * 12 || 0}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 											disabled={disabledFields}
 										/>
 									</div>
-									<FormDescription className={opacityStyles("text-inherit")}>
+									<FormDescription aria-disabled={disabledFields}>
 										Lorem Ipsum dolor sit amet.
 									</FormDescription>
 									<FormMessage />
@@ -313,7 +301,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="valueContribution"
 					render={({ field }) => (
 						<FormItem>
@@ -338,13 +326,13 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											readOnly
 											intlConfig={intlConfig}
-											value={form.getValues("valueContribution") * 12 || 0}
+											value={getValues("valueContribution") * 12 || 0}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 											disabled={disabledFields}
 										/>
 									</div>
-									<FormDescription className={opacityStyles("text-inherit")}>
+									<FormDescription aria-disabled={disabledFields}>
 										Por ejemplo, 3% por cada año de experiencia laboral
 									</FormDescription>
 									<FormMessage />
@@ -354,7 +342,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="unExpectedExpenses"
 					render={({ field }) => (
 						<FormItem>
@@ -379,13 +367,13 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											readOnly
 											intlConfig={intlConfig}
-											value={form.getValues("unExpectedExpenses") * 12 || 0}
+											value={getValues("unExpectedExpenses") * 12 || 0}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 											disabled={disabledFields}
 										/>
 									</div>
-									<FormDescription className={opacityStyles("text-inherit")}>
+									<FormDescription aria-disabled={disabledFields}>
 										Lorem Ipsum dolor sit amet.
 									</FormDescription>
 									<FormMessage />

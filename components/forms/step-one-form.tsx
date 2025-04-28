@@ -9,7 +9,6 @@ import {
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { IntlConfig } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import Heading from "./heading";
@@ -22,10 +21,10 @@ interface CoworkFieldValues {
 }
 
 export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
-	const form = useFormContext();
+	const { control, getValues, setValue } = useFormContext();
 
 	const cowork = useWatch({
-		control: form.control,
+		control: control,
 		name: "cowork",
 	});
 	const disabledField = useMemo(() => !cowork, [cowork]);
@@ -35,29 +34,24 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const handleCoworkChange = (value: boolean) => {
 		if (!value) {
 			prevValues.current = {
-				officeRent: form.getValues("officeRent"),
-				officeInsurance: form.getValues("officeInsurance"),
-				officeBills: form.getValues("officeBills"),
-				officeInternet: form.getValues("officeInternet"),
+				officeRent: getValues("officeRent"),
+				officeInsurance: getValues("officeInsurance"),
+				officeBills: getValues("officeBills"),
+				officeInternet: getValues("officeInternet"),
 			};
 
-			form.setValue("officeRent", undefined);
-			form.setValue("officeInsurance", undefined);
-			form.setValue("officeBills", undefined);
-			form.setValue("officeInternet", undefined);
+			setValue("officeRent", undefined);
+			setValue("officeInsurance", undefined);
+			setValue("officeBills", undefined);
+			setValue("officeInternet", undefined);
 		} else {
-			form.setValue("officeRent", prevValues.current.officeRent);
-			form.setValue("officeInsurance", prevValues.current.officeInsurance);
-			form.setValue("officeBills", prevValues.current.officeBills);
-			form.setValue("officeInternet", prevValues.current.officeInternet);
+			setValue("officeRent", prevValues.current.officeRent);
+			setValue("officeInsurance", prevValues.current.officeInsurance);
+			setValue("officeBills", prevValues.current.officeBills);
+			setValue("officeInternet", prevValues.current.officeInternet);
 		}
 		return value;
 	};
-
-	const opacityStyles = (className: string) =>
-		cn(className, "transition-opacity ease-in-out", {
-			"opacity-50": disabledField,
-		});
 
 	return (
 		<div className="flex flex-col">
@@ -67,7 +61,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			</Heading>
 			<div className="mt-10 space-y-8">
 				<FormField
-					control={form.control}
+					control={control}
 					name="selfEmployed"
 					render={({ field }) => (
 						<FormItem>
@@ -95,7 +89,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="consultancy"
 					render={({ field }) => (
 						<FormItem>
@@ -123,7 +117,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="lifecycleEquipment"
 					render={({ field }) => (
 						<FormItem>
@@ -134,7 +128,9 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<div className="flex w-full flex-col">
 									<div className="grid grid-cols-2 gap-x-4">
 										<div className="flex items-center">
-											<FormLabel className="min-w-max">Costo Anual</FormLabel>
+											<FormLabel className="mr-1 min-w-max">
+												Costo Anual
+											</FormLabel>
 											<FormControl>
 												<NumberInput
 													ref={field.ref}
@@ -150,7 +146,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											readOnly
 											intlConfig={intlConfig}
-											value={form.getValues("lifecycleEquipment") * 12 || 0}
+											value={getValues("lifecycleEquipment") * 12 || 0}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -165,7 +161,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="subscriptions"
 					render={({ field }) => (
 						<FormItem>
@@ -193,7 +189,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="cowork"
 					render={({ field }) => (
 						<FormItem className="space-y-3">
@@ -231,7 +227,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 				/>
 				<div className="space-y-8">
 					<FormField
-						control={form.control}
+						control={control}
 						name="officeRent"
 						render={({ field }) => (
 							<FormItem>
@@ -251,7 +247,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												disabled={disabledField}
 											/>
 										</FormControl>
-										<FormDescription className={opacityStyles("text-inherit")}>
+										<FormDescription aria-disabled={disabledField}>
 											Lorem Ipsum dolor sit amet.
 										</FormDescription>
 										<FormMessage />
@@ -261,7 +257,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						)}
 					/>
 					<FormField
-						control={form.control}
+						control={control}
 						name="officeInsurance"
 						render={({ field }) => (
 							<FormItem>
@@ -272,7 +268,10 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
 											<div className="flex items-center">
-												<FormLabel className={opacityStyles("min-w-max")}>
+												<FormLabel
+													aria-disabled={disabledField}
+													className="mr-1 min-w-max"
+												>
 													Costo Anual
 												</FormLabel>
 												<FormControl>
@@ -290,15 +289,13 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												readOnly
 												intlConfig={intlConfig}
-												value={
-													(form.getValues("officeInsurance") ?? 0) * 12 || 0
-												}
+												value={(getValues("officeInsurance") ?? 0) * 12 || 0}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												disabled={disabledField}
 											/>
 										</div>
-										<FormDescription className={opacityStyles("text-inherit")}>
+										<FormDescription aria-disabled={disabledField}>
 											Lorem Ipsum dolor sit amet.
 										</FormDescription>
 										<FormMessage />
@@ -308,7 +305,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						)}
 					/>
 					<FormField
-						control={form.control}
+						control={control}
 						name="officeBills"
 						render={({ field }) => (
 							<FormItem>
@@ -328,7 +325,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												disabled={disabledField}
 											/>
 										</FormControl>
-										<FormDescription className={opacityStyles("text-inherit")}>
+										<FormDescription aria-disabled={disabledField}>
 											Lorem Ipsum dolor sit amet.
 										</FormDescription>
 										<FormMessage />
@@ -338,7 +335,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						)}
 					/>
 					<FormField
-						control={form.control}
+						control={control}
 						name="officeInternet"
 						render={({ field }) => (
 							<FormItem>
@@ -358,7 +355,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												disabled={disabledField}
 											/>
 										</FormControl>
-										<FormDescription className={opacityStyles("text-inherit")}>
+										<FormDescription aria-disabled={disabledField}>
 											Lorem Ipsum dolor sit amet.
 										</FormDescription>
 										<FormMessage />
@@ -369,7 +366,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					/>
 				</div>
 				<FormField
-					control={form.control}
+					control={control}
 					name="gasoline"
 					render={({ field }) => (
 						<FormItem>
@@ -397,7 +394,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="coffee"
 					render={({ field }) => (
 						<FormItem>
@@ -425,7 +422,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					)}
 				/>
 				<FormField
-					control={form.control}
+					control={control}
 					name="water"
 					render={({ field }) => (
 						<FormItem>
