@@ -146,7 +146,9 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											readOnly
 											intlConfig={intlConfig}
-											value={getValues("lifecycleEquipment") * 12 || 0}
+											value={Math.round(
+												(getValues("lifecycleEquipment") ?? 0) / 12 || 0,
+											)}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -289,7 +291,9 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												readOnly
 												intlConfig={intlConfig}
-												value={(getValues("officeInsurance") ?? 0) * 12 || 0}
+												value={Math.round(
+													(getValues("officeInsurance") ?? 0) / 12 || 0,
+												)}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												disabled={disabledField}

@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import { Form } from "../ui/form";
+import { AditionalCostsForm } from "./aditional-costs-form";
 import { StepOneForm } from "./step-one-form";
 import { StepTwoForm } from "./step-two-form";
 
@@ -46,9 +47,9 @@ const DEFAULT_FORM_STEP_TWO = {
 	livingExpensesTwoTwo: undefined,
 	carInsurance: undefined,
 	taxes: undefined,
-	incomeTaxRetention: undefined,
-	valueContribution: undefined,
 	unExpectedExpenses: undefined,
+	valueContribution: undefined,
+	incomeTaxRetention: undefined,
 };
 
 const OFFICE_CONDITIONAL_FIELDS = [
@@ -64,9 +65,9 @@ const CHILDREN_CONDITIONAL_FIELDS = [
 	"livingExpensesTwoTwo",
 	"carInsurance",
 	"taxes",
-	"incomeTaxRetention",
-	"valueContribution",
 	"unExpectedExpenses",
+	"valueContribution",
+	"incomeTaxRetention",
 ] as const;
 
 export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
@@ -114,7 +115,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 
 			return (
 				(values.officeRent ?? 0) +
-				(values.officeInsurance ?? 0) * 12 +
+				Math.round((values.officeInsurance ?? 0) / 12) +
 				(values.officeBills ?? 0) +
 				(values.officeInternet ?? 0)
 			);
@@ -126,26 +127,18 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			const childrenBasicExpenses =
 				(values.quantityChildrens ?? 0) * (values.childrensExpenses ?? 0);
 			const childrenPeriodicExpenses =
-				(values.livingExpensesTwoTwo ?? 0) * 12 +
-				(values.carInsurance ?? 0) * 12 +
-				(values.taxes ?? 0) * 12;
-			const childrenPercentageExpenses =
-				(values.incomeTaxRetention ?? 0) +
-				(values.valueContribution ?? 0) +
-				(values.unExpectedExpenses ?? 0); // fix: calculate % expenses
+				Math.round((values.livingExpensesTwoTwo ?? 0) / 12) +
+				Math.round((values.carInsurance ?? 0) / 12) +
+				Math.round((values.taxes ?? 0) / 12);
 
-			return (
-				childrenBasicExpenses +
-				childrenPeriodicExpenses +
-				childrenPercentageExpenses
-			);
+			return childrenBasicExpenses + childrenPeriodicExpenses;
 		};
 
 		// Step One Expenses
 		const businessExpenses =
 			values.selfEmployed +
 			values.consultancy +
-			values.lifecycleEquipment * 12 +
+			Math.round(values.lifecycleEquipment / 12) +
 			values.subscriptions;
 
 		const officeExpenses = calculateOfficeExpenses();
@@ -173,16 +166,42 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 
 		const childrenExpenses = calculateChildrenExpenses();
 
-		return (
-			businessExpenses +
-			officeExpenses +
-			dailyBusinessExpenses +
+		const totalStepOneExpenses =
+			businessExpenses + officeExpenses + dailyBusinessExpenses;
+		const totalStepTwoExpenses =
 			basicLivingExpenses +
 			lifestyleExpenses +
 			recurringExpenses +
 			financialSecurity +
-			childrenExpenses
+			childrenExpenses;
+
+		// Additional Costs
+		const unExpectedExpenses =
+			(totalStepOneExpenses + totalStepTwoExpenses) *
+			((values.unExpectedExpenses ?? 0) / 100);
+		const valueContribution =
+			(totalStepOneExpenses + totalStepTwoExpenses + unExpectedExpenses) *
+			((values.valueContribution ?? 0) / 100);
+		const incomeTaxRetention =
+			(totalStepOneExpenses +
+				totalStepTwoExpenses +
+				unExpectedExpenses +
+				valueContribution) *
+			((values.incomeTaxRetention ?? 0) / 100);
+
+		const additionalCosts = Math.round(
+			unExpectedExpenses + valueContribution + incomeTaxRetention,
 		);
+
+		// Total sum
+		const totalStepsExpenses =
+			totalStepOneExpenses + totalStepTwoExpenses + additionalCosts;
+
+		return {
+			totalStepOne: totalStepOneExpenses,
+			totalStepTwo: totalStepTwoExpenses,
+			total: totalStepsExpenses,
+		};
 	}, [watchedValues]);
 
 	return (
@@ -194,13 +213,20 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					className="flex flex-col gap-y-20"
 				>
 					<StepOneForm intlConfig={intlConfig} />
-					<StepTwoForm intlConfig={intlConfig} />
+					<div className="grid">
+						<StepTwoForm intlConfig={intlConfig} />
+						<AditionalCostsForm
+							totalFormStepOne={stepsSum.totalStepOne}
+							totalFormStepTwo={stepsSum.totalStepTwo}
+							intlConfig={intlConfig}
+						/>
+					</div>
 				</form>
 			</Form>
 			<div className="sticky bottom-0 py-10">
 				<div className="rounded-3xl bg-lime-400 p-6 font-bold">
 					Total: {intlConfig.symbol}
-					{stepsSum}
+					{stepsSum.total}
 				</div>
 			</div>
 			<button

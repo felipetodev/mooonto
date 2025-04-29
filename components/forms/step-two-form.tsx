@@ -244,7 +244,7 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												readOnly
 												disabled={disabledFields}
 												intlConfig={intlConfig}
-												value={getValues(f.name) * 12 || 0}
+												value={Math.round(getValues(f.name) / 12 || 0)}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 											/>
@@ -259,129 +259,6 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						)}
 					/>
 				))}
-				<FormField
-					control={control}
-					name="incomeTaxRetention"
-					render={({ field }) => (
-						<FormItem>
-							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Retención IRPF</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onValueChange={(value) => {
-													field.onChange(Number(value ?? 0));
-												}}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
-										<NumberInput
-											readOnly
-											intlConfig={intlConfig}
-											value={getValues("incomeTaxRetention") * 12 || 0}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-											disabled={disabledFields}
-										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										Lorem Ipsum dolor sit amet.
-									</FormDescription>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="valueContribution"
-					render={({ field }) => (
-						<FormItem>
-							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Valor que aportas</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onValueChange={(value) => {
-													field.onChange(Number(value ?? 0));
-												}}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
-										<NumberInput
-											readOnly
-											intlConfig={intlConfig}
-											value={getValues("valueContribution") * 12 || 0}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-											disabled={disabledFields}
-										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										Por ejemplo, 3% por cada año de experiencia laboral
-									</FormDescription>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="unExpectedExpenses"
-					render={({ field }) => (
-						<FormItem>
-							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Imprevistos</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onValueChange={(value) => {
-													field.onChange(Number(value ?? 0));
-												}}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
-										<NumberInput
-											readOnly
-											intlConfig={intlConfig}
-											value={getValues("unExpectedExpenses") * 12 || 0}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
-											disabled={disabledFields}
-										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										Lorem Ipsum dolor sit amet.
-									</FormDescription>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
 			</div>
 		</div>
 	);
