@@ -82,8 +82,8 @@ export function AditionalCostsForm({
 										<NumberInput
 											className="max-w-60"
 											intlConfig={intlConfig}
-											onValueChange={(value) => {
-												field.onChange(Number(value ?? 0));
+											onChange={(value) => {
+												field.onChange(value);
 											}}
 											prefix="%"
 											placeholder="%"
@@ -123,8 +123,8 @@ export function AditionalCostsForm({
 										<NumberInput
 											className="max-w-60"
 											intlConfig={intlConfig}
-											onValueChange={(value) => {
-												field.onChange(Number(value ?? 0));
+											onChange={(value) => {
+												field.onChange(value);
 											}}
 											prefix="%"
 											placeholder="%"
@@ -164,8 +164,8 @@ export function AditionalCostsForm({
 										<NumberInput
 											className="max-w-60"
 											intlConfig={intlConfig}
-											onValueChange={(value) => {
-												field.onChange(Number(value ?? 0));
+											onChange={(value) => {
+												field.onChange(value);
 											}}
 											prefix="%"
 											placeholder="%"
