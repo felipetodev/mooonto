@@ -65,7 +65,7 @@ export function AditionalCostsForm({
 			valueContributionTotal,
 			incomeTaxRetentionTotal,
 		};
-	}, [unExpectedExpenses, valueContribution, incomeTaxRetention]);
+	}, [totalBaseSum, unExpectedExpenses, valueContribution, incomeTaxRetention]);
 
 	return (
 		<div className="mt-10 space-y-8">
