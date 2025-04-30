@@ -80,6 +80,9 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		mode: "onChange",
 	});
 
+	console.log("FORM VALUES:::", form.getValues());
+	console.log("FORM ERRORS:::", form.formState.errors);
+
 	const watchedValues = useWatch({ control: form.control });
 
 	const onSubmit = (formData: FormValues) => {
@@ -103,9 +106,6 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	function onError(errors: any) {
 		toast.warning("Tienes campos inválidos y/o incompletos");
 	}
-
-	console.log("FORM VALUES :::: ", form.getValues());
-	console.log("FORM ERRORS :::: ", form.formState.errors);
 
 	const stepsSum = useMemo(() => {
 		const values = form.getValues();
@@ -146,6 +146,9 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		const dailyBusinessExpenses =
 			values.gasoline + values.coffee + values.water;
 
+		const totalStepOneExpenses =
+			businessExpenses + officeExpenses + dailyBusinessExpenses;
+
 		// Step Two Expenses
 		const basicLivingExpenses =
 			values.livingExpenses + values.commonExpenses + values.food;
@@ -166,8 +169,6 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 
 		const childrenExpenses = calculateChildrenExpenses();
 
-		const totalStepOneExpenses =
-			businessExpenses + officeExpenses + dailyBusinessExpenses;
 		const totalStepTwoExpenses =
 			basicLivingExpenses +
 			lifestyleExpenses +
@@ -175,12 +176,13 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			financialSecurity +
 			childrenExpenses;
 
+		const totalBaseSum = totalStepOneExpenses + totalStepTwoExpenses;
+
 		// Additional Costs
 		const unExpectedExpenses =
-			(totalStepOneExpenses + totalStepTwoExpenses) *
-			((values.unExpectedExpenses ?? 0) / 100);
+			totalBaseSum * ((values.unExpectedExpenses ?? 0) / 100);
 		const valueContribution =
-			(totalStepOneExpenses + totalStepTwoExpenses + unExpectedExpenses) *
+			(totalBaseSum + unExpectedExpenses) *
 			((values.valueContribution ?? 0) / 100);
 		const incomeTaxRetention =
 			(totalStepOneExpenses +
@@ -189,18 +191,16 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 				valueContribution) *
 			((values.incomeTaxRetention ?? 0) / 100);
 
-		const additionalCosts = Math.round(
+		const totalAdditionalCosts = Math.round(
 			unExpectedExpenses + valueContribution + incomeTaxRetention,
 		);
 
 		// Total sum
-		const totalStepsExpenses =
-			totalStepOneExpenses + totalStepTwoExpenses + additionalCosts;
+		const totalStepsExpenses = totalBaseSum + totalAdditionalCosts;
 
 		return {
-			totalStepOne: totalStepOneExpenses,
-			totalStepTwo: totalStepTwoExpenses,
-			total: totalStepsExpenses,
+			totalBaseSum,
+			totalResult: totalStepsExpenses,
 		};
 	}, [watchedValues]);
 
@@ -216,8 +216,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					<div className="grid">
 						<StepTwoForm intlConfig={intlConfig} />
 						<AditionalCostsForm
-							totalFormStepOne={stepsSum.totalStepOne}
-							totalFormStepTwo={stepsSum.totalStepTwo}
+							totalBaseSum={stepsSum.totalBaseSum}
 							intlConfig={intlConfig}
 						/>
 					</div>
@@ -226,7 +225,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			<div className="sticky bottom-0 py-10">
 				<div className="rounded-3xl bg-lime-400 p-6 font-bold">
 					Total: {intlConfig.symbol}
-					{stepsSum.total}
+					{stepsSum.totalResult}
 				</div>
 			</div>
 			<button

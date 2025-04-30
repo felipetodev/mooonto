@@ -12,12 +12,10 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { NumberInput } from "../ui/number-input";
 
 export function AditionalCostsForm({
-	totalFormStepOne,
-	totalFormStepTwo,
+	totalBaseSum,
 	intlConfig,
 }: {
-	totalFormStepOne: number;
-	totalFormStepTwo: number;
+	totalBaseSum: number;
 	intlConfig: IntlConfig;
 }) {
 	const { control } = useFormContext();
@@ -48,13 +46,11 @@ export function AditionalCostsForm({
 	const disabledFields = useMemo(() => !hasChildrens, [hasChildrens]);
 
 	const calculations = useMemo(() => {
-		const baseSum = totalFormStepOne + totalFormStepTwo;
-
 		const unExpectedExpensesTotal = Math.round(
-			(baseSum * (unExpectedExpenses || 0)) / 100,
+			(totalBaseSum * (unExpectedExpenses || 0)) / 100,
 		);
 
-		const sumWithUnexpected = baseSum + unExpectedExpensesTotal;
+		const sumWithUnexpected = totalBaseSum + unExpectedExpensesTotal;
 		const valueContributionTotal = Math.round(
 			(sumWithUnexpected * (valueContribution || 0)) / 100,
 		);
@@ -69,13 +65,7 @@ export function AditionalCostsForm({
 			valueContributionTotal,
 			incomeTaxRetentionTotal,
 		};
-	}, [
-		totalFormStepOne,
-		totalFormStepTwo,
-		unExpectedExpenses,
-		valueContribution,
-		incomeTaxRetention,
-	]);
+	}, [unExpectedExpenses, valueContribution, incomeTaxRetention]);
 
 	return (
 		<div className="mt-10 space-y-8">
