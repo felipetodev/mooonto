@@ -93,8 +93,8 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												ref={field.ref}
 												intlConfig={intlConfig}
-												onValueChange={(value) => {
-													field.onChange(Number(value ?? 0));
+												onChange={(value) => {
+													field.onChange(value);
 												}}
 												prefix={intlConfig.symbol}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
@@ -193,8 +193,8 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<FormControl>
 										<NumberInput
 											intlConfig={intlConfig}
-											onValueChange={(value) => {
-												field.onChange(Number(value ?? 0));
+											onChange={(value) => {
+												field.onChange(value);
 											}}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
@@ -232,8 +232,8 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													<NumberInput
 														disabled={disabledFields}
 														intlConfig={intlConfig}
-														onValueChange={(value) => {
-															field.onChange(Number(value ?? 0));
+														onChange={(value) => {
+															field.onChange(value);
 														}}
 														prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 														placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}

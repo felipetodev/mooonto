@@ -1,16 +1,19 @@
+import { cn } from "@/lib/utils";
 import CurrencyInput, {
 	type CurrencyInputProps,
 } from "react-currency-input-field";
 
-import type * as React from "react";
-
-import { cn } from "@/lib/utils";
-
 export function NumberInput({
 	className,
-	type,
+	onChange,
 	...props
-}: React.ComponentProps<"input"> & CurrencyInputProps) {
+}: Omit<CurrencyInputProps, "onValueChange"> & {
+	onChange?: (value: number) => void;
+}) {
+	const handleValueChange = (value: string | undefined) => {
+		onChange?.(Number(value ?? 0));
+	};
+
 	return (
 		<CurrencyInput
 			className={cn(
@@ -20,6 +23,7 @@ export function NumberInput({
 				className,
 			)}
 			{...props}
+			onValueChange={handleValueChange}
 		/>
 	);
 }
