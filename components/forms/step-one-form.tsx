@@ -72,9 +72,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={intlConfig.symbol}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -100,9 +98,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -135,9 +131,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<NumberInput
 													ref={field.ref}
 													intlConfig={intlConfig}
-													onChange={(value) => {
-														field.onChange(value);
-													}}
+													onChange={field.onChange}
 													prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 													placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												/>
@@ -174,9 +168,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -241,9 +233,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<FormControl>
 											<NumberInput
 												intlConfig={intlConfig}
-												onChange={(value) => {
-													field.onChange(value);
-												}}
+												onChange={field.onChange}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												disabled={disabledField}
@@ -279,9 +269,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<NumberInput
 														intlConfig={intlConfig}
-														onChange={(value) => {
-															field.onChange(value);
-														}}
+														onChange={field.onChange}
 														prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 														placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 														disabled={disabledField}
@@ -321,9 +309,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<FormControl>
 											<NumberInput
 												intlConfig={intlConfig}
-												onChange={(value) => {
-													field.onChange(value);
-												}}
+												onChange={field.onChange}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												disabled={disabledField}
@@ -351,9 +337,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<FormControl>
 											<NumberInput
 												intlConfig={intlConfig}
-												onChange={(value) => {
-													field.onChange(value);
-												}}
+												onChange={field.onChange}
 												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 												disabled={disabledField}
@@ -381,9 +365,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -409,9 +391,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
@@ -437,9 +417,7 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											ref={field.ref}
 											intlConfig={intlConfig}
-											onChange={(value) => {
-												field.onChange(value);
-											}}
+											onChange={field.onChange}
 											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
 											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
 										/>
