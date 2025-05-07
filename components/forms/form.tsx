@@ -200,6 +200,8 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 
 		return {
 			totalBaseSum,
+			totalStepOne: totalStepOneExpenses,
+			totalStepTwo: totalStepTwoExpenses,
 			totalResult: totalStepsExpenses,
 		};
 	}, [watchedValues]);
@@ -222,10 +224,22 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					</div>
 				</form>
 			</Form>
-			<div className="sticky bottom-0 py-10">
-				<div className="rounded-3xl bg-lime-400 p-6 font-bold">
-					Total: {intlConfig.symbol}
-					{stepsSum.totalResult}
+			<div className="sticky bottom-0 py-8">
+				<div className="rounded-3xl bg-lime-400 p-4 font-bold">
+					<div className="grid gap-y-2">
+						<span>
+							Total gastos mínimos (trabajo): {intlConfig.symbol}
+							{stepsSum.totalStepOne}
+						</span>
+						<span>
+							Total gastos mínimos (vivienda): {intlConfig.symbol}
+							{stepsSum.totalStepTwo}
+						</span>
+						<span>
+							Ingresos mínimos: {intlConfig.symbol}
+							{stepsSum.totalResult}
+						</span>
+					</div>
 				</div>
 			</div>
 			<button
