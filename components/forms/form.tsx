@@ -70,6 +70,31 @@ const CHILDREN_CONDITIONAL_FIELDS = [
 	"incomeTaxRetention",
 ] as const;
 
+const getFormCompletionRate = (values: FormValues) => {
+	const totalFields = Object.entries(values).filter(([key, value]) => {
+		if (value != null && typeof value !== "boolean") {
+			return true;
+		}
+
+		if (values.cowork && OFFICE_CONDITIONAL_FIELDS.includes(key as any)) {
+			return true;
+		}
+
+		if (values.childrens && CHILDREN_CONDITIONAL_FIELDS.includes(key as any)) {
+			return true;
+		}
+	}).length;
+
+	const filledFields = Object.values(values).reduce<number>((acc, value) => {
+		if (typeof value === "number" && value > 0) {
+			return acc + 1;
+		}
+		return acc;
+	}, 0);
+
+	return Math.round((filledFields / totalFields) * 100);
+};
+
 export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
@@ -107,7 +132,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		toast.warning("Tienes campos inválidos y/o incompletos");
 	}
 
-	const stepsSum = useMemo(() => {
+	const formResults = useMemo(() => {
 		const values = form.getValues();
 
 		const calculateOfficeExpenses = () => {
@@ -198,11 +223,14 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		// Total sum
 		const totalStepsExpenses = totalBaseSum + totalAdditionalCosts;
 
+		const formCompletionRate = getFormCompletionRate(values);
+
 		return {
 			totalBaseSum,
 			totalStepOne: totalStepOneExpenses,
 			totalStepTwo: totalStepTwoExpenses,
 			totalResult: totalStepsExpenses,
+			formCompletionRate,
 		};
 	}, [watchedValues]);
 
@@ -218,7 +246,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					<div className="grid">
 						<StepTwoForm intlConfig={intlConfig} />
 						<AditionalCostsForm
-							totalBaseSum={stepsSum.totalBaseSum}
+							totalBaseSum={formResults.totalBaseSum}
 							intlConfig={intlConfig}
 						/>
 					</div>
@@ -226,19 +254,27 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			</Form>
 			<div className="sticky bottom-0 py-8">
 				<div className="rounded-3xl bg-lime-400 p-4 font-bold">
-					<div className="grid gap-y-2">
-						<span>
-							Total gastos mínimos (trabajo): {intlConfig.symbol}
-							{stepsSum.totalStepOne}
-						</span>
-						<span>
-							Total gastos mínimos (vivienda): {intlConfig.symbol}
-							{stepsSum.totalStepTwo}
-						</span>
-						<span>
-							Ingresos mínimos: {intlConfig.symbol}
-							{stepsSum.totalResult}
-						</span>
+					<div className="flex items-center justify-between">
+						<div className="grid gap-y-2">
+							<span>
+								Total gastos mínimos (trabajo): {intlConfig.symbol}
+								{formResults.totalStepOne}
+							</span>
+							<span>
+								Total gastos mínimos (vivienda): {intlConfig.symbol}
+								{formResults.totalStepTwo}
+							</span>
+							<span>
+								Ingresos mínimos: {intlConfig.symbol}
+								{formResults.totalResult}
+							</span>
+						</div>
+						<div className="flex flex-col items-center">
+							<span className="font-bold text-2xl">
+								{formResults.formCompletionRate}%
+							</span>
+							<span>Completado</span>
+						</div>
 					</div>
 				</div>
 			</div>
