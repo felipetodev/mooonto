@@ -8,10 +8,10 @@ import {
 } from "@/components/ui/form";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Heading } from "@/forms/heading";
 import type { IntlConfig } from "@/lib/types";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import Heading from "./heading";
 
 interface CoworkFieldValues {
 	officeRent?: number;
@@ -20,7 +20,7 @@ interface CoworkFieldValues {
 	officeInternet?: number;
 }
 
-export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
+export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const { control, getValues, setValue } = useFormContext();
 
 	const cowork = useWatch({
@@ -435,5 +435,3 @@ export function StepOneForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		</div>
 	);
 }
-
-export default StepOneForm;

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
-function Heading({
+export function Heading({
 	children,
 	step,
 	totalSteps,
@@ -22,5 +22,3 @@ function Heading({
 		</div>
 	);
 }
-
-export default Heading;

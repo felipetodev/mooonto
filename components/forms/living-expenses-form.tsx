@@ -9,11 +9,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Heading } from "@/forms/heading";
 import { FORM_FIELDS_TWO, FORM_FIELDS_TWO_TWO } from "@/lib/constants";
 import type { IntlConfig } from "@/lib/types";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import Heading from "./heading";
 
 interface ChildFieldValues {
 	quantityChildrens?: number;
@@ -26,7 +26,7 @@ interface ChildFieldValues {
 	unExpectedExpenses?: number;
 }
 
-export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
+export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const { control, getValues, setValue } = useFormContext();
 
 	const hasChildrens = useWatch({
@@ -257,5 +257,3 @@ export function StepTwoForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		</div>
 	);
 }
-
-export default StepTwoForm;

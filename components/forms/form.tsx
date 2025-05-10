@@ -1,15 +1,15 @@
 "use client";
 
+import { Form } from "@/components/ui/form";
+import { AditionalCostsForm } from "@/forms/aditional-costs-form";
+import { LivingExpensesForm } from "@/forms/living-expenses-form";
+import { WorkExpensesForm } from "@/forms/work-expenses-form";
 import type { IntlConfig } from "@/lib/types";
 import { type FormValues, formSchema } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
-import { Form } from "../ui/form";
-import { AditionalCostsForm } from "./aditional-costs-form";
-import { StepOneForm } from "./step-one-form";
-import { StepTwoForm } from "./step-two-form";
 
 const DEFAULT_FORM_STEP_ONE = {
 	selfEmployed: 0,
@@ -70,7 +70,7 @@ const CHILDREN_CONDITIONAL_FIELDS = [
 	"incomeTaxRetention",
 ] as const;
 
-const getFormCompletionRate = (values: FormValues) => {
+const getFormCompletionProgress = (values: FormValues) => {
 	const totalFields = Object.entries(values).filter(([key, value]) => {
 		if (value != null && typeof value !== "boolean") {
 			return true;
@@ -223,14 +223,14 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		// Total sum
 		const totalStepsExpenses = totalBaseSum + totalAdditionalCosts;
 
-		const formCompletionRate = getFormCompletionRate(values);
+		const completionProgress = getFormCompletionProgress(values);
 
 		return {
 			totalBaseSum,
 			totalStepOne: totalStepOneExpenses,
 			totalStepTwo: totalStepTwoExpenses,
 			totalResult: totalStepsExpenses,
-			formCompletionRate,
+			completionProgress,
 		};
 	}, [watchedValues]);
 
@@ -242,9 +242,9 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className="flex flex-col gap-y-20"
 				>
-					<StepOneForm intlConfig={intlConfig} />
+					<WorkExpensesForm intlConfig={intlConfig} />
 					<div className="grid">
-						<StepTwoForm intlConfig={intlConfig} />
+						<LivingExpensesForm intlConfig={intlConfig} />
 						<AditionalCostsForm
 							totalBaseSum={formResults.totalBaseSum}
 							intlConfig={intlConfig}
@@ -271,7 +271,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						</div>
 						<div className="flex flex-col items-center">
 							<span className="font-bold text-2xl">
-								{formResults.formCompletionRate}%
+								{formResults.completionProgress}%
 							</span>
 							<span>Completado</span>
 						</div>
