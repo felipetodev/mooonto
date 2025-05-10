@@ -1,0 +1,12 @@
+{
+	"workExpenses": {
+		"selfEmployed": {
+			"label": "Autónomos 🇪🇸",
+			"description": "Costo de impuestos por ser autónomo"
+		},
+		"consultancy": {
+			"label": "sesoría / Gestoría",
+			"description": "Costos de contabilidad y servicios externos"
+		}
+	}
+}

@@ -1,15 +1,15 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
-export default function useCookies<T>(
+export default function useCookies(
 	key: string,
-	initialValue: T,
+	initialValue: string,
 	opts?: Cookies.CookieAttributes,
-): [T, (value: T) => void] {
-	const [storedValue, setStoredValue] = useState<T>(() => {
+): [string, (value: string) => void] {
+	const [storedValue, setStoredValue] = useState<string>(() => {
 		// Retrieve from Cookies
 		const item = Cookies.get(key);
-		return item ? JSON.parse(item) : initialValue;
+		return item || initialValue;
 	});
 
 	useEffect(() => {
@@ -17,7 +17,7 @@ export default function useCookies<T>(
 		const handleStorageChange = () => {
 			const item = Cookies.get(key);
 			if (item) {
-				setStoredValue(JSON.parse(item) as T);
+				setStoredValue(item);
 			}
 		};
 
@@ -30,11 +30,11 @@ export default function useCookies<T>(
 		};
 	}, [key]);
 
-	const setValue = (value: T) => {
+	const setValue = (value: string) => {
 		// Save state
 		setStoredValue(value);
 		// Save to Cookies
-		Cookies.set(key, JSON.stringify(value), opts);
+		Cookies.set(key, value, opts);
 	};
 
 	return [storedValue, setValue];

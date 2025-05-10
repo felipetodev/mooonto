@@ -1,9 +1,9 @@
 import NavBar from "@/components/navbar";
-import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import { delaGothicOne, fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,13 +26,13 @@ export default function RootLayout({
 					delaGothicOne.variable,
 				)}
 			>
-				<Providers>
+				<NextIntlClientProvider>
 					<NavBar />
 					<main className="flex min-h-[calc(100vh-64px)] flex-1 flex-col text-[#F7F4F0]">
 						{children}
 					</main>
 					<Toaster position="top-center" richColors />
-				</Providers>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);

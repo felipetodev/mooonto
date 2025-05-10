@@ -1,70 +1,72 @@
 import type { IntlConfig } from "./types";
 
+export const DEFAULT_CURRENCY = "EUR" as const;
+
 export const CURRENCY_SELECTOR: IntlConfig[] = [
 	{
 		name: "Chile",
 		currency: "CLP",
-		locale: "es-CL",
+		locale: "CL",
 		symbol: "$",
 	},
 	{
 		name: "Argentina",
 		currency: "ARS",
-		locale: "es-AR",
+		locale: "AR",
 		symbol: "$",
 	},
 	{
 		name: "Colombia",
 		currency: "COP",
-		locale: "es-CO",
+		locale: "CO",
 		symbol: "$",
 	},
 	{
 		name: "Mexico",
 		currency: "MXN",
-		locale: "es-MX",
+		locale: "MX",
 		symbol: "$",
 	},
 	{
 		name: "España",
 		currency: "EUR",
-		locale: "es-ES",
+		locale: "ES",
 		symbol: "€",
 	},
 	{
 		name: "USA",
 		currency: "USD",
-		locale: "en-US",
+		locale: "US",
 		symbol: "$",
 	},
 	{
 		name: "Uruguay",
 		currency: "UYU",
-		locale: "es-UY",
+		locale: "UY",
 		symbol: "$",
 	},
 	{
 		name: "Brazil",
 		currency: "BRL",
-		locale: "pt-BR",
+		locale: "BR",
 		symbol: "R$",
 	},
 	{
 		name: "Peru",
 		currency: "PEN",
-		locale: "es-PE",
+		locale: "PE",
 		symbol: "S/",
 	},
 	{
 		name: "Paraguay",
 		currency: "PYG",
-		locale: "es-PY",
+		locale: "PY",
 		symbol: "₲",
 	},
 	{
 		name: "Bolivia",
 		currency: "BOB",
-		locale: "es-BO",
+		locale: "BO",
 		symbol: "$",
 	},
 ] as const;

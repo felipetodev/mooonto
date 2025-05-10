@@ -10,6 +10,7 @@ import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
 import type { IntlConfig } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
@@ -22,6 +23,7 @@ interface CoworkFieldValues {
 
 export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const { control, getValues, setValue } = useFormContext();
+	const t = useTranslations("workExpenses");
 
 	const cowork = useWatch({
 		control: control,
@@ -66,7 +68,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Autónomos</FormLabel>
+								<FormLabel className="w-[330px]">
+									{t("selfEmployed.label")}
+								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -78,7 +82,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Costo de impuestos por ser autónomo
+										{t("selfEmployed.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -92,7 +96,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Asesoría / Gestoría</FormLabel>
+								<FormLabel className="w-[330px]">
+									{t("consultancy.label")}
+								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -104,7 +110,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Costos de contabilidad y servicios externos
+										{t("consultancy.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>

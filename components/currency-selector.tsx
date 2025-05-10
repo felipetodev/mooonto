@@ -10,10 +10,12 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import useCookies from "@/hooks/use-cookies";
-import { CURRENCY_COOKIE_KEY, CURRENCY_SELECTOR } from "@/lib/constants";
+import {
+	CURRENCY_COOKIE_KEY,
+	CURRENCY_SELECTOR,
+	DEFAULT_CURRENCY,
+} from "@/lib/constants";
 import { useRouter } from "next/navigation";
-
-const DEFAULT_CURRENCY = "CLP";
 
 function CurrencySelector() {
 	const [currency, setCurrency] = useCookies(
@@ -40,7 +42,7 @@ function CurrencySelector() {
 						<SelectItem key={c.name} value={c.currency}>
 							<div className="flex space-x-2">
 								<img
-									src={`https://hatscripts.github.io/circle-flags/flags/${c.locale.split("-")[1].toLowerCase()}.svg`}
+									src={`https://hatscripts.github.io/circle-flags/flags/${c.locale?.toLowerCase()}.svg`}
 									width="20"
 									alt={c.name}
 								/>
