@@ -1,8 +1,8 @@
-import type messages from "@/public/common/es.json";
+import type common from "@/public/common/es.json";
 
 declare module "next-intl" {
 	interface AppConfig {
-		Messages: typeof messages;
+		Messages: typeof common;
 	}
 }
 

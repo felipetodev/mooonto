@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 import {
 	CURRENCY_COOKIE_KEY,
 	CURRENCY_SELECTOR,
 	DEFAULT_CURRENCY,
-} from "./lib/constants";
+} from "@/lib/constants";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
 	const url = req.nextUrl.clone();
@@ -13,11 +13,11 @@ export function middleware(req: NextRequest) {
 	const city = req.headers.get("x-vercel-ip-city");
 	// const browserLang = req.headers.get("accept-language")?.split(",")[0];
 
-	const hasCustomCurrency = req.cookies.get(CURRENCY_COOKIE_KEY);
+	const currencyCookie = req.cookies.get(CURRENCY_COOKIE_KEY);
 
 	const res = NextResponse.rewrite(url);
 
-	if (!hasCustomCurrency) {
+	if (!currencyCookie) {
 		[
 			[
 				CURRENCY_COOKIE_KEY,
