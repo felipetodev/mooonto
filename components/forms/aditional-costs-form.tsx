@@ -6,10 +6,10 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { NumberInput } from "@/components/ui/number-input";
 import type { IntlConfig } from "@/lib/types";
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { NumberInput } from "../ui/number-input";
 
 export function AditionalCostsForm({
 	totalBaseSum,
@@ -20,29 +20,28 @@ export function AditionalCostsForm({
 }) {
 	const { control } = useFormContext();
 
-	const hasChildrens = useWatch({
+	const formValues = useWatch({
 		control,
-		name: "childrens",
+		name: [
+			"childrens",
+			"unExpectedExpenses",
+			"valueContribution",
+			"incomeTaxRetention",
+		] as const,
+		defaultValue: {
+			childrens: false,
+			unExpectedExpenses: 0,
+			valueContribution: 0,
+			incomeTaxRetention: 0,
+		},
 	});
 
-	const unExpectedExpenses = useWatch({
-		control,
-		name: "unExpectedExpenses",
-		defaultValue: 0,
-	});
-
-	const valueContribution = useWatch({
-		control,
-		name: "valueContribution",
-		defaultValue: 0,
-	});
-
-	const incomeTaxRetention = useWatch({
-		control,
-		name: "incomeTaxRetention",
-		defaultValue: 0,
-	});
-
+	const [
+		hasChildrens,
+		unExpectedExpenses,
+		valueContribution,
+		incomeTaxRetention,
+	] = formValues;
 	const disabledFields = useMemo(() => !hasChildrens, [hasChildrens]);
 
 	const calculations = useMemo(() => {
@@ -66,6 +65,11 @@ export function AditionalCostsForm({
 			incomeTaxRetentionTotal,
 		};
 	}, [totalBaseSum, unExpectedExpenses, valueContribution, incomeTaxRetention]);
+
+	const currencyPrefix = useMemo(
+		() => `${intlConfig.currency} ${intlConfig.symbol}`,
+		[intlConfig],
+	);
 
 	return (
 		<div className="mt-10 space-y-8">
@@ -94,8 +98,8 @@ export function AditionalCostsForm({
 										readOnly
 										intlConfig={intlConfig}
 										value={calculations.unExpectedExpensesTotal}
-										prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-										placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
 										disabled={disabledFields}
 									/>
 								</div>
@@ -133,8 +137,8 @@ export function AditionalCostsForm({
 										readOnly
 										intlConfig={intlConfig}
 										value={calculations.valueContributionTotal}
-										prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-										placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
 										disabled={disabledFields}
 									/>
 								</div>
@@ -172,8 +176,8 @@ export function AditionalCostsForm({
 										readOnly
 										intlConfig={intlConfig}
 										value={calculations.incomeTaxRetentionTotal}
-										prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-										placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
 										disabled={disabledFields}
 									/>
 								</div>

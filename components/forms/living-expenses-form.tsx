@@ -72,6 +72,11 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		return value;
 	};
 
+	const currencyPrefix = useMemo(
+		() => `${intlConfig.currency} ${intlConfig.symbol}`,
+		[intlConfig],
+	);
+
 	return (
 		<div className="flex flex-col">
 			<Heading step={2} totalSteps={2}>
@@ -95,7 +100,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												intlConfig={intlConfig}
 												onChange={field.onChange}
 												prefix={intlConfig.symbol}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												placeholder={`${currencyPrefix} 0`}
 											/>
 										</FormControl>
 										<FormDescription className="text-inherit">
@@ -192,8 +197,8 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										<NumberInput
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 											disabled={disabledFields}
 										/>
 									</FormControl>
@@ -229,8 +234,8 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 														disabled={disabledFields}
 														intlConfig={intlConfig}
 														onChange={field.onChange}
-														prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-														placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+														prefix={`${currencyPrefix}`}
+														placeholder={`${currencyPrefix} 0`}
 													/>
 												</FormControl>
 											</div>
@@ -239,8 +244,8 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												disabled={disabledFields}
 												intlConfig={intlConfig}
 												value={Math.round(getValues(f.name) / 12 || 0)}
-												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												prefix={`${currencyPrefix}`}
+												placeholder={`${currencyPrefix} 0`}
 											/>
 										</div>
 										<FormDescription aria-disabled={disabledFields}>

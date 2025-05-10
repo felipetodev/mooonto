@@ -55,6 +55,11 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		return value;
 	};
 
+	const currencyPrefix = useMemo(
+		() => `${intlConfig.currency} ${intlConfig.symbol}`,
+		[intlConfig],
+	);
+
 	return (
 		<div className="flex flex-col">
 			<Heading step={1} totalSteps={2}>
@@ -78,7 +83,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											intlConfig={intlConfig}
 											onChange={field.onChange}
 											prefix={intlConfig.symbol}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
@@ -105,8 +110,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
@@ -138,8 +143,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													ref={field.ref}
 													intlConfig={intlConfig}
 													onChange={field.onChange}
-													prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-													placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
 												/>
 											</FormControl>
 										</div>
@@ -149,8 +154,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											value={Math.round(
 												(getValues("lifecycleEquipment") ?? 0) / 12 || 0,
 											)}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</div>
 									<FormDescription className="text-inherit">
@@ -175,8 +180,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
@@ -240,8 +245,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												intlConfig={intlConfig}
 												onChange={field.onChange}
-												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												prefix={`${currencyPrefix}`}
+												placeholder={`${currencyPrefix} 0`}
 												disabled={disabledField}
 											/>
 										</FormControl>
@@ -276,8 +281,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													<NumberInput
 														intlConfig={intlConfig}
 														onChange={field.onChange}
-														prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-														placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+														prefix={`${currencyPrefix}`}
+														placeholder={`${currencyPrefix} 0`}
 														disabled={disabledField}
 													/>
 												</FormControl>
@@ -288,8 +293,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												value={Math.round(
 													(getValues("officeInsurance") ?? 0) / 12 || 0,
 												)}
-												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												prefix={`${currencyPrefix}`}
+												placeholder={`${currencyPrefix} 0`}
 												disabled={disabledField}
 											/>
 										</div>
@@ -316,8 +321,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												intlConfig={intlConfig}
 												onChange={field.onChange}
-												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												prefix={`${currencyPrefix}`}
+												placeholder={`${currencyPrefix} 0`}
 												disabled={disabledField}
 											/>
 										</FormControl>
@@ -344,8 +349,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											<NumberInput
 												intlConfig={intlConfig}
 												onChange={field.onChange}
-												prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-												placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+												prefix={`${currencyPrefix}`}
+												placeholder={`${currencyPrefix} 0`}
 												disabled={disabledField}
 											/>
 										</FormControl>
@@ -372,8 +377,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
@@ -398,8 +403,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
@@ -424,8 +429,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${intlConfig.currency} ${intlConfig.symbol}`}
-											placeholder={`${intlConfig.currency} ${intlConfig.symbol} 0`}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
