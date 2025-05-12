@@ -1,1 +1,106 @@
-{}
+{
+	"workExpenses": {
+		"selfEmployed": {
+			"label": "Autónomos 🇺🇾",
+			"description": "Costo de impuestos por ser autónomo"
+		},
+		"consultancy": {
+			"label": "Asesoría / Gestoría",
+			"description": "Costos de contabilidad y servicios externos"
+		}
+	},
+	"livingExpenses": {
+		"livingExpenses": {
+			"label": "Alquiler / hipoteca",
+			"description": "¿Cuánto pagas de alquiler o hipoteca?"
+		},
+		"commonExpenses": {
+			"label": "Gastos comunes",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"food": {
+			"label": "Comida",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"gym": {
+			"label": "Gimnasio",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"entertainment": {
+			"label": "Ocio",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"clothes": {
+			"label": "Ropa y aseo personal",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"carFee": {
+			"label": "Cuota automóvil",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"livingExpensesTwo": {
+			"label": "Agua / luz / gas",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"internet": {
+			"label": "Internet",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"personalPhone": {
+			"label": "Teléfono personal",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"healthPlan": {
+			"label": "Plan de previsión de salud",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"retirementFund": {
+			"label": "Fondo jubilación",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"otherExpenses": {
+			"label": "Otro tipo de gastos",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"childrens": {
+			"label": "Hijos o personas a tu cargo",
+			"options": {
+				"true": "Sí",
+				"false": "No"
+			}
+		},
+		"quantityChildrens": {
+			"label": "Cantidad"
+		},
+		"childrensExpenses": {
+			"label": "Media de gastos mensuales por cada hijo o persona a tu cargo",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"livingExpensesTwoTwo": {
+			"label": "Seguro de vivienda",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"carInsurance": {
+			"label": "Seguro automotriz",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"taxes": {
+			"label": "Impuestos",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
+	},
+	"aditionalCosts": {
+		"unExpectedExpenses": {
+			"label": "Imprevistos",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"valueContribution": {
+			"label": "Valor que aportas",
+			"description": "Por ejemplo, 3% por cada año de experiencia laboral"
+		},
+		"incomeTaxRetention": {
+			"label": "Retención IRPF",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
+	}
+}

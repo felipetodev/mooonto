@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
 import { FORM_FIELDS_TWO, FORM_FIELDS_TWO_TWO } from "@/lib/constants";
 import type { IntlConfig } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import { useMemo, useRef } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
@@ -28,6 +29,7 @@ interface ChildFieldValues {
 
 export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	const { control, getValues, setValue } = useFormContext();
+	const t = useTranslations("livingExpenses");
 
 	const hasChildrens = useWatch({
 		control: control,
@@ -92,7 +94,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						render={({ field }) => (
 							<FormItem>
 								<div className="flex items-center">
-									<FormLabel className="w-[330px]">{f.label}</FormLabel>
+									<FormLabel className="w-[330px]">{t(f.label)}</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
@@ -104,7 +106,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</FormControl>
 										<FormDescription className="text-inherit">
-											{f.description}
+											{t(f.description)}
 										</FormDescription>
 										<FormMessage />
 									</div>
@@ -120,7 +122,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						<FormItem className="space-y-3">
 							<div className="flex items-center">
 								<FormLabel className="block w-[330px]">
-									Hijos o personas a tu cargo
+									{t("childrens.label")}
 								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
@@ -136,13 +138,17 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="font-normal">Si</FormLabel>
+												<FormLabel className="font-normal">
+													{t("childrens.options.true")}
+												</FormLabel>
 											</FormItem>
 											<FormItem className="flex items-center space-x-3 space-y-0">
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="font-normal">No</FormLabel>
+												<FormLabel className="font-normal">
+													{t("childrens.options.false")}
+												</FormLabel>
 											</FormItem>
 										</RadioGroup>
 									</FormControl>
@@ -159,7 +165,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						<FormItem>
 							<div className="flex items-center">
 								<FormLabel className="w-[330px]">
-									<span className="ml-8">Cantidad</span>
+									<span className="ml-8">{t("quantityChildrens.label")}</span>
 								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
@@ -189,7 +195,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 							<div className="flex items-center">
 								<FormLabel className="w-[330px]">
 									<span className="ml-8 flex text-balance">
-										Media de gastos mensuales por cada hijo o persona a tu cargo
+										{t("childrensExpenses.label")}
 									</span>
 								</FormLabel>
 								<div className="flex w-full flex-col">
@@ -203,7 +209,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription aria-disabled={disabledFields}>
-										Lorem Ipsum dolor sit amet.
+										{t("childrensExpenses.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -219,7 +225,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						render={({ field }) => (
 							<FormItem>
 								<div className="flex items-center">
-									<FormLabel className="w-[330px]">{f.label}</FormLabel>
+									<FormLabel className="w-[330px]">{t(f.label)}</FormLabel>
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
 											<div className="flex items-center">
@@ -227,7 +233,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													aria-disabled={disabledFields}
 													className="mr-1 min-w-max"
 												>
-													Costo Anual
+													{t(f.label)}
 												</FormLabel>
 												<FormControl>
 													<NumberInput
@@ -249,7 +255,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</div>
 										<FormDescription aria-disabled={disabledFields}>
-											{f.description}
+											{t(f.description)}
 										</FormDescription>
 										<FormMessage />
 									</div>

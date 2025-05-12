@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import { NumberInput } from "@/components/ui/number-input";
 import type { IntlConfig } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
@@ -19,6 +20,7 @@ export function AditionalCostsForm({
 	intlConfig: IntlConfig;
 }) {
 	const { control } = useFormContext();
+	const t = useTranslations("aditionalCosts");
 
 	const formValues = useWatch({
 		control,
@@ -79,7 +81,9 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">Imprevistos</FormLabel>
+							<FormLabel className="w-[330px]">
+								{t("unExpectedExpenses.label")}
+							</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
@@ -104,7 +108,7 @@ export function AditionalCostsForm({
 									/>
 								</div>
 								<FormDescription aria-disabled={disabledFields}>
-									Lorem Ipsum dolor sit amet.
+									{t("unExpectedExpenses.description")}
 								</FormDescription>
 								<FormMessage />
 							</div>
@@ -118,7 +122,9 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">Valor que aportas</FormLabel>
+							<FormLabel className="w-[330px]">
+								{t("valueContribution.label")}
+							</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
@@ -143,7 +149,7 @@ export function AditionalCostsForm({
 									/>
 								</div>
 								<FormDescription aria-disabled={disabledFields}>
-									Por ejemplo, 3% por cada año de experiencia laboral
+									{t("valueContribution.description")}
 								</FormDescription>
 								<FormMessage />
 							</div>
@@ -157,7 +163,9 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">Retención IRPF</FormLabel>
+							<FormLabel className="w-[330px]">
+								{t("incomeTaxRetention.label")}
+							</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
@@ -182,7 +190,7 @@ export function AditionalCostsForm({
 									/>
 								</div>
 								<FormDescription aria-disabled={disabledFields}>
-									Lorem Ipsum dolor sit amet.
+									{t("incomeTaxRetention.description")}
 								</FormDescription>
 								<FormMessage />
 							</div>

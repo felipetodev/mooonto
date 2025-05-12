@@ -1,1 +1,151 @@
-{}
+{
+	"workExpenses": {
+		"selfEmployed": {
+			"label": "Self-employed 🇺🇸",
+			"description": "Cost of taxes for being self-employed"
+		},
+		"consultancy": {
+			"label": "Consulting / Accounting",
+			"description": "Costs of accounting and external services"
+		},
+		"lifecycleEquipment": {
+			"label": "Equipment lifecycle",
+			"subLabel": "Annual Cost",
+			"description": "Cost of taxes for being self-employed"
+		},
+		"subscriptions": {
+			"label": "Subscriptions",
+			"description": "Vercel, GitHub, Adobe, Shutterstock, Figma, etc."
+		},
+		"cowork": {
+			"label": "Office / Coworking",
+			"options": {
+				"true": "Yes",
+				"false": "No"
+			}
+		},
+		"officeRent": {
+			"label": "Office rent / Coworking",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeInsurance": {
+			"label": "Office insurance",
+			"subLabel": "Annual Cost",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeBills": {
+			"label": "Office water / electricity / gas",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeInternet": {
+			"label": "Office internet / phone",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"gasoline": {
+			"label": "Gasoline / diesel",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"coffee": {
+			"label": "Coffee",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"water": {
+			"label": "Water",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
+	},
+	"livingExpenses": {
+		"livingExpenses": {
+			"label": "Rent / Mortgage",
+			"description": "How much do you pay for rent or mortgage?"
+		},
+		"commonExpenses": {
+			"label": "Common expenses",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"food": {
+			"label": "Food",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"gym": {
+			"label": "Gym",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"entertainment": {
+			"label": "Entertainment",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"clothes": {
+			"label": "Clothes and personal care",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"carFee": {
+			"label": "Car payment",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"livingExpensesTwo": {
+			"label": "Water / Electricity / Gas",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"internet": {
+			"label": "Internet",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"personalPhone": {
+			"label": "Personal phone",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"healthPlan": {
+			"label": "Health plan",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"retirementFund": {
+			"label": "Retirement fund",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"otherExpenses": {
+			"label": "Other expenses",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"childrens": {
+			"label": "Children or dependents",
+			"options": {
+				"true": "Yes",
+				"false": "No"
+			}
+		},
+		"quantityChildrens": {
+			"label": "Quantity"
+		},
+		"childrensExpenses": {
+			"label": "Average monthly expenses per child or dependent",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"livingExpensesTwoTwo": {
+			"label": "Home insurance",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"carInsurance": {
+			"label": "Car insurance",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"taxes": {
+			"label": "Taxes",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
+	},
+	"aditionalCosts": {
+		"unExpectedExpenses": {
+			"label": "Unexpected expenses",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"valueContribution": {
+			"label": "Value you bring",
+			"description": "For example, 3% for each year of work experience"
+		},
+		"incomeTaxRetention": {
+			"label": "Income tax withholding",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
+	}
+}

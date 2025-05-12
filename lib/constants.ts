@@ -71,90 +71,47 @@ export const CURRENCY_SELECTOR: IntlConfig[] = [
 	},
 ] as const;
 
-export const FORM_FIELDS_TWO = [
-	{
-		label: "Alquiler / hipoteca",
-		name: "livingExpenses",
-		description: "¿Cuánto pagas de alquiler o hipoteca?",
-	},
-	{
-		label: "Gastos comunes",
-		name: "commonExpenses",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Comida",
-		name: "food",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Gimnasio",
-		name: "gym",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Ocio",
-		name: "entertainment",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Ropa y aseo personal",
-		name: "clothes",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Cuota automóvil",
-		name: "carFee",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Agua / luz / gas",
-		name: "livingExpensesTwo",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Internet",
-		name: "internet",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Teléfono personal",
-		name: "personalPhone",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Plan de previsión de salud",
-		name: "healthPlan",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Fondo jubilación",
-		name: "retirementFund",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
-	{
-		label: "Otro tipo de gastos",
-		name: "otherExpenses",
-		description: "Lorem Ipsum dolor sit amet.",
-	},
+export const LIVING_EXPENSES_FIELDS = [
+	"livingExpenses",
+	"commonExpenses",
+	"food",
+	"gym",
+	"entertainment",
+	"clothes",
+	"carFee",
+	"livingExpensesTwo",
+	"internet",
+	"personalPhone",
+	"healthPlan",
+	"retirementFund",
+	"otherExpenses",
 ] as const;
+
+type LivingExpensesKey =
+	`${(typeof LIVING_EXPENSES_FIELDS)[number]}.${"label" | "description"}`;
+
+export const FORM_FIELDS_TWO = LIVING_EXPENSES_FIELDS.map((name) => ({
+	name,
+	label: `${name}.label` as LivingExpensesKey,
+	description: `${name}.description` as LivingExpensesKey,
+}));
 
 // change variable name 😅
 export const FORM_FIELDS_TWO_TWO = [
 	{
-		label: "Seguro de vivienda",
 		name: "livingExpensesTwoTwo",
-		description: "Lorem Ipsum dolor sit amet.",
+		label: "livingExpensesTwoTwo.label" as LivingExpensesKey,
+		description: "livingExpensesTwoTwo.description" as LivingExpensesKey,
 	},
 	{
-		label: "Seguro automotriz",
 		name: "carInsurance",
-		description: "Lorem Ipsum dolor sit amet.",
+		label: "carInsurance.label" as LivingExpensesKey,
+		description: "carInsurance.description" as LivingExpensesKey,
 	},
 	{
-		label: "Impuestos",
 		name: "taxes",
-		description: "Lorem Ipsum dolor sit amet.",
+		label: "taxes.label" as LivingExpensesKey,
+		description: "taxes.description" as LivingExpensesKey,
 	},
 ] as const;
 

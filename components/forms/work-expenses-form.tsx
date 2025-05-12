@@ -130,13 +130,13 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						<FormItem>
 							<div className="flex items-center">
 								<FormLabel className="w-[330px]">
-									Vida útil de tus equipos
+									{t("lifecycleEquipment.label")}
 								</FormLabel>
 								<div className="flex w-full flex-col">
 									<div className="grid grid-cols-2 gap-x-4">
 										<div className="flex items-center">
 											<FormLabel className="mr-1 min-w-max">
-												Costo Anual
+												{t("lifecycleEquipment.subLabel")}
 											</FormLabel>
 											<FormControl>
 												<NumberInput
@@ -159,7 +159,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</div>
 									<FormDescription className="text-inherit">
-										Costo de impuestos por ser autónomo
+										{t("lifecycleEquipment.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -173,7 +173,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Suscripciones</FormLabel>
+								<FormLabel className="w-[330px]">
+									{t("subscriptions.label")}
+								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -185,7 +187,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Vercel, GitHub, Adobe, Shutterstock, Figma, etc.
+										{t("subscriptions.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -199,7 +201,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem className="space-y-3">
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Oficina / Cowork</FormLabel>
+								<FormLabel className="w-[330px]">{t("cowork.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<RadioGroup
@@ -214,13 +216,17 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="font-normal">Si</FormLabel>
+												<FormLabel className="font-normal">
+													{t("cowork.options.true")}
+												</FormLabel>
 											</FormItem>
 											<FormItem className="flex items-center space-x-3 space-y-0">
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="font-normal">No</FormLabel>
+												<FormLabel className="font-normal">
+													{t("cowork.options.false")}
+												</FormLabel>
 											</FormItem>
 										</RadioGroup>
 									</FormControl>
@@ -238,7 +244,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 							<FormItem>
 								<div className="flex items-center">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">Alquiler de oficina / Cowork</span>
+										<span className="ml-8">{t("officeRent.label")}</span>
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
@@ -251,7 +257,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</FormControl>
 										<FormDescription aria-disabled={disabledField}>
-											Lorem Ipsum dolor sit amet.
+											{t("officeRent.description")}
 										</FormDescription>
 										<FormMessage />
 									</div>
@@ -266,7 +272,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 							<FormItem>
 								<div className="flex items-center">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">Seguro oficina</span>
+										<span className="ml-8">{t("officeInsurance.label")}</span>
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
@@ -275,7 +281,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													aria-disabled={disabledField}
 													className="mr-1 min-w-max"
 												>
-													Costo Anual
+													{t("officeInsurance.subLabel")}
 												</FormLabel>
 												<FormControl>
 													<NumberInput
@@ -299,7 +305,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</div>
 										<FormDescription aria-disabled={disabledField}>
-											Lorem Ipsum dolor sit amet.
+											{t("officeInsurance.description")}
 										</FormDescription>
 										<FormMessage />
 									</div>
@@ -314,7 +320,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 							<FormItem>
 								<div className="flex items-center">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">Agua / luz / gas oficina</span>
+										<span className="ml-8">{t("officeBills.label")}</span>
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
@@ -327,7 +333,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</FormControl>
 										<FormDescription aria-disabled={disabledField}>
-											Lorem Ipsum dolor sit amet.
+											{t("officeBills.description")}
 										</FormDescription>
 										<FormMessage />
 									</div>
@@ -342,7 +348,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 							<FormItem>
 								<div className="flex items-center">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">Internet / teléfono oficina</span>
+										<span className="ml-8">{t("officeInternet.label")}</span>
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
@@ -355,7 +361,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											/>
 										</FormControl>
 										<FormDescription aria-disabled={disabledField}>
-											Lorem Ipsum dolor sit amet.
+											{t("officeInternet.description")}
 										</FormDescription>
 										<FormMessage />
 									</div>
@@ -370,7 +376,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Gasolina / diesel</FormLabel>
+								<FormLabel className="w-[330px]">
+									{t("gasoline.label")}
+								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -382,7 +390,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Lorem Ipsum dolor sit amet.
+										{t("gasoline.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -396,7 +404,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Café</FormLabel>
+								<FormLabel className="w-[330px]">{t("coffee.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -408,7 +416,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Lorem Ipsum dolor sit amet.
+										{t("coffee.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -422,7 +430,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">Agua</FormLabel>
+								<FormLabel className="w-[330px]">{t("water.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -434,7 +442,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 										/>
 									</FormControl>
 									<FormDescription className="text-inherit">
-										Lorem Ipsum dolor sit amet.
+										{t("water.description")}
 									</FormDescription>
 									<FormMessage />
 								</div>
