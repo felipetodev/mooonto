@@ -7,6 +7,51 @@
 		"consultancy": {
 			"label": "Asesoría / Gestoría",
 			"description": "Costos de contabilidad y servicios externos"
+		},
+		"lifecycleEquipment": {
+			"label": "Vida útil de tus equipos",
+			"subLabel": "Costo Anual",
+			"description": "Costo de impuestos por ser autónomo"
+		},
+		"subscriptions": {
+			"label": "Suscripciones",
+			"description": "Vercel, GitHub, Adobe, Shutterstock, Figma, etc."
+		},
+		"cowork": {
+			"label": "Oficina / Cowork",
+			"options": {
+				"true": "Sí",
+				"false": "No"
+			}
+		},
+		"officeRent": {
+			"label": "Alquiler de oficina / Cowork",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeInsurance": {
+			"label": "Seguro oficina",
+			"subLabel": "Costo Anual",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeBills": {
+			"label": "Agua / luz / gas oficina",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"officeInternet": {
+			"label": "Internet / teléfono oficina",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"gasoline": {
+			"label": "Nafta / gasoil",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"coffee": {
+			"label": "Café",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"water": {
+			"label": "Agua",
+			"description": "Lorem Ipsum dolor sit amet."
 		}
 	},
 	"livingExpenses": {

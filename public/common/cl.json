@@ -133,5 +133,19 @@
 			"label": "Impuestos",
 			"description": "Lorem Ipsum dolor sit amet."
 		}
+	},
+	"aditionalCosts": {
+		"unExpectedExpenses": {
+			"label": "Imprevistos",
+			"description": "Lorem Ipsum dolor sit amet."
+		},
+		"valueContribution": {
+			"label": "Valor que aportas",
+			"description": "Por ejemplo, 3% por cada año de experiencia laboral"
+		},
+		"incomeTaxRetention": {
+			"label": "Retención IRPF",
+			"description": "Lorem Ipsum dolor sit amet."
+		}
 	}
 }
