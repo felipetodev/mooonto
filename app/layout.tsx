@@ -21,7 +21,7 @@ export default function RootLayout({
 		<html lang="es" suppressHydrationWarning>
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
+					"min-h-screen bg-[#1A1A18] font-sans antialiased",
 					fontSans.variable,
 					delaGothicOne.variable,
 				)}

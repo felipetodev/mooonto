@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function MainHero() {
 	return (
-		<section className="h-[700px] w-full bg-[#002446] px-10 md:px-16">
+		<section className="h-[700px] w-full px-10 md:px-16">
 			<div className="mx-auto h-full max-w-(--breakpoint-4xl)">
 				<div className="flex h-full max-w-3xl flex-col justify-center gap-y-10">
 					<h1 className="flex flex-col font-bold font-dela-gothic text-[80px] leading-tight">
@@ -34,7 +34,7 @@ export function MainHero() {
 						href="#calcula"
 						className={cn(
 							buttonVariants({ variant: "secondary" }),
-							"w-max rounded-3xl font-bold text-[#002446] text-lg",
+							"w-max rounded-3xl font-bold text-[#1A1A18] text-lg",
 						)}
 					>
 						Calcula tu precio ahora, ¡es gratis!
