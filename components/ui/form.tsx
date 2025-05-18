@@ -98,7 +98,7 @@ function FormLabel({
 			data-slot="form-label"
 			data-error={!!error}
 			className={cn(
-				"transition aria-disabled:opacity-50 data-[error=true]:text-destructive",
+				"min-w-[130px] transition aria-disabled:opacity-50 data-[error=true]:text-destructive md:w-[300px] lg:w-[330px]",
 				className,
 			)}
 			htmlFor={formItemId}

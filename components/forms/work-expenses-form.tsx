@@ -73,9 +73,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									{t("selfEmployed.label")}
-								</FormLabel>
+								<FormLabel>{t("selfEmployed.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -101,10 +99,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									{t("consultancy.label")}
-								</FormLabel>
-								<div className="flex w-full flex-col">
+								<FormLabel>{t("consultancy.label")}</FormLabel>
+								<div className="flex w-full flex-col gap-x-4">
 									<FormControl>
 										<NumberInput
 											ref={field.ref}
@@ -129,17 +125,16 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									{t("lifecycleEquipment.label")}
-								</FormLabel>
+								<FormLabel>{t("lifecycleEquipment.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<div className="grid grid-cols-2 gap-x-4">
-										<div className="flex items-center">
-											<FormLabel className="mr-1 min-w-max">
+										<div className="flex flex-col-reverse md:flex-row md:items-center">
+											<FormLabel className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto">
 												{t("lifecycleEquipment.subLabel")}
 											</FormLabel>
 											<FormControl>
 												<NumberInput
+													className="w-full"
 													ref={field.ref}
 													intlConfig={intlConfig}
 													onChange={field.onChange}
@@ -173,9 +168,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									{t("subscriptions.label")}
-								</FormLabel>
+								<FormLabel>{t("subscriptions.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -201,7 +194,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem className="space-y-3">
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">{t("cowork.label")}</FormLabel>
+								<FormLabel>{t("cowork.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<RadioGroup
@@ -216,7 +209,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="font-normal">
+												<FormLabel className="!w-full !min-w-full font-normal">
 													{t("cowork.options.true")}
 												</FormLabel>
 											</FormItem>
@@ -224,7 +217,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="font-normal">
+												<FormLabel className="!w-full !min-w-full font-normal">
 													{t("cowork.options.false")}
 												</FormLabel>
 											</FormItem>
@@ -242,10 +235,8 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name="officeRent"
 						render={({ field }) => (
 							<FormItem>
-								<div className="flex items-center">
-									<FormLabel className="w-[330px]">
-										<span className="ml-8">{t("officeRent.label")}</span>
-									</FormLabel>
+								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+									<FormLabel>{t("officeRent.label")}</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
@@ -270,16 +261,14 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name="officeInsurance"
 						render={({ field }) => (
 							<FormItem>
-								<div className="flex items-center">
-									<FormLabel className="w-[330px]">
-										<span className="ml-8">{t("officeInsurance.label")}</span>
-									</FormLabel>
+								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+									<FormLabel>{t("officeInsurance.label")}</FormLabel>
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
-											<div className="flex items-center">
+											<div className="flex flex-col-reverse md:flex-row md:items-center">
 												<FormLabel
 													aria-disabled={disabledField}
-													className="mr-1 min-w-max"
+													className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto"
 												>
 													{t("officeInsurance.subLabel")}
 												</FormLabel>
@@ -318,9 +307,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name="officeBills"
 						render={({ field }) => (
 							<FormItem>
-								<div className="flex items-center">
+								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">{t("officeBills.label")}</span>
+										{t("officeBills.label")}
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
@@ -346,9 +335,9 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name="officeInternet"
 						render={({ field }) => (
 							<FormItem>
-								<div className="flex items-center">
+								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
 									<FormLabel className="w-[330px]">
-										<span className="ml-8">{t("officeInternet.label")}</span>
+										{t("officeInternet.label")}
 									</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
@@ -376,9 +365,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									{t("gasoline.label")}
-								</FormLabel>
+								<FormLabel>{t("gasoline.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -404,7 +391,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">{t("coffee.label")}</FormLabel>
+								<FormLabel>{t("coffee.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
@@ -430,7 +417,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="w-[330px]">{t("water.label")}</FormLabel>
+								<FormLabel>{t("water.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput

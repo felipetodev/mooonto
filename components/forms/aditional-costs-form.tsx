@@ -81,9 +81,7 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">
-								{t("unExpectedExpenses.label")}
-							</FormLabel>
+							<FormLabel>{t("unExpectedExpenses.label")}</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
@@ -122,9 +120,7 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">
-								{t("valueContribution.label")}
-							</FormLabel>
+							<FormLabel>{t("valueContribution.label")}</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
@@ -163,9 +159,7 @@ export function AditionalCostsForm({
 				render={({ field }) => (
 					<FormItem>
 						<div className="flex items-center">
-							<FormLabel className="w-[330px]">
-								{t("incomeTaxRetention.label")}
-							</FormLabel>
+							<FormLabel>{t("incomeTaxRetention.label")}</FormLabel>
 							<div className="flex w-full flex-col">
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
