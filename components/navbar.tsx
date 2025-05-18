@@ -11,10 +11,10 @@ function NavBar() {
 					<Logo className="text-[#F7F4F0]" />
 				</Link>
 				<ul className="flex items-center gap-x-4">
-					<li>
+					<li className="hidden sm:block">
 						<HelpPopover>Ayuda</HelpPopover>
 					</li>
-					<li>
+					<li className="hidden sm:block">
 						<a
 							href="#calcula"
 							className="font-semibold text-[#F7F4F0] text-md hover:underline"

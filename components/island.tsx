@@ -1,9 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { FormCompletionProgressResult } from "@/hooks/use-form-completions";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import type { IntlConfig } from "@/lib/types";
 import { AnimatePresence, motion, useInView } from "motion/react";
-import { type RefObject, useState } from "react";
+import { type RefObject, useMemo, useState } from "react";
 import useMeasure from "react-use-measure";
 
 type IslandProps = {
@@ -23,7 +24,14 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 		margin: "0px 0px -250px 0px",
 	});
 
-	const width = state === "collapsed" ? 240 : state === "expanded" ? 400 : 440;
+	const { isMobile } = useMediaQuery();
+
+	const width = useMemo(() => {
+		if (isMobile) {
+			return state === "collapsed" ? 240 : state === "expanded" ? 300 : 350;
+		}
+		return state === "collapsed" ? 240 : state === "expanded" ? 400 : 440;
+	}, [isMobile, state]);
 
 	return (
 		<AnimatePresence>
@@ -45,7 +53,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 									{state !== "collapsed" ? (
 										<motion.div
 											ref={ref}
-											className="flex h-fit items-center justify-between gap-x-4 pb-4"
+											className="flex h-fit items-center gap-x-4 pb-4 sm:justify-between"
 										>
 											<motion.div
 												initial={{ opacity: 0, filter: "blur(4px)" }}
@@ -158,7 +166,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 												) : null}
 											</motion.div>
 
-											<div>
+											<div className="hidden sm:block">
 												<motion.div
 													layoutId="progress"
 													transition={{

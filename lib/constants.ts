@@ -101,16 +101,19 @@ export const FORM_FIELDS_TWO_TWO = [
 	{
 		name: "livingExpensesTwoTwo",
 		label: "livingExpensesTwoTwo.label" as LivingExpensesKey,
+		subLabel: "livingExpensesTwoTwo.subLabel" as LivingExpensesKey,
 		description: "livingExpensesTwoTwo.description" as LivingExpensesKey,
 	},
 	{
 		name: "carInsurance",
 		label: "carInsurance.label" as LivingExpensesKey,
+		subLabel: "carInsurance.subLabel" as LivingExpensesKey,
 		description: "carInsurance.description" as LivingExpensesKey,
 	},
 	{
 		name: "taxes",
 		label: "taxes.label" as LivingExpensesKey,
+		subLabel: "taxes.subLabel" as LivingExpensesKey,
 		description: "taxes.description" as LivingExpensesKey,
 	},
 ] as const;

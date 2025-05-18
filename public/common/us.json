@@ -123,14 +123,17 @@
 		},
 		"livingExpensesTwoTwo": {
 			"label": "Home insurance",
+			"subLabel": "Annual Cost",
 			"description": "Lorem Ipsum dolor sit amet."
 		},
 		"carInsurance": {
 			"label": "Car insurance",
+			"subLabel": "Annual Cost",
 			"description": "Lorem Ipsum dolor sit amet."
 		},
 		"taxes": {
 			"label": "Taxes",
+			"subLabel": "Annual Cost",
 			"description": "Lorem Ipsum dolor sit amet."
 		}
 	},

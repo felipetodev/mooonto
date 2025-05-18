@@ -94,7 +94,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						render={({ field }) => (
 							<FormItem>
 								<div className="flex items-center">
-									<FormLabel className="w-[330px]">{t(f.label)}</FormLabel>
+									<FormLabel>{t(f.label)}</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
@@ -121,9 +121,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					render={({ field }) => (
 						<FormItem className="space-y-3">
 							<div className="flex items-center">
-								<FormLabel className="block w-[330px]">
-									{t("childrens.label")}
-								</FormLabel>
+								<FormLabel className="block">{t("childrens.label")}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<RadioGroup
@@ -138,7 +136,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="font-normal">
+												<FormLabel className="!w-full !min-w-full font-normal">
 													{t("childrens.options.true")}
 												</FormLabel>
 											</FormItem>
@@ -146,7 +144,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="font-normal">
+												<FormLabel className="!w-full !min-w-full font-normal">
 													{t("childrens.options.false")}
 												</FormLabel>
 											</FormItem>
@@ -170,7 +168,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<Input
-											className="max-w-60 text-end [&::-webkit-inner-spin-button]:ml-2"
+											className="text-end sm:max-w-60 [&::-webkit-inner-spin-button]:ml-2"
 											type="number"
 											placeholder="0"
 											{...field}
@@ -224,16 +222,16 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name={f.name}
 						render={({ field }) => (
 							<FormItem>
-								<div className="flex items-center">
-									<FormLabel className="w-[330px]">{t(f.label)}</FormLabel>
+								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+									<FormLabel>{t(f.label)}</FormLabel>
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
-											<div className="flex items-center">
+											<div className="flex flex-col-reverse md:flex-row md:items-center">
 												<FormLabel
 													aria-disabled={disabledFields}
-													className="mr-1 min-w-max"
+													className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto"
 												>
-													{t(f.label)}
+													{t(f.subLabel)}
 												</FormLabel>
 												<FormControl>
 													<NumberInput
