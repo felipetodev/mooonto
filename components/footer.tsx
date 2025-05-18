@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function Footer() {
 	return (
-		<footer className="w-full bg-[#002446] px-10 pt-24 pb-8 md:px-16">
+		<footer className="w-full px-10 pt-24 pb-8 md:px-16">
 			<div className="mx-auto h-full max-w-(--breakpoint-4xl)">
 				<div className="flex justify-between">
 					<Link href="/" className="h-max">

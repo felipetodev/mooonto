@@ -1,5 +1,5 @@
 "use client";
-
+import { Island } from "@/components/island";
 import { Form } from "@/components/ui/form";
 import { AditionalCostsForm } from "@/forms/aditional-costs-form";
 import { LivingExpensesForm } from "@/forms/living-expenses-form";
@@ -8,6 +8,7 @@ import { useFormCalculations } from "@/hooks/use-form-completions";
 import type { IntlConfig } from "@/lib/types";
 import { type FormValues, formSchema } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -71,6 +72,7 @@ export const CHILDREN_CONDITIONAL_FIELDS = [
 ] as const;
 
 export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
+	const formRef = useRef<HTMLFormElement>(null);
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -83,7 +85,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		control: form.control,
 	}) as FormValues;
 
-	console.log("FORM VALUES:::", form.getValues());
+	console.log("FORM VALUES:::", watchedValues);
 	console.log("FORM ERRORS:::", form.formState.errors);
 
 	const formResults = useFormCalculations(watchedValues);
@@ -107,14 +109,15 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	};
 
 	function onError(errors: any) {
-		toast.warning("Tienes campos inválidos y/o incompletos");
+		toast.error("Tienes campos inválidos y/o incompletos");
 	}
 
 	return (
-		<div className="relative flex flex-col text-[#002446]">
+		<div className="relative flex flex-col text-[#1A1A18]">
 			<Form {...form}>
 				<form
 					id="mooonto"
+					ref={formRef}
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className="flex flex-col gap-y-20"
 				>
@@ -128,32 +131,11 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					</div>
 				</form>
 			</Form>
-			<div className="sticky bottom-0 py-8">
-				<div className="rounded-3xl bg-lime-400 p-4 font-bold">
-					<div className="flex items-center justify-between">
-						<div className="grid gap-y-2">
-							<span>
-								Total gastos mínimos (trabajo): {intlConfig.symbol}
-								{formResults.totalStepOne}
-							</span>
-							<span>
-								Total gastos mínimos (vivienda): {intlConfig.symbol}
-								{formResults.totalStepTwo}
-							</span>
-							<span>
-								Ingresos mínimos: {intlConfig.symbol}
-								{formResults.totalResult}
-							</span>
-						</div>
-						<div className="flex flex-col items-center">
-							<span className="font-bold text-2xl">
-								{formResults.completionProgress}%
-							</span>
-							<span>Completado</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Island
+				formRef={formRef}
+				formResults={formResults}
+				intlConfig={intlConfig}
+			/>
 			<button
 				form="mooonto"
 				type="submit"

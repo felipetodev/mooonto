@@ -5,6 +5,19 @@ import {
 import type { FormValues } from "@/schemas/form";
 import { useMemo } from "react";
 
+export type FormCompletionProgressResult = {
+	completionProgress: number;
+	totalBaseSum: number;
+	totalStepOne: number;
+	totalStepTwo: number;
+	totalResult: number;
+	totalResultWithvalueContribution: number;
+	minimumHourlyRateBeingFreelance: number;
+	minimumHourlyRateBeingContracted: number;
+	minimumHourlyRateBeingFreelanceWithValueContribution: number;
+	minimumHourlyRateBeingContractedWithValueContribution: number;
+};
+
 const getFormCompletionProgress = (values: FormValues) => {
 	const totalFields = Object.entries(values).filter(([key, value]) => {
 		if (value != null && typeof value !== "boolean") {
@@ -30,7 +43,9 @@ const getFormCompletionProgress = (values: FormValues) => {
 	return Math.round((filledFields / totalFields) * 100);
 };
 
-export const useFormCalculations = (values: FormValues) => {
+export const useFormCalculations = (
+	values: FormValues,
+): FormCompletionProgressResult => {
 	return useMemo(() => {
 		const calculateOfficeExpenses = () => {
 			if (!values.cowork) return 0;
@@ -114,11 +129,17 @@ export const useFormCalculations = (values: FormValues) => {
 			((values.incomeTaxRetention ?? 0) / 100);
 
 		const totalAdditionalCosts = Math.round(
+			unExpectedExpenses + incomeTaxRetention,
+		);
+
+		const totalAdditionalCostsWithValueContribution = Math.round(
 			unExpectedExpenses + valueContribution + incomeTaxRetention,
 		);
 
-		// Total sum
-		const totalStepsExpenses = totalBaseSum + totalAdditionalCosts;
+		// Total sums
+		const totalStepExpenses = totalBaseSum + totalAdditionalCosts; // base imponible
+		const totalStepsExpensesWithValueContribution =
+			totalBaseSum + totalAdditionalCostsWithValueContribution;
 
 		const completionProgress = getFormCompletionProgress(values);
 
@@ -126,7 +147,16 @@ export const useFormCalculations = (values: FormValues) => {
 			totalBaseSum,
 			totalStepOne: totalStepOneExpenses,
 			totalStepTwo: totalStepTwoExpenses,
-			totalResult: totalStepsExpenses,
+			totalResult: totalStepExpenses,
+			totalResultWithvalueContribution: totalStepsExpensesWithValueContribution,
+			minimumHourlyRateBeingFreelance: Math.round(totalStepExpenses / 80),
+			minimumHourlyRateBeingContracted: Math.round(totalStepExpenses / 160),
+			minimumHourlyRateBeingFreelanceWithValueContribution: Math.round(
+				totalStepsExpensesWithValueContribution / 80,
+			),
+			minimumHourlyRateBeingContractedWithValueContribution: Math.round(
+				totalStepsExpensesWithValueContribution / 160,
+			),
 			completionProgress,
 		};
 	}, [values]);
