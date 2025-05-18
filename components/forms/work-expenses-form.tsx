@@ -308,9 +308,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						render={({ field }) => (
 							<FormItem>
 								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
-									<FormLabel className="w-[330px]">
-										{t("officeBills.label")}
-									</FormLabel>
+									<FormLabel>{t("officeBills.label")}</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
@@ -336,9 +334,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						render={({ field }) => (
 							<FormItem>
 								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
-									<FormLabel className="w-[330px]">
-										{t("officeInternet.label")}
-									</FormLabel>
+									<FormLabel>{t("officeInternet.label")}</FormLabel>
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput

@@ -161,9 +161,11 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					name="quantityChildrens"
 					render={({ field }) => (
 						<FormItem>
-							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									<span className="ml-8">{t("quantityChildrens.label")}</span>
+							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+								<FormLabel>
+									<span className="md:ml-8">
+										{t("quantityChildrens.label")}
+									</span>
 								</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
@@ -190,9 +192,9 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					name="childrensExpenses"
 					render={({ field }) => (
 						<FormItem>
-							<div className="flex items-center">
-								<FormLabel className="w-[330px]">
-									<span className="ml-8 flex text-balance">
+							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+								<FormLabel>
+									<span className="flex text-balance md:ml-8">
 										{t("childrensExpenses.label")}
 									</span>
 								</FormLabel>
