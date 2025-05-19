@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function MainHero() {
 	return (
-		<section className="relative h-[calc(100svh-64px)] w-full overflow-hidden px-10 md:px-16 lg:h-[700px]">
+		<section className="relative h-[calc(100vh-64px)] w-full overflow-hidden px-10 md:px-16 lg:h-[700px]">
 			<div className="mx-auto flex h-full max-w-(--breakpoint-4xl) flex-col lg:flex-row">
 				<div className="mt-10 flex h-full max-w-3xl flex-col justify-center gap-y-10 sm:mt-20 lg:mt-auto">
 					<h1 className="flex flex-col font-bold font-dela-gothic leading-tight [font-size:clamp(2em,4vw,100px)]">
@@ -42,6 +42,8 @@ export function MainHero() {
 				</div>
 				<div className="lg:-mr-10 lg:-mb-70 xl:-mb-100 relative mt-20 block w-full scale-140 md:mt-20 lg:scale-180 xl:mr-auto xl:scale-150">
 					<img
+						decoding="sync"
+						loading="eager"
 						src="/hero.webp"
 						alt="mooonto"
 						className="-scale-x-100 mx-auto h-full max-w-5/6 object-contain lg:w-full"

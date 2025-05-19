@@ -28,7 +28,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 
 	const width = useMemo(() => {
 		if (isMobile) {
-			return state === "collapsed" ? 240 : state === "expanded" ? 300 : 350;
+			return state === "collapsed" ? 240 : state === "expanded" ? 290 : 340;
 		}
 		return state === "collapsed" ? 240 : state === "expanded" ? 400 : 440;
 	}, [isMobile, state]);
