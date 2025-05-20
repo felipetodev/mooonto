@@ -21,7 +21,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 	const [state, setState] = useState<IslandStates>("collapsed");
 	const [ref, { height }] = useMeasure();
 	const isInView = useInView(formRef, {
-		margin: "0px 0px -250px 0px",
+		margin: "500px 0px -250px 0px",
 	});
 
 	const { isMobile } = useMediaQuery();
@@ -43,7 +43,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 					className="sticky bottom-0 h-40"
 				>
 					<div className="relative flex size-full justify-center">
-						<div className="absolute bottom-0 my-5 flex w-max min-w-68 flex-col rounded-3xl border bg-lime-400 p-4 font-medium shadow-lg">
+						<div className="absolute bottom-0 my-5 flex w-max min-w-68 flex-col rounded-3xl border bg-secondary p-4 font-medium shadow-lg">
 							<motion.div
 								animate={{ width, height }}
 								transition={{ type: "spring", duration: 0.35, bounce: 0 }}

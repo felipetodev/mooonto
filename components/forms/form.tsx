@@ -139,7 +139,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			<button
 				form="mooonto"
 				type="submit"
-				className="h-12 rounded-3xl border bg-lime-400 px-4 font-bold text-2xl"
+				className="h-14 rounded-3xl border bg-secondary px-4 font-bold text-2xl"
 			>
 				Obtener resultado
 			</button>

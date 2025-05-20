@@ -5,6 +5,7 @@
 
 @theme {
 	--breakpoint-4xl: 1920px;
+	--breakpoint-xs: 400px;
 
 	--font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -22,6 +23,7 @@
 	--color-primary-foreground: hsl(var(--primary-foreground));
 
 	--color-secondary: hsl(var(--secondary));
+	--color-secondary-hover: hsl(var(--secondary-hover));
 	--color-secondary-foreground: hsl(var(--secondary-foreground));
 
 	--color-destructive: hsl(var(--destructive));
@@ -103,7 +105,8 @@
 		--popover-foreground: 20 14.3% 4.1%;
 		--primary: 24.6 95% 53.1%;
 		--primary-foreground: 60 9.1% 97.8%;
-		--secondary: 60 4.8% 95.9%;
+		--secondary: 79 88% 64%;
+		--secondary-hover: 30 36% 96%;
 		--secondary-foreground: 24 9.8% 10%;
 		--muted: 60 4.8% 95.9%;
 		--muted-foreground: 25 5.3% 44.7%;

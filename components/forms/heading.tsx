@@ -13,7 +13,7 @@ export function Heading({
 	return (
 		<div>
 			<div className="flex flex-wrap gap-2 sm:gap-4">
-				<Badge className="bg-[#C2F454] font-bold text-inherit text-lg hover:bg-[#C2F454]/80">
+				<Badge variant="secondary" className="font-bold text-inherit text-lg ">
 					Paso {step} de {totalSteps}
 				</Badge>
 				<h2 className="text-2xl">{children}</h2>
