@@ -1,7 +1,7 @@
 import {
 	CHILDREN_CONDITIONAL_FIELDS,
 	OFFICE_CONDITIONAL_FIELDS,
-} from "@/components/forms/form";
+} from "@/lib/constants";
 import type { FormValues } from "@/schemas/form";
 import { useMemo } from "react";
 

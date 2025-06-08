@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react";
 
-function getDevice(): "mobile" | "tablet" | "desktop" | null {
+function getDevice({
+	mobileBreakPoint = 640,
+}: { mobileBreakPoint?: number }): "mobile" | "tablet" | "desktop" | null {
 	if (typeof window === "undefined") return null;
 
 	return window.matchMedia("(min-width: 1024px)").matches
 		? "desktop"
-		: window.matchMedia("(min-width: 640px)").matches
+		: window.matchMedia(`(min-width: ${mobileBreakPoint}px)`).matches
 			? "tablet"
 			: "mobile";
 }
 
-export function useMediaQuery() {
+export function useMediaQuery({
+	mobileBreakPoint,
+}: { mobileBreakPoint?: number } = {}) {
 	const [device, setDevice] = useState<"mobile" | "tablet" | "desktop" | null>(
-		getDevice(),
+		getDevice({ mobileBreakPoint }),
 	);
 
 	useEffect(() => {
 		const checkDevice = () => {
-			setDevice(getDevice());
+			setDevice(getDevice({ mobileBreakPoint }));
 		};
 
 		// Initial detection
