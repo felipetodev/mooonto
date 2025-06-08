@@ -1,83 +1,47 @@
 "use client";
-import { Island } from "@/components/island";
+
+import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { AditionalCostsForm } from "@/forms/aditional-costs-form";
 import { LivingExpensesForm } from "@/forms/living-expenses-form";
 import { WorkExpensesForm } from "@/forms/work-expenses-form";
 import { useFormCalculations } from "@/hooks/use-form-completions";
+import {
+	DEFAULT_LIVING_EXPENSES_VALUES,
+	DEFAULT_WORK_EXPENSES_VALUES,
+} from "@/lib/constants";
 import type { IntlConfig } from "@/lib/types";
 import { type FormValues, formSchema } from "@/schemas/form";
+import { useClerk } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef } from "react";
+import dynamic from "next/dynamic";
+import { useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
+import { FormWrapper } from "./form-wrapper";
 
-const DEFAULT_FORM_STEP_ONE = {
-	selfEmployed: 0,
-	consultancy: 0,
-	lifecycleEquipment: 0,
-	subscriptions: 0,
-	cowork: false,
-	officeRent: undefined, // cowork conditional field
-	officeInsurance: undefined, // cowork conditional field
-	officeBills: undefined, // cowork conditional field
-	officeInternet: undefined, // cowork conditional field
-	gasoline: 0,
-	coffee: 0,
-	water: 0,
-};
+const Island = dynamic(
+	() => import("@/components/island").then((mod) => mod.Island),
+	{
+		ssr: false,
+	},
+);
 
-const DEFAULT_FORM_STEP_TWO = {
-	livingExpenses: 0,
-	commonExpenses: 0,
-	food: 0,
-	gym: 0,
-	entertainment: 0,
-	clothes: 0,
-	carFee: 0,
-	livingExpensesTwo: 0,
-	internet: 0,
-	personalPhone: 0,
-	healthPlan: 0,
-	retirementFund: 0,
-	otherExpenses: 0,
-	childrens: false,
-	// childrens conditional fields
-	quantityChildrens: undefined,
-	childrensExpenses: undefined,
-	livingExpensesTwoTwo: undefined,
-	carInsurance: undefined,
-	taxes: undefined,
-	unExpectedExpenses: undefined,
-	valueContribution: undefined,
-	incomeTaxRetention: undefined,
-};
-
-export const OFFICE_CONDITIONAL_FIELDS = [
-	"officeRent",
-	"officeInsurance",
-	"officeBills",
-	"officeInternet",
-] as const;
-
-export const CHILDREN_CONDITIONAL_FIELDS = [
-	"quantityChildrens",
-	"childrensExpenses",
-	"livingExpensesTwoTwo",
-	"carInsurance",
-	"taxes",
-	"unExpectedExpenses",
-	"valueContribution",
-	"incomeTaxRetention",
-] as const;
+const ResultDrawer = dynamic(
+	() => import("@/components/drawer").then((mod) => mod.ResultDrawer),
+	{
+		ssr: false,
+	},
+);
 
 export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
+	const [openDrawer, setOpenDrawer] = useState(false);
 	const formRef = useRef<HTMLFormElement>(null);
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			...DEFAULT_FORM_STEP_ONE,
-			...DEFAULT_FORM_STEP_TWO,
+			...DEFAULT_WORK_EXPENSES_VALUES,
+			...DEFAULT_LIVING_EXPENSES_VALUES,
 		},
 	});
 
@@ -85,31 +49,32 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		control: form.control,
 	}) as FormValues;
 
+	const { user, openSignIn } = useClerk();
+
 	console.log("FORM VALUES:::", watchedValues);
 	console.log("FORM ERRORS:::", form.formState.errors);
 
 	const formResults = useFormCalculations(watchedValues);
 
-	const onSubmit = (formData: FormValues) => {
-		const cleanedData: Partial<FormValues> = structuredClone(formData);
-
-		if (!formData.cowork) {
-			OFFICE_CONDITIONAL_FIELDS.forEach((field) => {
-				cleanedData[field as keyof FormValues] = undefined;
-			});
-		}
-
-		if (!formData.childrens) {
-			CHILDREN_CONDITIONAL_FIELDS.forEach((field) => {
-				cleanedData[field as keyof FormValues] = undefined;
-			});
-		}
-
-		alert(JSON.stringify(cleanedData, null, 2));
+	const onSubmit = () => {
+		setOpenDrawer(true);
 	};
 
 	function onError(errors: any) {
 		toast.error("Tienes campos inválidos y/o incompletos");
+	}
+
+	function saveToDatabase(values: FormValues) {
+		if (!user) {
+			return openSignIn({
+				redirectUrl: `/dashboard?${new URLSearchParams(
+					Object.fromEntries(
+						Object.entries(values).map(([key, value]) => [key, String(value)]),
+					),
+				)}`,
+			});
+		}
+		console.log("Saving to database ✨✨");
 	}
 
 	return (
@@ -121,14 +86,34 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className="flex flex-col gap-y-20"
 				>
-					<WorkExpensesForm intlConfig={intlConfig} />
-					<div className="grid">
+					<FormWrapper
+						title={
+							<>
+								Gastos mensuales mínimos para poder{" "}
+								<span className="font-bold">trabajar</span>
+							</>
+						}
+						step={1}
+						totalSteps={2}
+					>
+						<WorkExpensesForm intlConfig={intlConfig} />
+					</FormWrapper>
+					<FormWrapper
+						title={
+							<>
+								Gastos mensuales mínimos para poder{" "}
+								<span className="font-bold">vivir</span>
+							</>
+						}
+						step={2}
+						totalSteps={2}
+					>
 						<LivingExpensesForm intlConfig={intlConfig} />
 						<AditionalCostsForm
 							totalBaseSum={formResults.totalBaseSum}
 							intlConfig={intlConfig}
 						/>
-					</div>
+					</FormWrapper>
 				</form>
 			</Form>
 			<Island
@@ -136,13 +121,21 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 				formResults={formResults}
 				intlConfig={intlConfig}
 			/>
-			<button
+			<ResultDrawer
+				open={openDrawer}
+				onSaveToDatabase={() => {
+					saveToDatabase(watchedValues);
+				}}
+				handleOpenDrawer={setOpenDrawer}
+			/>
+			<Button
 				form="mooonto"
 				type="submit"
-				className="h-14 rounded-3xl border bg-secondary px-4 font-bold text-2xl"
+				variant="secondary"
+				className="h-14 rounded-3xl font-bold text-2xl hover:bg-secondary/90"
 			>
 				Obtener resultado
-			</button>
+			</Button>
 		</div>
 	);
 }
