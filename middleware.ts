@@ -3,10 +3,15 @@ import {
 	CURRENCY_SELECTOR,
 	DEFAULT_CURRENCY,
 } from "@/lib/constants";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(req: NextRequest) {
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+	if (isProtectedRoute(req)) await auth.protect();
+
 	const url = req.nextUrl.clone();
 
 	const country = req.headers.get("x-vercel-ip-country");
@@ -32,8 +37,13 @@ export function middleware(req: NextRequest) {
 	}
 
 	return res;
-}
+});
 
 export const config = {
-	matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+	matcher: [
+		// Skip Next.js internals and all static files, unless found in search params
+		"/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+		// Always run for API routes
+		"/((?!api|trpc|_next|.*\\..*).*)",
+	],
 };

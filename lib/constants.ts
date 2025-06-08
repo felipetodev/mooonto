@@ -1,4 +1,5 @@
-import type { IntlConfig } from "./types";
+import type { IntlConfig } from "@/lib/types";
+import type { FormValues } from "@/schemas/form";
 
 export const DEFAULT_CURRENCY = "EUR" as const;
 
@@ -71,6 +72,62 @@ export const CURRENCY_SELECTOR: IntlConfig[] = [
 	},
 ] as const;
 
+export const DEFAULT_WORK_EXPENSES_VALUES: Partial<FormValues> = {
+	selfEmployed: 0,
+	consultancy: 0,
+	lifecycleEquipment: 0,
+	subscriptions: 0,
+	cowork: false,
+	officeRent: undefined, // cowork conditional field
+	officeInsurance: undefined, // cowork conditional field
+	officeBills: undefined, // cowork conditional field
+	officeInternet: undefined, // cowork conditional field
+	gasoline: 0,
+	coffee: 0,
+	water: 0,
+};
+
+export const DEFAULT_LIVING_EXPENSES_VALUES: Partial<FormValues> = {
+	livingExpenses: 0,
+	commonExpenses: 0,
+	food: 0,
+	gym: 0,
+	entertainment: 0,
+	clothes: 0,
+	carFee: 0,
+	livingExpensesTwo: 0,
+	internet: 0,
+	personalPhone: 0,
+	healthPlan: 0,
+	retirementFund: 0,
+	otherExpenses: 0,
+	childrens: false,
+	// childrens conditional fields
+	quantityChildrens: undefined,
+	childrensExpenses: undefined,
+	livingExpensesTwoTwo: undefined,
+	carInsurance: undefined,
+	taxes: undefined,
+	unExpectedExpenses: undefined,
+	valueContribution: undefined,
+	incomeTaxRetention: undefined,
+};
+
+export const WORK_EXPENSES_FIELDS = [
+	"selfEmployed",
+	"consultancy",
+	"lifecycleEquipment",
+	"subscriptions",
+	"cowork",
+	"officeRent",
+	"officeInsurance",
+	"officeBills",
+	"officeInternet",
+	"gasoline",
+	"coffee",
+	"water",
+] as readonly (keyof FormValues)[];
+
 export const LIVING_EXPENSES_FIELDS = [
 	"livingExpenses",
 	"commonExpenses",
@@ -87,6 +144,24 @@ export const LIVING_EXPENSES_FIELDS = [
 	"otherExpenses",
 ] as const;
 
+export const OFFICE_CONDITIONAL_FIELDS = [
+	"officeRent",
+	"officeInsurance",
+	"officeBills",
+	"officeInternet",
+] as readonly (keyof FormValues)[];
+
+export const CHILDREN_CONDITIONAL_FIELDS = [
+	"quantityChildrens",
+	"childrensExpenses",
+	"livingExpensesTwoTwo",
+	"carInsurance",
+	"taxes",
+	"unExpectedExpenses",
+	"valueContribution",
+	"incomeTaxRetention",
+] as readonly (keyof FormValues)[];
+
 type LivingExpensesKey =
 	`${(typeof LIVING_EXPENSES_FIELDS)[number]}.${"label" | "description"}`;
 
@@ -100,21 +175,21 @@ export const FORM_FIELDS_TWO = LIVING_EXPENSES_FIELDS.map((name) => ({
 export const FORM_FIELDS_TWO_TWO = [
 	{
 		name: "livingExpensesTwoTwo",
-		label: "livingExpensesTwoTwo.label" as LivingExpensesKey,
-		subLabel: "livingExpensesTwoTwo.subLabel" as LivingExpensesKey,
-		description: "livingExpensesTwoTwo.description" as LivingExpensesKey,
+		label: "livingExpensesTwoTwo.label",
+		subLabel: "livingExpensesTwoTwo.subLabel",
+		description: "livingExpensesTwoTwo.description",
 	},
 	{
 		name: "carInsurance",
-		label: "carInsurance.label" as LivingExpensesKey,
-		subLabel: "carInsurance.subLabel" as LivingExpensesKey,
-		description: "carInsurance.description" as LivingExpensesKey,
+		label: "carInsurance.label",
+		subLabel: "carInsurance.subLabel",
+		description: "carInsurance.description",
 	},
 	{
 		name: "taxes",
-		label: "taxes.label" as LivingExpensesKey,
-		subLabel: "taxes.subLabel" as LivingExpensesKey,
-		description: "taxes.description" as LivingExpensesKey,
+		label: "taxes.label",
+		subLabel: "taxes.subLabel",
+		description: "taxes.description",
 	},
 ] as const;
 

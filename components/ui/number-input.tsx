@@ -6,6 +6,7 @@ import CurrencyInput, {
 export function NumberInput({
 	className,
 	onChange,
+	value,
 	...props
 }: Omit<CurrencyInputProps, "onValueChange"> & {
 	onChange?: (value: number) => void;
@@ -22,6 +23,7 @@ export function NumberInput({
 				"aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
 				className,
 			)}
+			value={value || ""}
 			{...props}
 			onValueChange={handleValueChange}
 		/>

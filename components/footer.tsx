@@ -11,10 +11,10 @@ export function Footer() {
 						<img src="/footer.webp" alt="footer" className="size-full" />
 					</div>
 					<Link href="/" className="h-max">
-						<Logo className="text-[#FF3B16]" />
+						<Logo className="text-primary" />
 					</Link>
 					<div className="grid gap-y-4 md:grid-cols-2 md:gap-y-0 md:text-shadow-md">
-						<ul className="space-y-5 text-sm md:space-y-8 [&_a]:transition-colors [&_a]:hover:text-[#FF3B16]">
+						<ul className="space-y-5 text-sm md:space-y-8 [&_a]:transition-colors [&_a]:hover:text-primary">
 							<li>
 								<Link href="/">¿Quiénes somos?</Link>
 							</li>
@@ -26,7 +26,7 @@ export function Footer() {
 							</li>
 						</ul>
 
-						<ul className="space-y-5 text-sm md:space-y-8 [&_a]:transition-colors [&_a]:hover:text-[#FF3B16]">
+						<ul className="space-y-5 text-sm md:space-y-8 [&_a]:transition-colors [&_a]:hover:text-primary">
 							<li>
 								<a href="#" className="flex items-center">
 									<InstagramIcon className="mr-2 h-6 w-6" />
