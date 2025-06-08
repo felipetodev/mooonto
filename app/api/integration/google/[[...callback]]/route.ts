@@ -11,10 +11,14 @@ const oAuth2Client = new OAuth2Client({
 export async function GET(request: Request) {
 	const url = new URL(request.url);
 	const code = url.searchParams.get("code");
-	// const scope = url.searchParams.get("scope");
+	const state = url.searchParams.get("state");
 
 	if (!code) {
 		return redirect("/404");
+	}
+
+	if (state !== process.env.GOOGLE_OAUTH_STATE) {
+		return new Response("Invalid state parameter", { status: 400 });
 	}
 
 	const { tokens } = (await oAuth2Client.getToken(code)) as {

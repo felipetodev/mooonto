@@ -60,6 +60,7 @@ export const exportToGoogleSheets = async (
 			access_type: "offline",
 			scope: SCOPES,
 			prompt: "consent",
+			state: process.env.GOOGLE_OAUTH_STATE,
 		});
 
 		return { status: 401, url: authorizeUrl };
