@@ -11,7 +11,7 @@ export const usersTable = sqliteTable("users", {
 	email: text("email").unique().notNull(),
 	imageUrl: text("image_url"),
 	createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`).notNull(),
-	updateAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+	updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
 		() => new Date(),
 	),
 });
@@ -26,11 +26,11 @@ export const formsTable = sqliteTable("forms", {
 	description: text("description"),
 	slug: text("slug").unique(),
 	// folderId: integer("folder_id").references(() => foldersTable.id),
-	isFavorite: integer("is_active", { mode: "boolean" })
+	isFavorite: integer("is_favorite", { mode: "boolean" })
 		.default(sql`(0)`)
 		.notNull(),
 	createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`).notNull(),
-	updateAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
+	updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(
 		() => new Date(),
 	),
 });

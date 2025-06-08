@@ -1,0 +1,1 @@
+ALTER TABLE `forms` RENAME COLUMN "is_active" TO "is_favorite";

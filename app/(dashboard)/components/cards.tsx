@@ -12,7 +12,7 @@ const FormCard = ({
 	title,
 	formId,
 	imageUrl,
-	updateAt,
+	updatedAt,
 }: SelectForm & { imageUrl?: string | null }) => {
 	return (
 		<Link href={`/dashboard/form/${formId}`}>
@@ -29,9 +29,9 @@ const FormCard = ({
 								className="size-4 rounded-full"
 							/>
 						) : null}
-						{updateAt ? (
+						{updatedAt ? (
 							<span className="opacity-80">
-								{timeAgo.format(new Date(updateAt))}
+								{timeAgo.format(new Date(updatedAt))}
 							</span>
 						) : null}
 					</div>
