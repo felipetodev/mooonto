@@ -8,7 +8,7 @@ export function MainHero() {
 				<div className="z-10 mt-10 flex h-full max-w-3xl flex-col justify-center gap-y-10 md:mt-20 lg:mt-auto">
 					<h1 className="flex flex-col text-balance font-bold font-dela-gothic text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-[65px]">
 						Dale valor a tu trabajo creativo con{" "}
-						<span className="text-[#FF3B16]">mooonto</span>
+						<span className="text-primary">mooonto</span>
 					</h1>
 
 					<div className="flex flex-col gap-y-4">
@@ -29,7 +29,7 @@ export function MainHero() {
 					</a>
 					<span />
 				</div>
-				<div className="lg:-mr-10 -mt-25 mx-auto xs:mt-0 flex min-h-[700px] sm:min-h-[500px] md:min-w-[200px] lg:min-h-[1000px] lg:min-w-[500px] xl:mr-auto 2xl:min-w-[500px]">
+				<div className="lg:-mr-10 -mt-25 mx-auto xs:mt-0 flex min-h-[700px] sm:min-h-[500px] md:min-w-[200px] lg:min-h-[1000px] lg:min-w-[500px] xl:mr-auto 2xl:mt-22 2xl:min-w-[500px]">
 					<img
 						decoding="sync"
 						loading="eager"

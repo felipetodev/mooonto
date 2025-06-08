@@ -5,10 +5,12 @@ export function Heading({
 	children,
 	step,
 	totalSteps,
+	separator = true,
 }: {
 	children: React.ReactNode;
 	step: number;
 	totalSteps: number;
+	separator?: boolean;
 }) {
 	return (
 		<div>
@@ -18,7 +20,7 @@ export function Heading({
 				</Badge>
 				<h2 className="text-2xl">{children}</h2>
 			</div>
-			<Separator className="mt-10" />
+			{separator && <Separator className="mt-10" />}
 		</div>
 	);
 }

@@ -9,7 +9,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Heading } from "@/forms/heading";
 import { FORM_FIELDS_TWO, FORM_FIELDS_TWO_TWO } from "@/lib/constants";
 import type { IntlConfig } from "@/lib/types";
 import { useTranslations } from "next-intl";
@@ -80,136 +79,29 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	);
 
 	return (
-		<div className="flex flex-col">
-			<Heading step={2} totalSteps={2}>
-				Gastos mensuales mínimos para poder{" "}
-				<span className="font-bold">vivir</span>
-			</Heading>
-			<div className="mt-10 space-y-8">
-				{FORM_FIELDS_TWO.map((f) => (
-					<FormField
-						key={f.name}
-						control={control}
-						name={f.name}
-						render={({ field }) => (
-							<FormItem>
-								<div className="flex items-center">
-									<FormLabel>{t(f.label)}</FormLabel>
-									<div className="flex w-full flex-col">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix={intlConfig.symbol}
-												placeholder={`${currencyPrefix} 0`}
-											/>
-										</FormControl>
-										<FormDescription className="text-inherit">
-											{t(f.description)}
-										</FormDescription>
-										<FormMessage />
-									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-				))}
+		<div className="mt-10 space-y-8">
+			{FORM_FIELDS_TWO.map((f) => (
 				<FormField
+					key={f.name}
 					control={control}
-					name="childrens"
+					name={f.name}
 					render={({ field }) => (
-						<FormItem className="space-y-3">
+						<FormItem>
 							<div className="flex items-center">
-								<FormLabel className="block">{t("childrens.label")}</FormLabel>
-								<div className="flex w-full flex-col">
-									<FormControl>
-										<RadioGroup
-											onValueChange={(e) => {
-												const value = Boolean(Number(e));
-												field.onChange(handleChildrensChange(value));
-											}}
-											defaultValue={field.value ? "1" : "0"}
-											className="flex items-center"
-										>
-											<FormItem className="flex items-center space-x-3 space-y-0">
-												<FormControl>
-													<RadioGroupItem value="1" />
-												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
-													{t("childrens.options.true")}
-												</FormLabel>
-											</FormItem>
-											<FormItem className="flex items-center space-x-3 space-y-0">
-												<FormControl>
-													<RadioGroupItem value="0" />
-												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
-													{t("childrens.options.false")}
-												</FormLabel>
-											</FormItem>
-										</RadioGroup>
-									</FormControl>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="quantityChildrens"
-					render={({ field }) => (
-						<FormItem>
-							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
-								<FormLabel>
-									<span className="md:ml-8">
-										{t("quantityChildrens.label")}
-									</span>
-								</FormLabel>
-								<div className="flex w-full flex-col">
-									<FormControl>
-										<Input
-											className="text-end sm:max-w-60 [&::-webkit-inner-spin-button]:ml-2"
-											type="number"
-											placeholder="0"
-											{...field}
-											value={field.value || ""}
-											onChange={(e) => {
-												field.onChange(Number(e.target.value ?? 0));
-											}}
-											disabled={disabledFields}
-										/>
-									</FormControl>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="childrensExpenses"
-					render={({ field }) => (
-						<FormItem>
-							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
-								<FormLabel>
-									<span className="flex text-balance md:ml-8">
-										{t("childrensExpenses.label")}
-									</span>
-								</FormLabel>
+								<FormLabel>{t(f.label)}</FormLabel>
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
+											ref={field.ref}
+											value={field.value}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
-											prefix={`${currencyPrefix}`}
+											prefix={intlConfig.symbol}
 											placeholder={`${currencyPrefix} 0`}
-											disabled={disabledFields}
 										/>
 									</FormControl>
-									<FormDescription aria-disabled={disabledFields}>
-										{t("childrensExpenses.description")}
+									<FormDescription className="text-inherit">
+										{t(f.description)}
 									</FormDescription>
 									<FormMessage />
 								</div>
@@ -217,54 +109,157 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						</FormItem>
 					)}
 				/>
-				{FORM_FIELDS_TWO_TWO.map((f) => (
-					<FormField
-						key={f.name}
-						control={control}
-						name={f.name}
-						render={({ field }) => (
-							<FormItem>
-								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
-									<FormLabel>{t(f.label)}</FormLabel>
-									<div className="flex w-full flex-col">
-										<div className="grid grid-cols-2 gap-x-4">
-											<div className="flex flex-col-reverse md:flex-row md:items-center">
-												<FormLabel
-													aria-disabled={disabledFields}
-													className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto"
-												>
-													{t(f.subLabel)}
-												</FormLabel>
-												<FormControl>
-													<NumberInput
-														disabled={disabledFields}
-														intlConfig={intlConfig}
-														onChange={field.onChange}
-														prefix={`${currencyPrefix}`}
-														placeholder={`${currencyPrefix} 0`}
-													/>
-												</FormControl>
-											</div>
-											<NumberInput
-												readOnly
-												disabled={disabledFields}
-												intlConfig={intlConfig}
-												value={Math.round(getValues(f.name) / 12 || 0)}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
-											/>
+			))}
+			<FormField
+				control={control}
+				name="childrens"
+				render={({ field }) => (
+					<FormItem className="space-y-3">
+						<div className="flex items-center">
+							<FormLabel className="block">{t("childrens.label")}</FormLabel>
+							<div className="flex w-full flex-col">
+								<FormControl>
+									<RadioGroup
+										value={field.value ? "1" : "0"}
+										onValueChange={(e) => {
+											const value = Boolean(Number(e));
+											field.onChange(handleChildrensChange(value));
+										}}
+										defaultValue={field.value ? "1" : "0"}
+										className="flex items-center"
+									>
+										<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormControl>
+												<RadioGroupItem value="1" />
+											</FormControl>
+											<FormLabel className="!w-full !min-w-full font-normal">
+												{t("childrens.options.true")}
+											</FormLabel>
+										</FormItem>
+										<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormControl>
+												<RadioGroupItem value="0" />
+											</FormControl>
+											<FormLabel className="!w-full !min-w-full font-normal">
+												{t("childrens.options.false")}
+											</FormLabel>
+										</FormItem>
+									</RadioGroup>
+								</FormControl>
+								<FormMessage />
+							</div>
+						</div>
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={control}
+				name="quantityChildrens"
+				render={({ field }) => (
+					<FormItem>
+						<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+							<FormLabel>
+								<span className="md:ml-8">{t("quantityChildrens.label")}</span>
+							</FormLabel>
+							<div className="flex w-full flex-col">
+								<FormControl>
+									<Input
+										className="text-end sm:max-w-60 [&::-webkit-inner-spin-button]:ml-2"
+										type="number"
+										placeholder="0"
+										{...field}
+										value={field.value}
+										onChange={(e) => {
+											field.onChange(Number(e.target.value ?? 0));
+										}}
+										disabled={disabledFields}
+									/>
+								</FormControl>
+								<FormMessage />
+							</div>
+						</div>
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={control}
+				name="childrensExpenses"
+				render={({ field }) => (
+					<FormItem>
+						<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+							<FormLabel>
+								<span className="flex text-balance md:ml-8">
+									{t("childrensExpenses.label")}
+								</span>
+							</FormLabel>
+							<div className="flex w-full flex-col">
+								<FormControl>
+									<NumberInput
+										value={field.value}
+										intlConfig={intlConfig}
+										onChange={field.onChange}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
+										disabled={disabledFields}
+									/>
+								</FormControl>
+								<FormDescription aria-disabled={disabledFields}>
+									{t("childrensExpenses.description")}
+								</FormDescription>
+								<FormMessage />
+							</div>
+						</div>
+					</FormItem>
+				)}
+			/>
+			{FORM_FIELDS_TWO_TWO.map((f) => (
+				<FormField
+					key={f.name}
+					control={control}
+					name={f.name}
+					render={({ field }) => (
+						<FormItem>
+							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+								<FormLabel>{t(f.label)}</FormLabel>
+								<div className="flex w-full flex-col">
+									<div className="grid grid-cols-2 gap-x-4">
+										<div className="flex flex-col-reverse md:flex-row md:items-center">
+											<FormLabel
+												aria-disabled={disabledFields}
+												className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto"
+											>
+												{t(f.subLabel)}
+											</FormLabel>
+											<FormControl>
+												<NumberInput
+													value={field.value}
+													disabled={disabledFields}
+													intlConfig={intlConfig}
+													onChange={field.onChange}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
+												/>
+											</FormControl>
 										</div>
-										<FormDescription aria-disabled={disabledFields}>
-											{t(f.description)}
-										</FormDescription>
-										<FormMessage />
+										<NumberInput
+											readOnly
+											disabled={disabledFields}
+											intlConfig={intlConfig}
+											value={Math.round(getValues(f.name) / 12 || 0)}
+											prefix={`${currencyPrefix}`}
+											placeholder={`${currencyPrefix} 0`}
+										/>
 									</div>
+									<FormDescription aria-disabled={disabledFields}>
+										{t(f.description)}
+									</FormDescription>
+									<FormMessage />
 								</div>
-							</FormItem>
-						)}
-					/>
-				))}
-			</div>
+							</div>
+						</FormItem>
+					)}
+				/>
+			))}
 		</div>
 	);
 }

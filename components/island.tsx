@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import type { FormCompletionProgressResult } from "@/hooks/use-form-completions";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import type { IntlConfig } from "@/lib/types";
+import { MinusIcon } from "lucide-react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { type RefObject, useMemo, useState } from "react";
 import useMeasure from "react-use-measure";
@@ -44,6 +45,16 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 				>
 					<div className="relative flex size-full justify-center">
 						<div className="absolute bottom-0 my-5 flex w-max min-w-68 flex-col rounded-3xl border bg-secondary p-4 font-medium shadow-lg">
+							{state !== "collapsed" ? (
+								<button
+									type="button"
+									aria-expanded="true"
+									className="absolute top-2.5 right-4 text-primary-soft hover:text-primary"
+									onClick={() => setState("collapsed")}
+								>
+									<MinusIcon className="size-3.5 stroke-4" />
+								</button>
+							) : null}
 							<motion.div
 								animate={{ width, height }}
 								transition={{ type: "spring", duration: 0.35, bounce: 0 }}
@@ -100,7 +111,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 															<div className="grid items-center">
 																<header className="flex space-x-2">
 																	<h2>Precio hora mínimo</h2>{" "}
-																	<Badge className="font-bold">
+																	<Badge className="bg-primary-soft font-bold">
 																		Estando contratado
 																	</Badge>
 																</header>
@@ -112,7 +123,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 															<div className="grid items-center">
 																<header className="flex space-x-2">
 																	<h2>Precio hora mínimo</h2>{" "}
-																	<Badge className="font-bold">
+																	<Badge className="bg-primary-soft font-bold">
 																		Siendo freelance
 																	</Badge>
 																</header>
@@ -136,7 +147,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 															<div className="grid items-center">
 																<header className="flex space-x-2">
 																	<h2>Precio hora mínimo</h2>{" "}
-																	<Badge className="font-bold">
+																	<Badge className="bg-primary-soft font-bold">
 																		Estando contratado
 																	</Badge>
 																</header>
@@ -150,7 +161,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 															<div className="grid items-center">
 																<header className="flex space-x-2">
 																	<h2>Precio hora mínimo</h2>{" "}
-																	<Badge className="font-bold">
+																	<Badge className="bg-primary-soft font-bold">
 																		Siendo freelance
 																	</Badge>
 																</header>
@@ -191,7 +202,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 									<MotionButton
 										animate={{ opacity: 1 }}
 										exit={{ opacity: 0 }}
-										className="h-8"
+										className="h-8 bg-primary-soft"
 										layoutId="primary-btn"
 										onClick={() => setState("expanded")}
 										aria-expanded="false"
@@ -204,7 +215,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 										animate={{ opacity: 1 }}
 										exit={{ opacity: 0 }}
 										layoutId="primary-btn"
-										className="h-8 w-[calc(1/2*96%)]"
+										className="h-8 w-[calc(1/2*96%)] bg-primary-soft"
 										onClick={() => {
 											setState((prev) =>
 												prev === "expanded" ? "full" : "expanded",
@@ -218,7 +229,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 								)}
 								{state !== "collapsed" ? (
 									<Button
-										className="h-8 w-[calc(1/2*96%)]"
+										className="h-8 w-[calc(1/2*96%)] bg-primary-soft"
 										onClick={() =>
 											setState((prev) =>
 												prev === "collapsed" ? "expanded" : "collapsed",
