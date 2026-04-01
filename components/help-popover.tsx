@@ -35,12 +35,12 @@ function HelpPopover({ children }: { children: React.ReactNode }) {
 					</a>
 					<img
 						className="-right-10 absolute top-0 z-10 block h-full object-contain"
-						src="https://www.colab-ai.com/discord-pj.svg"
+						src="https://colab-ai.vercel.app/discord-pj.svg"
 						alt=""
 					/>
 					<img
 						className="absolute inset-0 block h-full object-cover"
-						src="https://www.colab-ai.com/discord-bg.svg"
+						src="https://colab-ai.vercel.app/discord-bg.svg"
 						alt=""
 					/>
 				</div>
