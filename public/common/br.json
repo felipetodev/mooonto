@@ -150,5 +150,27 @@
 			"label": "Retenção IRRF",
 			"description": "Lorem Ipsum dolor sit amet."
 		}
+	},
+	"report": {
+		"button": "Obter relatório",
+		"buttonLoading": "Gerando...",
+		"title": "Relatório de Tarifa Freelance",
+		"subtitle": "Análise de despesas e tarifas mínimas recomendadas",
+		"currency": "Moeda",
+		"generatedAt": "Gerado em",
+		"workExpensesTitle": "Despesas de Trabalho",
+		"livingExpensesTitle": "Despesas de Moradia",
+		"additionalCostsTitle": "Custos Adicionais",
+		"totalTitle": "Total Mensal Necessário",
+		"category": "Conceito",
+		"amount": "Valor",
+		"distributionTitle": "Distribuição de Despesas",
+		"ratesTitle": "Tarifas por Hora Mínimas",
+		"ratesTitleWithValue": "Tarifas com Valor Agregado",
+		"contractedRate": "Sendo contratado",
+		"freelanceRate": "Sendo freelancer",
+		"perHour": "por hora",
+		"disclaimer": "Este relatório é uma estimativa baseada nos dados inseridos. As tarifas reais podem variar de acordo com o mercado, experiência e outros fatores. Recomenda-se usar esses valores como ponto de partida para negociações.",
+		"poweredBy": "Gerado com Mooonto - mooonto.com"
 	}
 }

@@ -150,5 +150,27 @@
 			"label": "Income tax withholding",
 			"description": "Lorem Ipsum dolor sit amet."
 		}
+	},
+	"report": {
+		"button": "Get report",
+		"buttonLoading": "Generating...",
+		"title": "Freelance Rate Report",
+		"subtitle": "Expense analysis and recommended minimum rates",
+		"currency": "Currency",
+		"generatedAt": "Generated on",
+		"workExpensesTitle": "Work Expenses",
+		"livingExpensesTitle": "Living Expenses",
+		"additionalCostsTitle": "Additional Costs",
+		"totalTitle": "Monthly Total Required",
+		"category": "Category",
+		"amount": "Amount",
+		"distributionTitle": "Expense Distribution",
+		"ratesTitle": "Minimum Hourly Rates",
+		"ratesTitleWithValue": "Rates with Added Value",
+		"contractedRate": "As employee",
+		"freelanceRate": "As freelancer",
+		"perHour": "per hour",
+		"disclaimer": "This report is an estimate based on the data entered. Actual rates may vary depending on market conditions, experience, and other factors. These values are recommended as a starting point for negotiations.",
+		"poweredBy": "Generated with Mooonto - mooonto.com"
 	}
 }

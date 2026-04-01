@@ -150,5 +150,27 @@
 			"label": "Retención IRP",
 			"description": "Lorem Ipsum dolor sit amet."
 		}
+	},
+	"report": {
+		"button": "Obtener reporte",
+		"buttonLoading": "Generando...",
+		"title": "Tu Mooonto",
+		"subtitle": "Análisis de gastos y tarifas mínimas recomendadas",
+		"currency": "Moneda",
+		"generatedAt": "Generado el",
+		"workExpensesTitle": "Gastos de Trabajo",
+		"livingExpensesTitle": "Gastos de Vivienda",
+		"additionalCostsTitle": "Costos Adicionales",
+		"totalTitle": "Total Mensual Requerido",
+		"category": "Concepto",
+		"amount": "Monto",
+		"distributionTitle": "Distribución de Gastos",
+		"ratesTitle": "Tarifas por Hora Mínimas",
+		"ratesTitleWithValue": "Tarifas con Valor Aportado",
+		"contractedRate": "Estando contratado",
+		"freelanceRate": "Siendo freelance",
+		"perHour": "por hora",
+		"disclaimer": "Este reporte es una estimación basada en los datos ingresados. Las tarifas reales pueden variar según el mercado, la experiencia y otros factores. Se recomienda usar estos valores como punto de partida para negociaciones.",
+		"poweredBy": "Generado con Mooonto - mooonto.com"
 	}
 }
