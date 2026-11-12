@@ -131,7 +131,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<div className="flex w-full flex-col">
 									<div className="grid grid-cols-2 gap-x-4">
 										<div className="flex flex-col-reverse md:flex-row md:items-center">
-											<FormLabel className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto">
+											<FormLabel className="my-1.5 mr-1 w-auto! min-w-fit! md:my-auto">
 												{t("lifecycleEquipment.subLabel")}
 											</FormLabel>
 											<FormControl>
@@ -209,7 +209,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
+												<FormLabel className="w-full! min-w-full! font-normal">
 													{t("cowork.options.true")}
 												</FormLabel>
 											</FormItem>
@@ -217,7 +217,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
+												<FormLabel className="w-full! min-w-full! font-normal">
 													{t("cowork.options.false")}
 												</FormLabel>
 											</FormItem>
@@ -270,7 +270,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<div className="flex flex-col-reverse md:flex-row md:items-center">
 													<FormLabel
 														aria-disabled={disabledField}
-														className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
+														className="my-1.5 mr-1 w-auto! min-w-fit! md:my-auto"
 													>
 														{t("officeInsurance.subLabel")}
 													</FormLabel>

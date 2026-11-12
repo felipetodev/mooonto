@@ -138,7 +138,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
+												<FormLabel className="w-full! min-w-full! font-normal">
 													{t("childrens.options.true")}
 												</FormLabel>
 											</FormItem>
@@ -146,7 +146,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
-												<FormLabel className="!w-full !min-w-full font-normal">
+												<FormLabel className="w-full! min-w-full! font-normal">
 													{t("childrens.options.false")}
 												</FormLabel>
 											</FormItem>
@@ -236,7 +236,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													<div className="flex flex-col-reverse md:flex-row md:items-center">
 														<FormLabel
 															aria-disabled={disabledFields}
-															className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
+															className="my-1.5 mr-1 w-auto! min-w-fit! md:my-auto"
 														>
 															{t(f.subLabel)}
 														</FormLabel>

@@ -7,7 +7,7 @@ export function Footer() {
 		<footer className="relative w-full overflow-hidden px-4.5 pt-24 pb-8 sm:px-10 md:px-16">
 			<div className="mx-auto h-full max-w-(--breakpoint-4xl)">
 				<div className="relative flex flex-col justify-between gap-y-8 md:flex-row md:gap-y-0">
-					<div className="absolute top-50 -right-18 -z-10 w-[430px] sm:top-10 sm:-right-10 sm:w-[500px] md:-top-20 md:left-[27%]">
+					<div className="absolute top-50 -right-18 -z-10 w-107.5 sm:top-10 sm:-right-10 sm:w-125 md:-top-20 md:left-[27%]">
 						<img src="/footer.webp" alt="footer" className="size-full" />
 					</div>
 					<Link href="/" className="h-max">

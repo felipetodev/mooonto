@@ -231,7 +231,7 @@ function ReceiptRow({
 			</span>
 			<span
 				aria-hidden="true"
-				className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-[#1A1A18]/30"
+				className="min-w-4 flex-1 -translate-y-0.75 border-b border-dotted border-[#1A1A18]/30"
 			/>
 			{row.filled ? (
 				<span className="shrink-0 text-right">
