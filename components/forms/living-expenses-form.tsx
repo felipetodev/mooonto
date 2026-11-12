@@ -201,6 +201,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								<div className="flex w-full flex-col">
 									<FormControl>
 										<NumberInput
+											ref={field.ref}
 											intlConfig={intlConfig}
 											onChange={field.onChange}
 											prefix={`${currencyPrefix}`}
@@ -237,6 +238,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												</FormLabel>
 												<FormControl>
 													<NumberInput
+														ref={field.ref}
 														disabled={disabledFields}
 														intlConfig={intlConfig}
 														onChange={field.onChange}

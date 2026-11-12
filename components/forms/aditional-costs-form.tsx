@@ -86,6 +86,7 @@ export function AditionalCostsForm({
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
 										<NumberInput
+											ref={field.ref}
 											className="max-w-60"
 											intlConfig={intlConfig}
 											onChange={field.onChange}
@@ -125,6 +126,7 @@ export function AditionalCostsForm({
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
 										<NumberInput
+											ref={field.ref}
 											className="max-w-60"
 											intlConfig={intlConfig}
 											onChange={field.onChange}
@@ -164,6 +166,7 @@ export function AditionalCostsForm({
 								<div className="grid grid-cols-2 gap-x-4">
 									<FormControl>
 										<NumberInput
+											ref={field.ref}
 											className="max-w-60"
 											intlConfig={intlConfig}
 											onChange={field.onChange}

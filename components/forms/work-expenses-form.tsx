@@ -240,6 +240,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
+												ref={field.ref}
 												intlConfig={intlConfig}
 												onChange={field.onChange}
 												prefix={`${currencyPrefix}`}
@@ -274,6 +275,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												</FormLabel>
 												<FormControl>
 													<NumberInput
+														ref={field.ref}
 														intlConfig={intlConfig}
 														onChange={field.onChange}
 														prefix={`${currencyPrefix}`}
@@ -312,6 +314,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
+												ref={field.ref}
 												intlConfig={intlConfig}
 												onChange={field.onChange}
 												prefix={`${currencyPrefix}`}
@@ -338,6 +341,7 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 									<div className="flex w-full flex-col">
 										<FormControl>
 											<NumberInput
+												ref={field.ref}
 												intlConfig={intlConfig}
 												onChange={field.onChange}
 												prefix={`${currencyPrefix}`}

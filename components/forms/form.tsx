@@ -124,7 +124,9 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			<Island
 				formRef={formRef}
 				formResults={formResults}
+				formValues={watchedValues}
 				intlConfig={intlConfig}
+				onJump={(name) => form.setFocus(name)}
 			/>
 			<button
 				form="mooonto"
