@@ -7,6 +7,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ComputedValue } from "@/components/ui/computed-value";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
@@ -247,13 +248,11 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													/>
 												</FormControl>
 											</div>
-											<NumberInput
-												readOnly
-												disabled={disabledFields}
-												intlConfig={intlConfig}
+											<ComputedValue
 												value={Math.round(getValues(f.name) / 12 || 0)}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
+												prefix={currencyPrefix}
+												locale={intlConfig.locale}
+												disabled={disabledFields}
 											/>
 										</div>
 										<FormDescription aria-disabled={disabledFields}>

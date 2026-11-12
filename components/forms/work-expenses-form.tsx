@@ -6,6 +6,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { ComputedValue } from "@/components/ui/computed-value";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
@@ -143,14 +144,12 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 												/>
 											</FormControl>
 										</div>
-										<NumberInput
-											readOnly
-											intlConfig={intlConfig}
+										<ComputedValue
 											value={Math.round(
 												(getValues("lifecycleEquipment") ?? 0) / 12 || 0,
 											)}
-											prefix={`${currencyPrefix}`}
-											placeholder={`${currencyPrefix} 0`}
+											prefix={currencyPrefix}
+											locale={intlConfig.locale}
 										/>
 									</div>
 									<FormDescription className="text-inherit">
@@ -284,14 +283,12 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													/>
 												</FormControl>
 											</div>
-											<NumberInput
-												readOnly
-												intlConfig={intlConfig}
+											<ComputedValue
 												value={Math.round(
 													(getValues("officeInsurance") ?? 0) / 12 || 0,
 												)}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
+												prefix={currencyPrefix}
+												locale={intlConfig.locale}
 												disabled={disabledField}
 											/>
 										</div>
