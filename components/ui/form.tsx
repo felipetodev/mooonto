@@ -134,7 +134,7 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 			data-slot="form-description"
 			id={formDescriptionId}
 			className={cn(
-				"text-inherit text-sm transition aria-disabled:opacity-50",
+				"text-sm text-inherit transition aria-disabled:opacity-50",
 				className,
 			)}
 			{...props}
@@ -154,7 +154,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 		<p
 			data-slot="form-message"
 			id={formMessageId}
-			className={cn("text-destructive text-sm", className)}
+			className={cn("text-sm text-destructive", className)}
 			{...props}
 		>
 			{body}

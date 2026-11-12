@@ -7,11 +7,12 @@
 	--breakpoint-4xl: 1920px;
 	--breakpoint-xs: 400px;
 
-	--font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif,
+	--font-sans:
+		var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-dela-gothic:
+		var(--font-dela-gothic), sans-serif, ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	--font-dela-gothic: var(--font-dela-gothic), sans-serif, ui-sans-serif,
-		system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-		"Segoe UI Symbol", "Noto Color Emoji";
 
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));

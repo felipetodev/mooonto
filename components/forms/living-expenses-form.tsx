@@ -132,7 +132,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 											defaultValue={field.value ? "1" : "0"}
 											className="flex items-center"
 										>
-											<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormItem className="flex items-center space-y-0 space-x-3">
 												<FormControl>
 													<RadioGroupItem value="1" />
 												</FormControl>
@@ -140,7 +140,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													{t("childrens.options.true")}
 												</FormLabel>
 											</FormItem>
-											<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormItem className="flex items-center space-y-0 space-x-3">
 												<FormControl>
 													<RadioGroupItem value="0" />
 												</FormControl>
@@ -161,7 +161,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					name="quantityChildrens"
 					render={({ field }) => (
 						<FormItem>
-							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
 								<FormLabel>
 									<span className="md:ml-8">
 										{t("quantityChildrens.label")}
@@ -192,7 +192,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 					name="childrensExpenses"
 					render={({ field }) => (
 						<FormItem>
-							<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
 								<FormLabel>
 									<span className="flex text-balance md:ml-8">
 										{t("childrensExpenses.label")}
@@ -224,14 +224,14 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						name={f.name}
 						render={({ field }) => (
 							<FormItem>
-								<div className="ml-8 flex flex-col gap-y-2 md:flex-row md:items-center md:gap-y-auto">
+								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
 									<FormLabel>{t(f.label)}</FormLabel>
 									<div className="flex w-full flex-col">
 										<div className="grid grid-cols-2 gap-x-4">
 											<div className="flex flex-col-reverse md:flex-row md:items-center">
 												<FormLabel
 													aria-disabled={disabledFields}
-													className="!min-w-fit !w-auto my-1.5 mr-1 md:my-auto"
+													className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
 												>
 													{t(f.subLabel)}
 												</FormLabel>

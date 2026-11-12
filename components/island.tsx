@@ -68,7 +68,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 											>
 												<span>
 													Total gastos mínimos{" "}
-													<span className="font-bold text-neutral underline">
+													<span className="text-neutral font-bold underline">
 														trabajo
 													</span>
 													: {intlConfig.symbol}
@@ -76,7 +76,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 												</span>
 												<span>
 													Total gastos mínimos{" "}
-													<span className="font-bold text-neutral underline">
+													<span className="text-neutral font-bold underline">
 														vivienda
 													</span>
 													: {intlConfig.symbol}
@@ -88,7 +88,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 												</span>
 												{state === "full" ? (
 													<>
-														<h2 className="font-bold text-md underline underline-offset-6">
+														<h2 className="text-md font-bold underline underline-offset-6">
 															Ingresos mínimos para trabajar y vivir:
 														</h2>
 														<motion.div
@@ -123,7 +123,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 															</div>
 														</motion.div>
 
-														<h2 className="font-bold text-md underline underline-offset-6">
+														<h2 className="text-md font-bold underline underline-offset-6">
 															Ingresos mínimos para trabajar y vivir + valor que
 															aportas:
 														</h2>
@@ -175,7 +175,7 @@ export function Island({ formRef, formResults, intlConfig }: IslandProps) {
 													}}
 													className="grid place-content-center text-center"
 												>
-													<span className="font-bold text-lg">
+													<span className="text-lg font-bold">
 														{formResults.completionProgress}%
 													</span>
 													<span>Completado</span>

@@ -11,7 +11,7 @@ import { DiscordIcon } from "./ui/icons";
 function HelpPopover({ children }: { children: React.ReactNode }) {
 	return (
 		<Popover>
-			<PopoverTrigger className="flex h-7 items-center font-semibold text-[#F7F4F0] text-md hover:underline">
+			<PopoverTrigger className="text-md flex h-7 items-center font-semibold text-[#F7F4F0] hover:underline">
 				<HelpCircle className="mr-1.5 h-4 w-4" />
 				{children}
 			</PopoverTrigger>
@@ -34,7 +34,7 @@ function HelpPopover({ children }: { children: React.ReactNode }) {
 						<DiscordIcon className="mr-1 h-5 w-5" /> Ingresa a nuestro servidor
 					</a>
 					<img
-						className="-right-10 absolute top-0 z-10 block h-full object-contain"
+						className="absolute top-0 -right-10 z-10 block h-full object-contain"
 						src="https://colab-ai.vercel.app/discord-pj.svg"
 						alt=""
 					/>

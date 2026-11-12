@@ -7,7 +7,7 @@ export function Footer() {
 		<footer className="relative w-full overflow-hidden px-4.5 pt-24 pb-8 sm:px-10 md:px-16">
 			<div className="mx-auto h-full max-w-(--breakpoint-4xl)">
 				<div className="relative flex flex-col justify-between gap-y-8 md:flex-row md:gap-y-0">
-					<div className="-right-18 sm:-right-10 md:-top-20 -z-10 absolute top-50 w-[430px] sm:top-10 sm:w-[500px] md:left-[27%]">
+					<div className="absolute top-50 -right-18 -z-10 w-[430px] sm:top-10 sm:-right-10 sm:w-[500px] md:-top-20 md:left-[27%]">
 						<img src="/footer.webp" alt="footer" className="size-full" />
 					</div>
 					<Link href="/" className="h-max">
@@ -28,21 +28,21 @@ export function Footer() {
 
 						<ul className="space-y-5 text-sm md:space-y-8 [&_a]:transition-colors [&_a]:hover:text-[#FF3B16]">
 							<li>
-								<a href="#" className="flex items-center">
+								<a href="#todo" className="flex items-center">
 									<InstagramIcon className="mr-2 h-6 w-6" />
 									Síguenos en Instagram
 								</a>
 							</li>
 							<li>
-								<a href="#">Discord</a>
+								<a href="#todo">Discord</a>
 							</li>
 							<li>
-								<a href="#">Contáctanos</a>
+								<a href="#todo">Contáctanos</a>
 							</li>
 						</ul>
 					</div>
 				</div>
-				<div className="mt-60 flex justify-between text-shadow-sm text-xs opacity-50 sm:mt-24">
+				<div className="mt-60 flex justify-between text-xs opacity-50 text-shadow-sm sm:mt-24">
 					<span>
 						Copyright © {new Date().getFullYear()} Mooonto. All Rights Reserved.
 					</span>

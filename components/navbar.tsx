@@ -17,7 +17,7 @@ function NavBar() {
 					<li className="hidden sm:block">
 						<a
 							href="#calcula"
-							className="font-semibold text-[#F7F4F0] text-md hover:underline"
+							className="text-md font-semibold text-[#F7F4F0] hover:underline"
 						>
 							Calcula tu precio
 						</a>

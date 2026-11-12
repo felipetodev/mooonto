@@ -11,7 +11,7 @@ function AdComponent({
 		<>
 			<aside
 				className={cn(
-					"sticky top-10 mt-0 mb-20 hidden h-[600px] w-40 place-items-center rounded bg-neutral-200 font-bold text-3xl md:mt-10 md:grid",
+					"sticky top-10 mt-0 mb-20 hidden h-150 w-40 place-items-center rounded bg-neutral-200 text-3xl font-bold md:mt-10 md:grid",
 					className,
 				)}
 			>
@@ -19,7 +19,7 @@ function AdComponent({
 			</aside>
 			<aside
 				className={cn(
-					"my-10 grid h-32 w-full place-items-center rounded bg-neutral-200 font-bold text-3xl sm:mb-10 md:mb-20 md:hidden",
+					"my-10 grid h-32 w-full place-items-center rounded bg-neutral-200 text-3xl font-bold sm:mb-10 md:mb-20 md:hidden",
 					className,
 				)}
 			>
