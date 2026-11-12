@@ -7,6 +7,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { ComputedValue } from "@/components/ui/computed-value";
+import { Reveal } from "@/components/ui/reveal";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
@@ -228,134 +229,136 @@ export function WorkExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						</FormItem>
 					)}
 				/>
-				<div className="space-y-8">
-					<FormField
-						control={control}
-						name="officeRent"
-						render={({ field }) => (
-							<FormItem>
-								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-									<FormLabel>{t("officeRent.label")}</FormLabel>
-									<div className="flex w-full flex-col">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
-												disabled={disabledField}
-											/>
-										</FormControl>
-										<FormDescription aria-disabled={disabledField}>
-											{t("officeRent.description")}
-										</FormDescription>
-										<FormMessage />
-									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={control}
-						name="officeInsurance"
-						render={({ field }) => (
-							<FormItem>
-								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-									<FormLabel>{t("officeInsurance.label")}</FormLabel>
-									<div className="flex w-full flex-col">
-										<div className="grid grid-cols-2 gap-x-4">
-											<div className="flex flex-col-reverse md:flex-row md:items-center">
-												<FormLabel
-													aria-disabled={disabledField}
-													className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
-												>
-													{t("officeInsurance.subLabel")}
-												</FormLabel>
-												<FormControl>
-													<NumberInput
-														ref={field.ref}
-														intlConfig={intlConfig}
-														onChange={field.onChange}
-														prefix={`${currencyPrefix}`}
-														placeholder={`${currencyPrefix} 0`}
-														disabled={disabledField}
-													/>
-												</FormControl>
-											</div>
-											<ComputedValue
-												value={Math.round(
-													(getValues("officeInsurance") ?? 0) / 12 || 0,
-												)}
-												prefix={currencyPrefix}
-												locale={intlConfig.locale}
-												disabled={disabledField}
-											/>
+				<Reveal show={Boolean(cowork)} className="pb-8">
+					<div className="space-y-8">
+						<FormField
+							control={control}
+							name="officeRent"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>{t("officeRent.label")}</FormLabel>
+										<div className="flex w-full flex-col">
+											<FormControl>
+												<NumberInput
+													ref={field.ref}
+													intlConfig={intlConfig}
+													onChange={field.onChange}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
+													disabled={disabledField}
+												/>
+											</FormControl>
+											<FormDescription aria-disabled={disabledField}>
+												{t("officeRent.description")}
+											</FormDescription>
+											<FormMessage />
 										</div>
-										<FormDescription aria-disabled={disabledField}>
-											{t("officeInsurance.description")}
-										</FormDescription>
-										<FormMessage />
 									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={control}
-						name="officeBills"
-						render={({ field }) => (
-							<FormItem>
-								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-									<FormLabel>{t("officeBills.label")}</FormLabel>
-									<div className="flex w-full flex-col">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
-												disabled={disabledField}
-											/>
-										</FormControl>
-										<FormDescription aria-disabled={disabledField}>
-											{t("officeBills.description")}
-										</FormDescription>
-										<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={control}
+							name="officeInsurance"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>{t("officeInsurance.label")}</FormLabel>
+										<div className="flex w-full flex-col">
+											<div className="grid grid-cols-2 gap-x-4">
+												<div className="flex flex-col-reverse md:flex-row md:items-center">
+													<FormLabel
+														aria-disabled={disabledField}
+														className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
+													>
+														{t("officeInsurance.subLabel")}
+													</FormLabel>
+													<FormControl>
+														<NumberInput
+															ref={field.ref}
+															intlConfig={intlConfig}
+															onChange={field.onChange}
+															prefix={`${currencyPrefix}`}
+															placeholder={`${currencyPrefix} 0`}
+															disabled={disabledField}
+														/>
+													</FormControl>
+												</div>
+												<ComputedValue
+													value={Math.round(
+														(getValues("officeInsurance") ?? 0) / 12 || 0,
+													)}
+													prefix={currencyPrefix}
+													locale={intlConfig.locale}
+													disabled={disabledField}
+												/>
+											</div>
+											<FormDescription aria-disabled={disabledField}>
+												{t("officeInsurance.description")}
+											</FormDescription>
+											<FormMessage />
+										</div>
 									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={control}
-						name="officeInternet"
-						render={({ field }) => (
-							<FormItem>
-								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-									<FormLabel>{t("officeInternet.label")}</FormLabel>
-									<div className="flex w-full flex-col">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix={`${currencyPrefix}`}
-												placeholder={`${currencyPrefix} 0`}
-												disabled={disabledField}
-											/>
-										</FormControl>
-										<FormDescription aria-disabled={disabledField}>
-											{t("officeInternet.description")}
-										</FormDescription>
-										<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={control}
+							name="officeBills"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>{t("officeBills.label")}</FormLabel>
+										<div className="flex w-full flex-col">
+											<FormControl>
+												<NumberInput
+													ref={field.ref}
+													intlConfig={intlConfig}
+													onChange={field.onChange}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
+													disabled={disabledField}
+												/>
+											</FormControl>
+											<FormDescription aria-disabled={disabledField}>
+												{t("officeBills.description")}
+											</FormDescription>
+											<FormMessage />
+										</div>
 									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-				</div>
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={control}
+							name="officeInternet"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>{t("officeInternet.label")}</FormLabel>
+										<div className="flex w-full flex-col">
+											<FormControl>
+												<NumberInput
+													ref={field.ref}
+													intlConfig={intlConfig}
+													onChange={field.onChange}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
+													disabled={disabledField}
+												/>
+											</FormControl>
+											<FormDescription aria-disabled={disabledField}>
+												{t("officeInternet.description")}
+											</FormDescription>
+											<FormMessage />
+										</div>
+									</div>
+								</FormItem>
+							)}
+						/>
+					</div>
+				</Reveal>
 				<FormField
 					control={control}
 					name="gasoline"

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ComputedValue } from "@/components/ui/computed-value";
+import { Reveal } from "@/components/ui/reveal";
 import { NumberInput } from "@/components/ui/number-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heading } from "@/forms/heading";
@@ -157,114 +158,118 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={control}
-					name="quantityChildrens"
-					render={({ field }) => (
-						<FormItem>
-							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-								<FormLabel>
-									<span className="md:ml-8">
-										{t("quantityChildrens.label")}
-									</span>
-								</FormLabel>
-								<div className="flex w-full flex-col">
-									<FormControl>
-										<Input
-											className="text-end sm:max-w-60 [&::-webkit-inner-spin-button]:ml-2"
-											type="number"
-											placeholder="0"
-											{...field}
-											value={field.value || ""}
-											onChange={(e) => {
-												field.onChange(Number(e.target.value ?? 0));
-											}}
-											disabled={disabledFields}
-										/>
-									</FormControl>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="childrensExpenses"
-					render={({ field }) => (
-						<FormItem>
-							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-								<FormLabel>
-									<span className="flex text-balance md:ml-8">
-										{t("childrensExpenses.label")}
-									</span>
-								</FormLabel>
-								<div className="flex w-full flex-col">
-									<FormControl>
-										<NumberInput
-											ref={field.ref}
-											intlConfig={intlConfig}
-											onChange={field.onChange}
-											prefix={`${currencyPrefix}`}
-											placeholder={`${currencyPrefix} 0`}
-											disabled={disabledFields}
-										/>
-									</FormControl>
-									<FormDescription aria-disabled={disabledFields}>
-										{t("childrensExpenses.description")}
-									</FormDescription>
-									<FormMessage />
-								</div>
-							</div>
-						</FormItem>
-					)}
-				/>
-				{FORM_FIELDS_TWO_TWO.map((f) => (
-					<FormField
-						key={f.name}
-						control={control}
-						name={f.name}
-						render={({ field }) => (
-							<FormItem>
-								<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-									<FormLabel>{t(f.label)}</FormLabel>
-									<div className="flex w-full flex-col">
-										<div className="grid grid-cols-2 gap-x-4">
-											<div className="flex flex-col-reverse md:flex-row md:items-center">
-												<FormLabel
-													aria-disabled={disabledFields}
-													className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
-												>
-													{t(f.subLabel)}
-												</FormLabel>
-												<FormControl>
-													<NumberInput
-														ref={field.ref}
-														disabled={disabledFields}
-														intlConfig={intlConfig}
-														onChange={field.onChange}
-														prefix={`${currencyPrefix}`}
-														placeholder={`${currencyPrefix} 0`}
-													/>
-												</FormControl>
-											</div>
-											<ComputedValue
-												value={Math.round(getValues(f.name) / 12 || 0)}
-												prefix={currencyPrefix}
-												locale={intlConfig.locale}
-												disabled={disabledFields}
-											/>
+				<Reveal show={Boolean(hasChildrens)} collapsedMarginTop="-2rem">
+					<div className="space-y-8">
+						<FormField
+							control={control}
+							name="quantityChildrens"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>
+											<span className="md:ml-8">
+												{t("quantityChildrens.label")}
+											</span>
+										</FormLabel>
+										<div className="flex w-full flex-col">
+											<FormControl>
+												<Input
+													className="text-end sm:max-w-60 [&::-webkit-inner-spin-button]:ml-2"
+													type="number"
+													placeholder="0"
+													{...field}
+													value={field.value || ""}
+													onChange={(e) => {
+														field.onChange(Number(e.target.value ?? 0));
+													}}
+													disabled={disabledFields}
+												/>
+											</FormControl>
+											<FormMessage />
 										</div>
-										<FormDescription aria-disabled={disabledFields}>
-											{t(f.description)}
-										</FormDescription>
-										<FormMessage />
 									</div>
-								</div>
-							</FormItem>
-						)}
-					/>
-				))}
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={control}
+							name="childrensExpenses"
+							render={({ field }) => (
+								<FormItem>
+									<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+										<FormLabel>
+											<span className="flex text-balance md:ml-8">
+												{t("childrensExpenses.label")}
+											</span>
+										</FormLabel>
+										<div className="flex w-full flex-col">
+											<FormControl>
+												<NumberInput
+													ref={field.ref}
+													intlConfig={intlConfig}
+													onChange={field.onChange}
+													prefix={`${currencyPrefix}`}
+													placeholder={`${currencyPrefix} 0`}
+													disabled={disabledFields}
+												/>
+											</FormControl>
+											<FormDescription aria-disabled={disabledFields}>
+												{t("childrensExpenses.description")}
+											</FormDescription>
+											<FormMessage />
+										</div>
+									</div>
+								</FormItem>
+							)}
+						/>
+						{FORM_FIELDS_TWO_TWO.map((f) => (
+							<FormField
+								key={f.name}
+								control={control}
+								name={f.name}
+								render={({ field }) => (
+									<FormItem>
+										<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
+											<FormLabel>{t(f.label)}</FormLabel>
+											<div className="flex w-full flex-col">
+												<div className="grid grid-cols-2 gap-x-4">
+													<div className="flex flex-col-reverse md:flex-row md:items-center">
+														<FormLabel
+															aria-disabled={disabledFields}
+															className="my-1.5 mr-1 !w-auto !min-w-fit md:my-auto"
+														>
+															{t(f.subLabel)}
+														</FormLabel>
+														<FormControl>
+															<NumberInput
+																ref={field.ref}
+																disabled={disabledFields}
+																intlConfig={intlConfig}
+																onChange={field.onChange}
+																prefix={`${currencyPrefix}`}
+																placeholder={`${currencyPrefix} 0`}
+															/>
+														</FormControl>
+													</div>
+													<ComputedValue
+														value={Math.round(getValues(f.name) / 12 || 0)}
+														prefix={currencyPrefix}
+														locale={intlConfig.locale}
+														disabled={disabledFields}
+													/>
+												</div>
+												<FormDescription aria-disabled={disabledFields}>
+													{t(f.description)}
+												</FormDescription>
+												<FormMessage />
+											</div>
+										</div>
+									</FormItem>
+								)}
+							/>
+						))}
+					</div>
+				</Reveal>
 			</div>
 		</div>
 	);
