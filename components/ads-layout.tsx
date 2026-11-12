@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 
+const ADS_ENABLED = false;
+
 function AdComponent({
 	className,
 	children,
@@ -33,9 +35,9 @@ export function AdsLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<section id="calcula" className="bg-[#f7f4f0] px-4.5 sm:px-10 md:px-16">
 			<div className="mx-auto flex w-full max-w-(--breakpoint-4xl) flex-col md:flex-row">
-				<AdComponent className="ml-auto">AD</AdComponent>
+				{ADS_ENABLED ? <AdComponent className="ml-auto">AD</AdComponent> : null}
 				<main className="w-full pt-10 pb-20 md:px-14">{children}</main>
-				<AdComponent className="mr-auto">AD</AdComponent>
+				{ADS_ENABLED ? <AdComponent className="mr-auto">AD</AdComponent> : null}
 			</div>
 		</section>
 	);
