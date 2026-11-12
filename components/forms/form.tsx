@@ -103,7 +103,7 @@ export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {
 	}
 
 	return (
-		<div className="relative flex flex-col text-[#1A1A18]">
+		<div className="relative flex flex-col text-ink">
 			<Form {...form}>
 				<form
 					id="mooonto"

@@ -155,7 +155,7 @@ export function Island({
 									</motion.section>
 								))}
 
-								<footer className="mt-4 border-t-2 border-double border-[#1A1A18] py-3">
+								<footer className="mt-4 border-t-2 border-double border-ink py-3">
 									<p className="flex justify-between px-1.5 text-xs text-muted-foreground">
 										<span>Hora contratado / freelance</span>
 										<span>
@@ -231,7 +231,7 @@ function ReceiptRow({
 			</span>
 			<span
 				aria-hidden="true"
-				className="min-w-4 flex-1 -translate-y-0.75 border-b border-dotted border-[#1A1A18]/30"
+				className="min-w-4 flex-1 -translate-y-0.75 border-b border-dotted border-ink/30"
 			/>
 			{row.filled ? (
 				<span className="shrink-0 text-right">

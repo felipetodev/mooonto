@@ -14,6 +14,11 @@
 		var(--font-dela-gothic), sans-serif, ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
+	--color-ink: #1a1a18;
+	--color-paper: #f7f4f0;
+	--color-brand: #ff3b16;
+	--color-discord: #404eed;
+
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));
 	--color-ring: hsl(var(--ring));

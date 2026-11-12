@@ -11,7 +11,7 @@ import { DiscordIcon } from "./ui/icons";
 function HelpPopover({ children }: { children: React.ReactNode }) {
 	return (
 		<Popover>
-			<PopoverTrigger className="text-md flex h-7 items-center font-semibold text-[#F7F4F0] hover:underline">
+			<PopoverTrigger className="text-md flex h-7 items-center font-semibold text-paper hover:underline">
 				<HelpCircle className="mr-1.5 h-4 w-4" />
 				{children}
 			</PopoverTrigger>
@@ -21,7 +21,7 @@ function HelpPopover({ children }: { children: React.ReactNode }) {
 					Únete a nuestro servidor de Discord y te ayudaremos a resolver tus
 					dudas.
 				</p>
-				<div className="relative h-20 overflow-hidden rounded bg-[#404eed]">
+				<div className="relative h-20 overflow-hidden rounded bg-discord">
 					<a
 						className={cn(
 							buttonVariants({ variant: "outline", size: "sm" }),

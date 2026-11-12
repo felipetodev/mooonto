@@ -110,7 +110,7 @@ export function IslandV2({
 						initial={{ opacity: 0, scale: 0.95, y: 8 }}
 						animate={{ opacity: 1, scale: 1, y: 0 }}
 						transition={{ duration: 0.25, ease: EASE_OUT }}
-						className="pointer-events-auto absolute bottom-4 w-[min(100%,420px)] origin-bottom rounded-3xl bg-[#1A1A18] p-2 font-medium text-[#F7F4F0] shadow-lg"
+						className="pointer-events-auto absolute bottom-4 w-[min(100%,420px)] origin-bottom rounded-3xl bg-ink p-2 font-medium text-paper shadow-lg"
 					>
 						<motion.div
 							initial={false}
@@ -172,7 +172,7 @@ export function IslandV2({
 											<button
 												type="button"
 												onClick={onSubmit}
-												className="h-9 shrink-0 rounded-full bg-secondary px-4 text-sm font-bold text-[#1A1A18] transition-transform duration-150 ease-out active:scale-[0.97]"
+												className="h-9 shrink-0 rounded-full bg-secondary px-4 text-sm font-bold text-ink transition-transform duration-150 ease-out active:scale-[0.97]"
 											>
 												Obtener reporte
 											</button>
@@ -213,7 +213,7 @@ export function IslandV2({
 function StatusDot({ status, count }: { status: Status; count: number }) {
 	if (status === "confirmed")
 		return (
-			<span className="grid size-5 shrink-0 place-items-center rounded-full bg-secondary text-[#1A1A18]">
+			<span className="grid size-5 shrink-0 place-items-center rounded-full bg-secondary text-ink">
 				<Check className="size-3" strokeWidth={3.5} />
 				<span className="sr-only">Confirmado</span>
 			</span>
@@ -297,7 +297,7 @@ function SectionCard({
 					type="button"
 					disabled={status !== "pending"}
 					onClick={onConfirm}
-					className="h-9 shrink-0 rounded-full bg-secondary px-4 text-sm font-bold text-[#1A1A18] transition-[transform,opacity] duration-150 ease-out active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
+					className="h-9 shrink-0 rounded-full bg-secondary px-4 text-sm font-bold text-ink transition-[transform,opacity] duration-150 ease-out active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
 				>
 					{status === "confirmed" ? "Confirmado" : "Está correcto"}
 				</button>

@@ -21,14 +21,14 @@ export default function RootLayout({
 		<html lang="es" suppressHydrationWarning>
 			<body
 				className={cn(
-					"min-h-screen bg-[#1A1A18] font-sans antialiased",
+					"min-h-screen bg-ink font-sans antialiased",
 					fontSans.variable,
 					delaGothicOne.variable,
 				)}
 			>
 				<NextIntlClientProvider>
 					<NavBar />
-					<main className="flex min-h-[calc(100vh-64px)] flex-1 flex-col text-[#F7F4F0]">
+					<main className="flex min-h-[calc(100vh-64px)] flex-1 flex-col text-paper">
 						{children}
 					</main>
 					<Toaster position="top-center" richColors />

@@ -8,7 +8,7 @@ export function MainHero() {
 				<div className="z-10 mt-10 flex h-full max-w-3xl flex-col justify-center gap-y-10 md:mt-20 lg:mt-auto">
 					<h1 className="flex flex-col font-dela-gothic text-4xl leading-tight font-bold text-balance sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-[65px]">
 						Dale valor a tu trabajo creativo con{" "}
-						<span className="text-[#FF3B16]">mooonto</span>
+						<span className="text-brand">mooonto</span>
 					</h1>
 
 					<div className="flex flex-col gap-y-4">

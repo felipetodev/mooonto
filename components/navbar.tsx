@@ -5,10 +5,10 @@ import Link from "next/link";
 
 function NavBar() {
 	return (
-		<nav className="bg-[#FF3B16] px-4.5 sm:px-10 md:px-16">
+		<nav className="bg-brand px-4.5 sm:px-10 md:px-16">
 			<div className="mx-auto flex h-16 max-w-(--breakpoint-4xl) items-center justify-between">
 				<Link href="/">
-					<Logo className="text-[#F7F4F0]" />
+					<Logo className="text-paper" />
 				</Link>
 				<ul className="flex items-center gap-x-4">
 					<li className="hidden sm:block">
@@ -17,7 +17,7 @@ function NavBar() {
 					<li className="hidden sm:block">
 						<a
 							href="#calcula"
-							className="text-md font-semibold text-[#F7F4F0] hover:underline"
+							className="text-md font-semibold text-paper hover:underline"
 						>
 							Calcula tu precio
 						</a>
