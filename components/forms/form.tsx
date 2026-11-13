@@ -47,12 +47,13 @@ const DEFAULT_FORM_STEP_TWO = {
 	// childrens conditional fields
 	quantityChildrens: undefined,
 	childrensExpenses: undefined,
-	livingExpensesTwoTwo: undefined,
-	carInsurance: undefined,
-	taxes: undefined,
-	unExpectedExpenses: undefined,
-	valueContribution: undefined,
-	incomeTaxRetention: undefined,
+	// additional costs
+	livingExpensesTwoTwo: 0,
+	carInsurance: 0,
+	taxes: 0,
+	unExpectedExpenses: 0,
+	valueContribution: 0,
+	incomeTaxRetention: 0,
 };
 
 export const OFFICE_CONDITIONAL_FIELDS = [
@@ -65,12 +66,6 @@ export const OFFICE_CONDITIONAL_FIELDS = [
 export const CHILDREN_CONDITIONAL_FIELDS = [
 	"quantityChildrens",
 	"childrensExpenses",
-	"livingExpensesTwoTwo",
-	"carInsurance",
-	"taxes",
-	"unExpectedExpenses",
-	"valueContribution",
-	"incomeTaxRetention",
 ] as const;
 
 export function MainForm({ intlConfig }: { intlConfig: IntlConfig }) {

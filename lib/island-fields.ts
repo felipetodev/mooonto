@@ -77,6 +77,19 @@ export const FIELDS: FieldDef[] = [
 	{ name: "retirementFund", label: "Fondo jubilación", section: "living" },
 	{ name: "otherExpenses", label: "Otro tipo de gastos", section: "living" },
 	{
+		name: "livingExpensesTwoTwo",
+		label: "Seguro de vivienda",
+		section: "living",
+		yearly: true,
+	},
+	{
+		name: "carInsurance",
+		label: "Seguro automotriz",
+		section: "living",
+		yearly: true,
+	},
+	{ name: "taxes", label: "Impuestos", section: "living", yearly: true },
+	{
 		name: "quantityChildrens",
 		label: "Personas a tu cargo",
 		section: "living",

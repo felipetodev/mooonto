@@ -50,17 +50,20 @@ const stepTwoBaseFields = {
 	retirementFund: createPositiveField(),
 	otherExpenses: createPositiveField(),
 	childrens: z.boolean(),
+	livingExpensesTwoTwo: createPositiveField(),
+	carInsurance: createPositiveField(),
+	taxes: createPositiveField(),
 };
 
 const stepTwoChildrenFields = {
 	quantityChildrens: createConditionalField(),
 	childrensExpenses: createConditionalField(),
-	livingExpensesTwoTwo: createConditionalField(),
-	carInsurance: createConditionalField(),
-	taxes: createConditionalField(),
-	incomeTaxRetention: createConditionalField(),
-	valueContribution: createConditionalField(),
-	unExpectedExpenses: createConditionalField(),
+};
+
+const additionalCostsFields = {
+	unExpectedExpenses: createPositiveField(),
+	valueContribution: createPositiveField(),
+	incomeTaxRetention: createPositiveField(),
 };
 
 export const formSchema = z
@@ -69,6 +72,7 @@ export const formSchema = z
 		...stepOneOfficeFields,
 		...stepTwoBaseFields,
 		...stepTwoChildrenFields,
+		...additionalCostsFields,
 	})
 	.superRefine((data, ctx) => {
 		// Validate office fields only when cowork is true
@@ -91,12 +95,6 @@ export const formSchema = z
 			const childrenFieldsToValidate = [
 				{ value: data.quantityChildrens, path: "quantityChildrens" },
 				{ value: data.childrensExpenses, path: "childrensExpenses" },
-				{ value: data.livingExpensesTwoTwo, path: "livingExpensesTwoTwo" },
-				{ value: data.carInsurance, path: "carInsurance" },
-				{ value: data.taxes, path: "taxes" },
-				{ value: data.incomeTaxRetention, path: "incomeTaxRetention" },
-				{ value: data.valueContribution, path: "valueContribution" },
-				{ value: data.unExpectedExpenses, path: "unExpectedExpenses" },
 			];
 
 			childrenFieldsToValidate.forEach((field) => {

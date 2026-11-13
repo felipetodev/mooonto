@@ -6,7 +6,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Reveal } from "@/components/ui/reveal";
 import { NumberInput } from "@/components/ui/number-input";
 import type { IntlConfig } from "@/lib/types";
 import { useTranslations } from "next-intl";
@@ -26,26 +25,19 @@ export function AditionalCostsForm({
 	const formValues = useWatch({
 		control,
 		name: [
-			"childrens",
 			"unExpectedExpenses",
 			"valueContribution",
 			"incomeTaxRetention",
 		] as const,
 		defaultValue: {
-			childrens: false,
 			unExpectedExpenses: 0,
 			valueContribution: 0,
 			incomeTaxRetention: 0,
 		},
 	});
 
-	const [
-		hasChildrens,
-		unExpectedExpenses,
-		valueContribution,
-		incomeTaxRetention,
-	] = formValues;
-	const disabledFields = useMemo(() => !hasChildrens, [hasChildrens]);
+	const [unExpectedExpenses, valueContribution, incomeTaxRetention] =
+		formValues;
 
 	const calculations = useMemo(() => {
 		const unExpectedExpensesTotal = Math.round(
@@ -75,129 +67,121 @@ export function AditionalCostsForm({
 	);
 
 	return (
-		<Reveal show={Boolean(hasChildrens)}>
-			<div className="mt-10 space-y-8">
-				<FormField
-					control={control}
-					name="unExpectedExpenses"
-					render={({ field }) => (
-						<FormItem>
-							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-								<FormLabel>{t("unExpectedExpenses.label")}</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
+		<div className="mt-10 space-y-8">
+			<FormField
+				control={control}
+				name="unExpectedExpenses"
+				render={({ field }) => (
+					<FormItem>
+						<div className="md:gap-y-auto flex flex-col gap-y-2 md:flex-row md:items-center">
+							<FormLabel>{t("unExpectedExpenses.label")}</FormLabel>
+							<div className="flex w-full flex-col">
+								<div className="grid grid-cols-2 gap-x-4">
+									<FormControl>
 										<NumberInput
-											readOnly
+											ref={field.ref}
+											className="max-w-60"
 											intlConfig={intlConfig}
-											value={calculations.unExpectedExpensesTotal}
-											prefix={`${currencyPrefix}`}
-											placeholder={`${currencyPrefix} 0`}
-											disabled={disabledFields}
+											onChange={field.onChange}
+											prefix="%"
+											placeholder="%"
+											allowDecimals={false}
+											maxLength={2}
 										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										{t("unExpectedExpenses.description")}
-									</FormDescription>
-									<FormMessage />
+									</FormControl>
+									<NumberInput
+										readOnly
+										intlConfig={intlConfig}
+										value={calculations.unExpectedExpensesTotal}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
+									/>
 								</div>
+								<FormDescription>
+									{t("unExpectedExpenses.description")}
+								</FormDescription>
+								<FormMessage />
 							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="valueContribution"
-					render={({ field }) => (
-						<FormItem>
-							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-								<FormLabel>{t("valueContribution.label")}</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
+						</div>
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={control}
+				name="valueContribution"
+				render={({ field }) => (
+					<FormItem>
+						<div className="md:gap-y-auto flex flex-col gap-y-2 md:flex-row md:items-center">
+							<FormLabel>{t("valueContribution.label")}</FormLabel>
+							<div className="flex w-full flex-col">
+								<div className="grid grid-cols-2 gap-x-4">
+									<FormControl>
 										<NumberInput
-											readOnly
+											ref={field.ref}
+											className="max-w-60"
 											intlConfig={intlConfig}
-											value={calculations.valueContributionTotal}
-											prefix={`${currencyPrefix}`}
-											placeholder={`${currencyPrefix} 0`}
-											disabled={disabledFields}
+											onChange={field.onChange}
+											prefix="%"
+											placeholder="%"
+											allowDecimals={false}
+											maxLength={2}
 										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										{t("valueContribution.description")}
-									</FormDescription>
-									<FormMessage />
+									</FormControl>
+									<NumberInput
+										readOnly
+										intlConfig={intlConfig}
+										value={calculations.valueContributionTotal}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
+									/>
 								</div>
+								<FormDescription>
+									{t("valueContribution.description")}
+								</FormDescription>
+								<FormMessage />
 							</div>
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={control}
-					name="incomeTaxRetention"
-					render={({ field }) => (
-						<FormItem>
-							<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-								<FormLabel>{t("incomeTaxRetention.label")}</FormLabel>
-								<div className="flex w-full flex-col">
-									<div className="grid grid-cols-2 gap-x-4">
-										<FormControl>
-											<NumberInput
-												ref={field.ref}
-												className="max-w-60"
-												intlConfig={intlConfig}
-												onChange={field.onChange}
-												prefix="%"
-												placeholder="%"
-												disabled={disabledFields}
-												allowDecimals={false}
-												maxLength={2}
-											/>
-										</FormControl>
+						</div>
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={control}
+				name="incomeTaxRetention"
+				render={({ field }) => (
+					<FormItem>
+						<div className="md:gap-y-auto flex flex-col gap-y-2 md:flex-row md:items-center">
+							<FormLabel>{t("incomeTaxRetention.label")}</FormLabel>
+							<div className="flex w-full flex-col">
+								<div className="grid grid-cols-2 gap-x-4">
+									<FormControl>
 										<NumberInput
-											readOnly
+											ref={field.ref}
+											className="max-w-60"
 											intlConfig={intlConfig}
-											value={calculations.incomeTaxRetentionTotal}
-											prefix={`${currencyPrefix}`}
-											placeholder={`${currencyPrefix} 0`}
-											disabled={disabledFields}
+											onChange={field.onChange}
+											prefix="%"
+											placeholder="%"
+											allowDecimals={false}
+											maxLength={2}
 										/>
-									</div>
-									<FormDescription aria-disabled={disabledFields}>
-										{t("incomeTaxRetention.description")}
-									</FormDescription>
-									<FormMessage />
+									</FormControl>
+									<NumberInput
+										readOnly
+										intlConfig={intlConfig}
+										value={calculations.incomeTaxRetentionTotal}
+										prefix={`${currencyPrefix}`}
+										placeholder={`${currencyPrefix} 0`}
+									/>
 								</div>
+								<FormDescription>
+									{t("incomeTaxRetention.description")}
+								</FormDescription>
+								<FormMessage />
 							</div>
-						</FormItem>
-					)}
-				/>
-			</div>
-		</Reveal>
+						</div>
+					</FormItem>
+				)}
+			/>
+		</div>
 	);
 }

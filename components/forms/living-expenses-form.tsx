@@ -21,12 +21,6 @@ import { useFormContext, useWatch } from "react-hook-form";
 interface ChildFieldValues {
 	quantityChildrens?: number;
 	childrensExpenses?: number;
-	livingExpensesTwoTwo?: number;
-	carInsurance?: number;
-	taxes?: number;
-	incomeTaxRetention?: number;
-	valueContribution?: number;
-	unExpectedExpenses?: number;
 }
 
 export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
@@ -37,7 +31,6 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 		control: control,
 		name: "childrens",
 	});
-	const disabledFields = useMemo(() => !hasChildrens, [hasChildrens]);
 
 	const prevValues = useRef<ChildFieldValues>({});
 
@@ -46,31 +39,13 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 			prevValues.current = {
 				quantityChildrens: getValues("quantityChildrens"),
 				childrensExpenses: getValues("childrensExpenses"),
-				livingExpensesTwoTwo: getValues("livingExpensesTwoTwo"),
-				carInsurance: getValues("carInsurance"),
-				taxes: getValues("taxes"),
-				incomeTaxRetention: getValues("incomeTaxRetention"),
-				valueContribution: getValues("valueContribution"),
-				unExpectedExpenses: getValues("unExpectedExpenses"),
 			};
 
 			setValue("quantityChildrens", undefined);
 			setValue("childrensExpenses", undefined);
-			setValue("livingExpensesTwoTwo", undefined);
-			setValue("carInsurance", undefined);
-			setValue("taxes", undefined);
-			setValue("incomeTaxRetention", undefined);
-			setValue("valueContribution", undefined);
-			setValue("unExpectedExpenses", undefined);
 		} else {
 			setValue("quantityChildrens", prevValues.current.quantityChildrens);
 			setValue("childrensExpenses", prevValues.current.childrensExpenses);
-			setValue("livingExpensesTwoTwo", prevValues.current.livingExpensesTwoTwo);
-			setValue("carInsurance", prevValues.current.carInsurance);
-			setValue("taxes", prevValues.current.taxes);
-			setValue("incomeTaxRetention", prevValues.current.incomeTaxRetention);
-			setValue("valueContribution", prevValues.current.valueContribution);
-			setValue("unExpectedExpenses", prevValues.current.unExpectedExpenses);
 		}
 
 		return value;
@@ -158,7 +133,7 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 						</FormItem>
 					)}
 				/>
-				<Reveal show={Boolean(hasChildrens)} collapsedMarginTop="-2rem">
+				<Reveal show={Boolean(hasChildrens)} className="pb-8">
 					<div className="space-y-8">
 						<FormField
 							control={control}
@@ -182,7 +157,6 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													onChange={(e) => {
 														field.onChange(Number(e.target.value ?? 0));
 													}}
-													disabled={disabledFields}
 												/>
 											</FormControl>
 											<FormMessage />
@@ -210,10 +184,9 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 													onChange={field.onChange}
 													prefix={`${currencyPrefix}`}
 													placeholder={`${currencyPrefix} 0`}
-													disabled={disabledFields}
 												/>
 											</FormControl>
-											<FormDescription aria-disabled={disabledFields}>
+											<FormDescription>
 												{t("childrensExpenses.description")}
 											</FormDescription>
 											<FormMessage />
@@ -222,54 +195,47 @@ export function LivingExpensesForm({ intlConfig }: { intlConfig: IntlConfig }) {
 								</FormItem>
 							)}
 						/>
-						{FORM_FIELDS_TWO_TWO.map((f) => (
-							<FormField
-								key={f.name}
-								control={control}
-								name={f.name}
-								render={({ field }) => (
-									<FormItem>
-										<div className="md:gap-y-auto ml-8 flex flex-col gap-y-2 md:flex-row md:items-center">
-											<FormLabel>{t(f.label)}</FormLabel>
-											<div className="flex w-full flex-col">
-												<div className="grid grid-cols-2 gap-x-4">
-													<div className="flex flex-col-reverse md:flex-row md:items-center">
-														<FormLabel
-															aria-disabled={disabledFields}
-															className="my-1.5 mr-1 w-auto! min-w-fit! md:my-auto"
-														>
-															{t(f.subLabel)}
-														</FormLabel>
-														<FormControl>
-															<NumberInput
-																ref={field.ref}
-																disabled={disabledFields}
-																intlConfig={intlConfig}
-																onChange={field.onChange}
-																prefix={`${currencyPrefix}`}
-																placeholder={`${currencyPrefix} 0`}
-															/>
-														</FormControl>
-													</div>
-													<ComputedValue
-														value={Math.round(getValues(f.name) / 12 || 0)}
-														prefix={currencyPrefix}
-														locale={intlConfig.locale}
-														disabled={disabledFields}
-													/>
-												</div>
-												<FormDescription aria-disabled={disabledFields}>
-													{t(f.description)}
-												</FormDescription>
-												<FormMessage />
-											</div>
-										</div>
-									</FormItem>
-								)}
-							/>
-						))}
 					</div>
 				</Reveal>
+				{FORM_FIELDS_TWO_TWO.map((f) => (
+					<FormField
+						key={f.name}
+						control={control}
+						name={f.name}
+						render={({ field }) => (
+							<FormItem>
+								<div className="md:gap-y-auto flex flex-col gap-y-2 md:flex-row md:items-center">
+									<FormLabel>{t(f.label)}</FormLabel>
+									<div className="flex w-full flex-col">
+										<div className="grid grid-cols-2 gap-x-4">
+											<div className="flex flex-col-reverse md:flex-row md:items-center">
+												<FormLabel className="my-1.5 mr-1 w-auto! min-w-fit! md:my-auto">
+													{t(f.subLabel)}
+												</FormLabel>
+												<FormControl>
+													<NumberInput
+														ref={field.ref}
+														intlConfig={intlConfig}
+														onChange={field.onChange}
+														prefix={`${currencyPrefix}`}
+														placeholder={`${currencyPrefix} 0`}
+													/>
+												</FormControl>
+											</div>
+											<ComputedValue
+												value={Math.round(getValues(f.name) / 12 || 0)}
+												prefix={currencyPrefix}
+												locale={intlConfig.locale}
+											/>
+										</div>
+										<FormDescription>{t(f.description)}</FormDescription>
+										<FormMessage />
+									</div>
+								</div>
+							</FormItem>
+						)}
+					/>
+				))}
 			</div>
 		</div>
 	);

@@ -61,14 +61,7 @@ export const useFormCalculations = (
 		const calculateChildrenExpenses = () => {
 			if (!values.childrens) return 0;
 
-			const childrenBasicExpenses =
-				(values.quantityChildrens ?? 0) * (values.childrensExpenses ?? 0);
-			const childrenPeriodicExpenses =
-				Math.round((values.livingExpensesTwoTwo ?? 0) / 12) +
-				Math.round((values.carInsurance ?? 0) / 12) +
-				Math.round((values.taxes ?? 0) / 12);
-
-			return childrenBasicExpenses + childrenPeriodicExpenses;
+			return (values.quantityChildrens ?? 0) * (values.childrensExpenses ?? 0);
 		};
 
 		// Step One Expenses
@@ -106,11 +99,17 @@ export const useFormCalculations = (
 
 		const childrenExpenses = calculateChildrenExpenses();
 
+		const periodicExpenses =
+			Math.round((values.livingExpensesTwoTwo ?? 0) / 12) +
+			Math.round((values.carInsurance ?? 0) / 12) +
+			Math.round((values.taxes ?? 0) / 12);
+
 		const totalStepTwoExpenses =
 			basicLivingExpenses +
 			lifestyleExpenses +
 			recurringExpenses +
 			financialSecurity +
+			periodicExpenses +
 			childrenExpenses;
 
 		const totalBaseSum = totalStepOneExpenses + totalStepTwoExpenses;
